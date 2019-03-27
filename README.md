@@ -33,5 +33,6 @@ Todo list that helps plan your time
 - Alert user when task time expired (push notification)
 - Offline work mode
 - Firebase sync
+- Add promo page
 
 ## Maintainers
