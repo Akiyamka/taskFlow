@@ -36,3 +36,5 @@ Todo list that helps plan your time
 - Add promo page
 
 ## Maintainers
+- [Alexander Dubinin](https://github.com/Akiyamka)
+- [Alexander Kulikov](https://github.com/Kulinar310)
