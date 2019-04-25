@@ -37,4 +37,4 @@ Todo list that helps plan your time
 
 ## Maintainers
 - [Alexander Dubinin](https://github.com/Akiyamka)
-- [Alexander Kulikov](https://github.com/Kulinar310)
+- [Andry Burak](https://github.com/Burach0k)
