@@ -1,0 +1,43 @@
+$button-color: rgba(0, 0, 0, 0.8);
+$text-color: #ffffff;
+
+#add-button {
+  position: fixed;
+  bottom: 0;
+
+  height: 50px;
+  width: 100vw;
+
+  border: none;
+  display: flex;
+  color: $text-color;
+  background: $button-color;
+
+  justify-content: center;
+
+  #text-button {
+    width: 86px;
+    height: 18px;
+
+    display: flex;
+    align-items: center;
+
+    #icon-plus {
+      width: 12px;
+      height: 12px;
+
+      margin-right: 8px;
+    }
+
+    h2 {
+      width: 66px;
+      height: 18px;
+
+      font-family: 'PT Root UI';
+      font-size: 14px;
+      line-height: 18px;
+      text-align: center;
+      text-transform: uppercase;
+    }
+  }
+}

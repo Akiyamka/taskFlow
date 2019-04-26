@@ -1,16 +1,19 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
-// import { Provider } from 'react-redux';
-// import { store } from '../../redux/store';
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faCertificate, faBookmark } from '@fortawesome/free-solid-svg-icons';
-import Header from '../views/Header/Header';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import MainView from '../views/MainView/MainView';
+import PageNotFound from '../views/PageNotFound/PageNotFound';
 
-// library.add(faCertificate, faBookmark);
+library.add(faPlus);
 
 const Routing = () => (
   <BrowserRouter>
-    <Route component={Header} />
+    <Switch>
+      <Route exact path='/' component={MainView} />
+      {/* <Route extra path = '/add' component={} /> */}
+      <Route path='**' component={PageNotFound} />
+    </Switch>
   </BrowserRouter>
 );
 
