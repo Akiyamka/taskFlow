@@ -1,0 +1,54 @@
+$text-color: rgba(0, 0, 0, 0.6);
+$vector-color: transparent;
+$rectangle1-color: #50e092;
+$rectangle2-color: #a8c6e8;
+$rectangle3-color: rgba(45, 97, 232, 0.17);
+
+@import url('http://fonts.fontstorage.com/import/ptrootui.css');
+
+@mixin rectangle($left, $right, $top, $bottom, $color) {
+  position: absolute;
+  left: $left;
+  right: $right;
+  top: $top;
+  bottom: $bottom;
+
+  fill: $color;
+}
+
+#logo {
+  position: absolute;
+  left: 4.87%;
+  right: 67.4%;
+  top: 20%;
+  bottom: 25.51%;
+  h2 {
+    position: absolute;
+    left: 0%;
+    right: 1.47%;
+    top: 0%;
+    bottom: 5.49%;
+
+    font-family: 'PT Root UI';
+    font-size: 28.5px;
+    line-height: 36px;
+
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+#logo-vector {
+  width: 114px;
+  height: 6.29px;
+
+  @include rectangle(0%, 0%, 83.52%, 0%, $vector-color);
+  #rectangle1 {
+    @include rectangle(0%, 69.85%, 83.52%, -25.27%, $rectangle1-color);
+  }
+  #rectangle2 {
+    @include rectangle(31.62%, 41.18%, 83.52%, -25.27%, $rectangle2-color);
+  }
+  #rectangle3 {
+    @include rectangle(60.29%, 0%, 83.52%, -25.27%, $rectangle3-color);
+  }
+}
