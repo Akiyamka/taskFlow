@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import './AddTask.scss';
+import './index.scss';
 
 const AddTask = () => (
   <Link to='/add'>

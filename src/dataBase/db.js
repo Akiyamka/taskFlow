@@ -8,7 +8,7 @@ if ('indexedDB' in window) {
 }
 
 export default {
-  create: new Promise( (res,rej) => {
+  create: new Promise((res, rej) => {
     if (idbSupported) {
       const openRequest = indexedDB.open('tasksDB', 1);
 

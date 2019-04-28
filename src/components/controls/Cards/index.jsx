@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'unistore/react';
-import Card from '../Card/Card';
+import Card from '../Card';
 import action from '../../../store/actions';
 import database from '../../../dataBase/db';
-import './Cards.scss';
+import './index.scss';
 
 const Cards = (props) => {
   database.create.then((res) => {
@@ -12,8 +12,8 @@ const Cards = (props) => {
     };
   });
 
-  return props.tasks.map((val) => {
-    return <Card key={val.id} id={val.id} name={val.name} text={val.text} status={val.status} />;
+  return props.tasks.map((task) => {
+    return <Card key={task.id} id={task.id} name={task.name} text={task.text} status={task.status} />;
   });
 };
 

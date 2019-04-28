@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './Frame.scss';
+import './index.scss';
 
 const Frame = (props) => {
   const [name, setName] = useState(props.name);

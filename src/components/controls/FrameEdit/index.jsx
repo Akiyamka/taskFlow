@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'unistore/react';
-import Frame from '../Frame/Frame';
+import Frame from '../Frame';
 import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
-import './FrameEdit.scss';
+import './index.scss';
 
 const FrameEdit = (props) => {
   const id = props.match.params.id;

@@ -4,7 +4,7 @@ import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import action from '../../../store/actions';
 import database from '../../../dataBase/db';
-import './Card.scss';
+import './index.scss';
 
 const Card = (props) => {
   const getTaskData = () => {
@@ -15,9 +15,7 @@ const Card = (props) => {
     database.edit({ id: props.id, name: props.name, text: props.text, status: true });
     props.changeTask({ id: props.id, name: props.name, text: props.text, status: true });
   };
-  let status;
-  if (props.status) status = 'Completed';
-  else status = 'Done';
+  let status = props.status ? 'Completed' : 'Done';
 
   return (
     <div className='card'>

@@ -1,6 +1,6 @@
 import React from 'react';
-import Logo from '../Logo/Logo';
-import './Header.scss';
+import Logo from '../Logo';
+import './index.scss';
 
 const Header = () => (
   <div id='header'>
