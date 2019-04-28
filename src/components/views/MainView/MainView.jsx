@@ -1,14 +1,21 @@
 import React, { Fragment } from 'react';
 import Header from '../Header/Header';
+import AddTask from '../../views/AddTask/AddTask';
+import Cards from '../../controlls/Cards/Cards';
+import Footer from '../Footer/Footer';
 import './MainView.scss';
-import AddTask from '../../controlls/AddTask/AddTask';
 
-const MainView = () => (
-  <Fragment>
-    <Header />
-    <AddTask />
-    {/* <Footer /> */}
-  </Fragment>
-);
+const MainView = () => {
+  return (
+    <Fragment>
+      <div id='view'>
+        <Header />
+        <AddTask />
+        <Cards />
+      </div>
+      <Footer />
+    </Fragment>
+  );
+};
 
 export default MainView;

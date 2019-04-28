@@ -1,0 +1,73 @@
+.card {
+  display: inline-block;
+  margin-left: 15%;
+
+  width: 80vw;
+
+  background: #ffffff;
+  border: 2px solid rgba(45, 97, 232, 0.17);
+  border-radius: 4px;
+
+  h2 {
+    font-family: 'PT Root UI';
+    display: inline-block;
+    font-size: 24px;
+    line-height: 30px;
+    overflow: hidden;
+    margin: 20px 10vw;
+    color: rgba(0, 0, 0, 0.6);
+  }
+  p {
+    text-overflow: ellipsis;
+    margin: 20px 10vw;
+    width: 60vw;
+    overflow: hidden;
+    word-wrap: break-word;
+    font-family: 'PT Root UI';
+    font-size: 16px;
+    line-height: 20px;
+
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
+.config-icon {
+  color: #a8c6e8;
+  padding: 6px;
+}
+.config {
+  display: inline-block;
+  border: 1px solid rgba(45, 97, 232, 0.17);
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.task-header {
+  width: 75vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.status-completed {
+  color: #50e092;
+  font-family: 'PT Root UI';
+  font-size: 14px;
+  line-height: 18px;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  border: 0;
+  background-color: transparent;
+  margin-left: 80%;
+  margin-bottom: 20px;
+}
+.status-done {
+  font-family: 'PT Root UI';
+  font-size: 14px;
+  line-height: 18px;
+  background: #50e092;
+  border-radius: 2px;
+  border: 0;
+  margin-left: 80%;
+  margin-bottom: 20px;
+  width: 56px;
+  height: 26px;
+}

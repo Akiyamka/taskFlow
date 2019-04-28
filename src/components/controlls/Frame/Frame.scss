@@ -1,0 +1,96 @@
+#frame {
+  background: #e8f0f9;
+  width: 100vw;
+  height: 100vh;
+}
+
+#frame-title {
+  position: absolute;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+
+  width: 100vw;
+  height: 70px;
+
+  background: #ffffff;
+  box-shadow: 0px 2px 4px rgba(168, 198, 232, 0.2);
+  border-radius: 0px 0px 4px 4px;
+
+  font-family: 'PT Root UI';
+  font-size: 28.5px;
+  line-height: 36px;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  h3 {
+    position: absolute;
+    left: 20px;
+    top: 17px;
+  }
+}
+#frame-body {
+  position: absolute;
+
+  top: 83px;
+  left: 10px;
+  right: 10px;
+  bottom: 14px;
+
+  background: #ffffff;
+  border: 2px solid rgba(45, 97, 232, 0.17);
+  border-radius: 4px;
+
+  #input-title {
+    margin: 20px 20px 12px 20px;
+    font-size: 24px;
+    line-height: 30px;
+    
+    color: rgba(0, 0, 0, 0.6);
+  }
+  #input-text {
+    margin: 0px 20px;
+    font-size: 16px;
+    line-height: 20px;
+    height: 60vh;
+    
+    color: rgba(0, 0, 0, 0.7);
+  }
+
+  input, textarea {
+    border: none;
+    outline: none;
+    width:80vw;
+
+    font-family: 'PT Root UI';
+  }
+}
+#save {
+  position: absolute;
+  width: 60px;
+  height: 30px;
+  right: 20px;
+  bottom: 20px;
+
+  background: #50e092;
+  border-radius: 2px;
+
+  h3 {
+    font-family: 'PT Root UI';
+    font-size: 14px;
+    line-height: 18px;
+    align-items: center;
+    text-align: center;
+
+    color: #ffffff;
+  }
+}
+
+#save {
+  border: 0;
+  border-radius: 2px;
+  text-align: center;
+  width: 56px;
+  height: 26px;
+}
