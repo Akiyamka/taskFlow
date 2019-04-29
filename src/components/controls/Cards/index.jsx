@@ -6,9 +6,9 @@ import database from '../../../dataBase/db';
 import './index.scss';
 
 const Cards = (props) => {
-  database.create.then((res) => {
-    res.onsuccess = () => {
-      props.addTask(res.result);
+  database.getAll.then((res) => {
+    res.onsuccess = (res) => {
+      props.addTask(res.target.result);
     };
   });
 

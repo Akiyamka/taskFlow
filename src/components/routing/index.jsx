@@ -6,8 +6,8 @@ import { Provider } from 'unistore/react';
 import MainView from '../views/MainView';
 import PageNotFound from '../views/PageNotFound';
 import store from '../../store/store';
-import FrameAdd from '../controlls/FrameAdd';
-import FrameEdit from '../controlls/FrameEdit';
+import FrameAdd from '../controls/FrameAdd';
+import FrameEdit from '../controls/FrameEdit';
 
 library.add(faPlus, faPen, faHeart);
 
