@@ -7,14 +7,14 @@ import './index.scss';
 
 const MainView = () => {
   return (
-    <>
+    <div id='main-view'>
       <div id='view'>
         <Header />
         <AddTask />
         <Cards />
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

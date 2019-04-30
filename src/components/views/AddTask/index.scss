@@ -6,7 +6,7 @@ $text-color: #ffffff;
   bottom: 0;
 
   height: 50px;
-  width: 100vw;
+  width: 100%;
 
   border: none;
   display: flex;
@@ -16,10 +16,10 @@ $text-color: #ffffff;
   justify-content: center;
 
   #text-button {
+    display: flex;
     width: 86px;
     height: 18px;
 
-    display: flex;
     align-items: center;
 
     #icon-plus {
