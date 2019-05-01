@@ -6,29 +6,29 @@ import action from '../../../store/actions';
 import database from '../../../dataBase/db';
 import './index.scss';
 
-const Card = (props) => {
+const Card = ({ data, changeTask, getTask }) => {
   const getTaskData = () => {
-    props.getTask(props.id);
+    getTask(data.id);
   };
   const changeStatus = () => {
     status = 'Completed';
-    database.edit({ id: props.id, name: props.name, text: props.text, status: true });
-    props.changeTask({ id: props.id, name: props.name, text: props.text, status: true });
+    database.put({ ...data, status: true });
+    changeTask({ ...data, status: true });
   };
-  let status = props.status ? 'Completed' : 'Done';
+  let status = data.status ? 'Completed' : 'Done';
 
   return (
     <div className='card'>
       <div className='task-header'>
-        <h2>{props.name}</h2>
-        <Link to={'/edit/' + props.id} onClick={getTaskData}>
+        <h2>{data.name}</h2>
+        <Link to={`/edit/${data.id}`} onClick={getTaskData}>
           <div className='config'>
             <FontAwesomeIcon className='config-icon' icon='pen' />
           </div>
         </Link>
       </div>
-      <p>{props.text}</p>
-      <button className={'status-' + status.toLocaleLowerCase()} onClick={changeStatus}>
+      <p>{data.text}</p>
+      <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
         {status}
       </button>
     </div>

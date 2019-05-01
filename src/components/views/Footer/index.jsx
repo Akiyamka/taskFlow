@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './index.scss';
 
-const Footer = (props) => (
+const Footer = () => (
   <div id='footer'>
     <h3>
       MADE WIDTH

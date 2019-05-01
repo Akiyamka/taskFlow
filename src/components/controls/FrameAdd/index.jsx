@@ -6,7 +6,7 @@ import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
 import './index.scss';
 
-const FrameAdd = (props) => (
+const FrameAdd = ({ addTask }) => (
   <Frame
     id={uuid()}
     frameTitle='Add task'
@@ -16,7 +16,7 @@ const FrameAdd = (props) => (
     text=''
     backFunction={() => {}}
     buttonFunction={(arg) => {
-      props.addTask([arg]);
+      addTask(arg);
       database.add(arg);
     }}
   />

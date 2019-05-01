@@ -1,38 +1,30 @@
 const actions = (store) => ({
-  addTask(state, tasks) {
-    let newTasks = [].concat(state.tasks);
-    tasks.map((task) => {
-      newTasks.push(task);
-    });
+  addTask: (state, tasks) => {
+    const newTasks = [].concat(state.tasks);
+    newTasks.push(tasks);
 
-    return {
-      tasks: newTasks,
-    };
+    return { tasks: newTasks };
   },
 
-  deleteTask(state, id) {
-    let newTasks = [].concat(state.tasks);
+  deleteTask: (state, id) => {
+    const newTasks = [].concat(state.tasks);
     newTasks.map((task, index) => {
       if (id === task.id) newTasks.splice(index, 1);
     });
 
-    return {
-      tasks: newTasks,
-    };
+    return { tasks: newTasks };
   },
 
-  getTask(state, id) {
+  getTask: (state, id) => {
     let data = {};
     state.tasks.map((task, index) => {
       if (id === task.id) data = state.tasks[index];
     });
-    return {
-      edit: data,
-    };
+    return { edit: data };
   },
 
-  changeTask(state, data) {
-    let newTasks = [].concat(state.tasks);
+  changeTask: (state, data) => {
+    const newTasks = [].concat(state.tasks);
     newTasks.map((task, index) => {
       if (data.id === task.id) {
         for (const key in newTasks[index]) {
@@ -40,9 +32,7 @@ const actions = (store) => ({
         }
       }
     });
-    return {
-      tasks: newTasks,
-    };
+    return { tasks: newTasks };
   },
 });
 

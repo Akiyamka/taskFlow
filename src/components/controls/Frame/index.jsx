@@ -2,46 +2,46 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
 
-const Frame = (props) => {
-  const [name, setName] = useState(props.name);
-  const [text, setText] = useState(props.text);
+const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName, backFunction }) => {
+  const [newName, setName] = useState(name);
+  const [newText, setText] = useState(text);
 
   const save = () => {
-    props.buttonFunction({
-      id: props.id,
-      name: name,
-      text: text,
-      status: props.status,
+    buttonFunction({
+      id,
+      name: newName,
+      text: newText,
+      status,
     });
   };
   const del = () => {
-    props.backFunction(props.id);
+    backFunction(id);
   };
 
   return (
     <div id='frame'>
       <div id='frame-title'>
-        <h3>{props.frameTitle}</h3>
+        <h3>{frameTitle}</h3>
       </div>
 
       <div id='frame-body'>
         <input
           id='input-title'
           onChange={(e) => setName(e.target.value)}
-          defaultValue={name}
+          defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
           id='input-text'
           onChange={(e) => setText(e.target.value)}
-          defaultValue={text}
+          defaultValue={newText}
           placeholder='Add text...'
         />
 
         <Link to='/'>
-          <button id={props.buttonName.toLowerCase()} onClick={del}>
-            <h3>{props.buttonName}</h3>
+          <button id={buttonName.toLowerCase()} onClick={del}>
+            <h3>{buttonName}</h3>
           </button>
 
           <button id='save' onClick={save}>

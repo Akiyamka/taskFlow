@@ -1,43 +1,33 @@
-let idbSupported = false;
-let db;
-let store;
-if ('indexedDB' in window) idbSupported = true;
+import Dexie from 'dexie';
+import 'babel-polyfill';
+
+const db = new Dexie('taasksDB');
+
+db.version(1).stores({
+  tasks: 'id, name, text, status',
+});
 
 export default {
-  getAll: new Promise((rej) => {
-    if (idbSupported) {
-      const openRequest = indexedDB.open('tasksDB', 1);
-
-      openRequest.onupgradeneeded = (e) => {
-        db = e.target.result;
-        if (!db.objectStoreNames.contains('tasks')) db.createObjectStore('tasks');
-      };
-
-      openRequest.onsuccess = function(e) {
-        db = e.target.result;
-        store = db.transaction(['tasks'], 'readwrite').objectStore('tasks');
-        rej(store.getAll());
-      };
-
-      openRequest.onerror = (e) => {
-        console.dir(e);
-      };
-    }
-  }),
+  getAll: async () => {
+    const b = [];
+    await db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.each((contact) => b.push(contact));
+    });
+    return b;
+  },
   add: (data) => {
-    store = db.transaction(['tasks'], 'readwrite').objectStore('tasks');
-    store.add(data, data.id);
+    db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.add(data);
+    });
   },
-  get: (id) => {
-    store = db.transaction(['tasks'], 'readwrite').objectStore('tasks');
-    return store.get(id);
-  },
-  edit: (data) => {
-    store = db.transaction(['tasks'], 'readwrite').objectStore('tasks');
-    store.put(data, data.id);
+  put: (data) => {
+    db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.put({ ...data });
+    });
   },
   delete: (id) => {
-    store = db.transaction(['tasks'], 'readwrite').objectStore('tasks');
-    store.delete(id);
+    db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.delete(id);
+    });
   },
 };

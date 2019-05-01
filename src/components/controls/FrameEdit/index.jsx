@@ -5,29 +5,29 @@ import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
 import './index.scss';
 
-const FrameEdit = (props) => {
-  const id = props.match.params.id;
+const FrameEdit = ({ edit, deleteTask, changeTask, match }) => {
+  const { id } = match.params;
   return (
     <Frame
       id={id}
       frameTitle='Edit task'
       buttonName='Delete'
-      status={props.edit.status}
-      name={props.edit.name}
-      text={props.edit.text}
+      status={edit.status}
+      name={edit.name}
+      text={edit.text}
       backFunction={(id) => {
         database.delete(id);
-        props.deleteTask(id);
+        deleteTask(id);
       }}
       buttonFunction={(arg) => {
-        database.edit(arg);
-        props.changeTask(arg);
+        database.put(arg);
+        changeTask(arg);
       }}
     />
   );
 };
 
 export default connect(
-  ['edit'],
+  'edit',
   actions
 )(FrameEdit);
