@@ -1,38 +1,25 @@
 const actions = (store) => ({
-  addTask: (state, tasks) => {
-    const newTasks = [].concat(state.tasks);
-    newTasks.push(tasks);
-
-    return { tasks: newTasks };
+  addTask: ({ tasks }, task) => {
+    return { tasks: [].concat(tasks, task) };
   },
 
-  deleteTask: (state, id) => {
-    const newTasks = [].concat(state.tasks);
-    newTasks.map((task, index) => {
-      if (id === task.id) newTasks.splice(index, 1);
-    });
-
-    return { tasks: newTasks };
+  deleteTask: ({ tasks }, id) => {
+    const index = [].concat(tasks).findIndex((task) => task.id === id);
+    tasks.splice(index, 1);
+    return { tasks };
   },
 
-  getTask: (state, id) => {
-    let data = {};
-    state.tasks.map((task, index) => {
-      if (id === task.id) data = state.tasks[index];
-    });
-    return { edit: data };
+  getTask: ({ tasks }, id) => {
+    const index = tasks.findIndex((task) => task.id === id);
+    return { edit: tasks[index] };
   },
 
-  changeTask: (state, data) => {
-    const newTasks = [].concat(state.tasks);
-    newTasks.map((task, index) => {
-      if (data.id === task.id) {
-        for (const key in newTasks[index]) {
-          newTasks[index][key] = data[key];
-        }
-      }
-    });
-    return { tasks: newTasks };
+  changeTask: ({ tasks }, data) => {
+    const index = [].concat(tasks).findIndex((task) => data.id === task.id);
+    for (const key in tasks[index]) {
+      tasks[index][key] = data[key];
+    }
+    return { tasks: [].concat(tasks) };
   },
 });
 

@@ -4,9 +4,7 @@ import Card from '../Card';
 import './index.scss';
 
 const Cards = ({ tasks }) => {
-  return tasks.map((task) => {
-    return <Card key={task.id} data={task} />;
-  });
+  return tasks.map((task) => <Card key={task.id} data={task} />);
 };
 
 export default connect('tasks')(Cards);
