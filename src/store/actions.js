@@ -4,7 +4,7 @@ const actions = (store) => ({
   },
 
   deleteTask: ({ tasks }, id) => {
-    const index = [].concat(tasks).findIndex((task) => task.id === id);
+    const index = tasks.findIndex((task) => task.id === id);
     tasks.splice(index, 1);
     return { tasks };
   },
@@ -15,7 +15,7 @@ const actions = (store) => ({
   },
 
   changeTask: ({ tasks }, data) => {
-    const index = [].concat(tasks).findIndex((task) => data.id === task.id);
+    const index = tasks.findIndex((task) => data.id === task.id);
     for (const key in tasks[index]) {
       tasks[index][key] = data[key];
     }
