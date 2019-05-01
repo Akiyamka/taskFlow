@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,15 +7,13 @@ import database from '../../../dataBase/db';
 import './index.scss';
 
 const Card = ({ data, changeTask, getTask }) => {
-  const getTaskData = () => {
-    getTask(data.id);
-  };
+  const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
+  const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
-    status = 'Completed';
+    setStatus('Completed');
     database.put({ ...data, status: true });
     changeTask({ ...data, status: true });
   };
-  let status = data.status ? 'Completed' : 'Done';
 
   return (
     <div className='card'>

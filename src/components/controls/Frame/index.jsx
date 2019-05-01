@@ -6,17 +6,8 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const [newName, setName] = useState(name);
   const [newText, setText] = useState(text);
 
-  const save = () => {
-    buttonFunction({
-      id,
-      name: newName,
-      text: newText,
-      status,
-    });
-  };
-  const del = () => {
-    backFunction(id);
-  };
+  const save = () => buttonFunction({ id, name: newName, text: newText, status });
+  const remove = () => backFunction(id);
 
   return (
     <div id='frame'>
@@ -40,7 +31,7 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
         />
 
         <Link to='/'>
-          <button id={buttonName.toLowerCase()} onClick={del}>
+          <button id={buttonName.toLowerCase()} onClick={remove}>
             <h3>{buttonName}</h3>
           </button>
 
