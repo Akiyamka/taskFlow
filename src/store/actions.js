@@ -1,6 +1,6 @@
 const actions = (store) => ({
   addTask: ({ tasks }, task) => {
-    return { tasks: [].concat(tasks, task) };
+    return { tasks: [...tasks, task] };
   },
 
   deleteTask: ({ tasks }, id) => {
@@ -17,7 +17,7 @@ const actions = (store) => ({
   changeTask: ({ tasks }, data) => {
     const index = tasks.findIndex((task) => data.id === task.id);
     tasks[index] = { ...tasks[index], ...data };
-    return { tasks: [].concat(tasks) };
+    return { tasks: [...tasks] };
   },
 });
 
