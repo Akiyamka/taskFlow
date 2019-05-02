@@ -12,7 +12,7 @@ const Card = ({ data, changeTask, getTask }) => {
   const changeStatus = () => {
     setStatus('Completed');
     database.put({ ...data, status: true });
-    changeTask({ ...data, status: true });
+    changeTask({ id: data.id, status: true });
   };
 
   return (

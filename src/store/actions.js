@@ -16,9 +16,7 @@ const actions = (store) => ({
 
   changeTask: ({ tasks }, data) => {
     const index = tasks.findIndex((task) => data.id === task.id);
-    for (const key in tasks[index]) {
-      tasks[index][key] = data[key];
-    }
+    tasks[index] = { ...tasks[index], ...data };
     return { tasks: [].concat(tasks) };
   },
 });
