@@ -1,11 +1,11 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './index.scss';
+import './style.scss';
 
 const Footer = () => (
   <div id='footer'>
     <h3>
-      MADE WIDTH
+      MADE WITH
       <FontAwesomeIcon id='footer-icon' icon='heart' />
       IN BELARUS
     </h3>

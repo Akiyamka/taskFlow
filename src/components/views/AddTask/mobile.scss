@@ -1,0 +1,29 @@
+$button-color: rgba(0, 0, 0, 0.8);
+$text-color: #ffffff;
+
+#add-button {
+  @media screen and (max-width: 500px) {
+    height: 50px;
+    width: 100%;
+
+    display: flex;
+    bottom: 0;
+
+    border: none;
+
+    background: $button-color;
+    color: $text-color;
+  }
+  #text-button {
+    #icon-plus {
+      @media screen and (max-width: 500px) {
+        margin-right: 8px;
+      }
+    }
+    @media screen and (max-width: 500px) {
+      display: flex;
+      width: 86px;
+      height: 18px;
+    }
+  }
+}

@@ -4,10 +4,11 @@ import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import action from '../../../store/actions';
 import database from '../../../dataBase/db';
-import './index.scss';
+import './style.scss';
 
 const Card = ({ data, changeTask, getTask }) => {
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
+  const textContain = data.text ? 'text' : 'hidden';
   const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
     setStatus('Completed');
@@ -25,10 +26,13 @@ const Card = ({ data, changeTask, getTask }) => {
           </div>
         </Link>
       </div>
-      <p>{data.text}</p>
-      <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
-        {status}
-      </button>
+      <p className={`card-${textContain}`}>{data.text}</p>
+      <div className='status-button'>
+        <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
+        <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
+          {status}
+        </button>
+      </div>
     </div>
   );
 };

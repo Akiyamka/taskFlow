@@ -1,3 +1,6 @@
+@import './desktop.scss';
+@import './mobile.scss';
+
 @mixin font($family, $size, $lineHeight) {
   font-family: $family;
   font-size: $size;
@@ -5,9 +8,8 @@
 }
 .card {
   display: inline-block;
-  margin-left: 15%;
 
-  width: 80%;
+  min-height: 70px;
 
   background: #ffffff;
   border: 2px solid rgba(45, 97, 232, 0.17);
@@ -17,23 +19,18 @@
 
   h2 {
     display: inline-block;
-    margin: 20px;
+
+    margin-right: 5px;
 
     @include font('PT Root UI', 24px, 30px);
+    word-wrap: break-word;
     overflow: hidden;
 
     color: rgba(0, 0, 0, 0.6);
-
-    @media screen and (max-width: 600px) {
-      font-size: 22px;
-    }
-    @media screen and (max-width: 300px) {
-      font-size: 15px;
-    }
   }
-  p {
+  .card-text {
     width: 60%;
-    margin: 20px 10vw;
+    margin: 20px 5%;
 
     @include font('PT Root UI', 16px, 20px);
     text-overflow: ellipsis;
@@ -42,13 +39,9 @@
 
     overflow: hidden;
     color: rgba(0, 0, 0, 0.7);
-
-    @media screen and (max-width: 600px) {
-      font-size: 15px;
-    }
-    @media screen and (max-width: 300px) {
-      font-size: 10px;
-    }
+  }
+  .card-hidden {
+    display: none;
   }
 }
 .config-icon {
@@ -64,16 +57,14 @@
 }
 .task-header {
   display: flex;
-  width: 80%;
-  margin: 0 10%;
+  width: 90%;
+  margin: 0 5%;
 
   justify-content: space-between;
   align-items: center;
 }
 .status-completed {
   display: inline-block;
-  margin-bottom: 20px;
-  margin-right: 20px;
 
   @include font('PT Root UI', 14px, 18px);
   text-align: right;
@@ -86,8 +77,6 @@
 }
 .status-done {
   display: inline-block;
-  margin-bottom: 20px;
-  margin-right: 20px;
 
   width: 56px;
   height: 26px;
@@ -98,4 +87,16 @@
   @include font('PT Root UI', 14px, 18px);
 
   background: #50e092;
+}
+
+.check-icon-done {
+  visibility: hidden;
+}
+.check-icon-completed {
+  visibility: visible;
+  color: #50e092;
+}
+.status-button {
+  margin-bottom: 20px;
+  margin-right: 20px;
 }

@@ -1,0 +1,23 @@
+.card {
+  @media screen and (max-width: 500px) {
+    margin-left: 15%;
+    width: 80%;
+  }
+
+  h2 {
+    @media screen and (max-width: 600px) {
+      font-size: 22px;
+    }
+    @media screen and (max-width: 300px) {
+      font-size: 15px;
+    }
+  }
+  p {
+    @media screen and (max-width: 600px) {
+      font-size: 15px;
+    }
+    @media screen and (max-width: 300px) {
+      font-size: 10px;
+    }
+  }
+}
