@@ -19,6 +19,11 @@ const actions = (store) => ({
     tasks[index] = { ...tasks[index], ...data };
     return { tasks: [...tasks] };
   },
+
+  changeTimeLine: ({ timeLine }, { hours, minutes, type }) => {
+    timeLine[type] = [hours, minutes];
+    return { timeLine: { ...timeLine } };
+  },
 });
 
 export default actions;

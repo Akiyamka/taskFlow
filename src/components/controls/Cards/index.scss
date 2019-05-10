@@ -1,5 +1,10 @@
 #cards-container {
+  position: absolute;
+  top: 83px;
+
   display: flex;
+  width: 100%;
+
   @media screen and (min-width: 500px) {
     width: calc(98% - 55px);
   }

@@ -1,0 +1,11 @@
+export const HOURS_DELAY = 300;
+export const CURRENT_TIME_HEIGHT = 21;
+export const TIME_STEP_HEIGHT = 18;
+export const MAX_MINUTES = 60;
+export const HOURS = 0;
+export const MINUTES = 1;
+export const ONE_SECONDS = 1000;
+export const ONE_MINUTES = 60000;
+export const MINIMUM_CARD_HEIGHT = 70;
+export const ZERO_MINUTES = '00';
+export const COEFFICIENT = 5; // 300 / 60

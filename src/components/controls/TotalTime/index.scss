@@ -1,0 +1,83 @@
+#time-start {
+  border: 1px solid rgba(45, 97, 232, 0.17);
+}
+#time-start,
+#time-end {
+  width: 77px;
+  height: 37px;
+  right: 14px;
+  top: calc(50% - 37px / 2 + 1.5px);
+
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  font-family: 'PT Root UI';
+  font-size: 18px;
+  line-height: 23px;
+
+  outline: none;
+  color: rgba(0, 0, 0, 0.6);
+}
+#start-container {
+  margin-right: 13px;
+}
+
+#start-container,
+#end-container {
+  position: relative;
+  display: inline-block;
+}
+#start-container:hover,
+#end-container:hover {
+  #time-start,
+  #time-end {
+    border: 2px solid rgba(41, 96, 238, 0.73);
+    box-sizing: border-box;
+    border-radius: 2px;
+  }
+  #text-start,
+  #text-end {
+    color: rgba(41, 96, 238, 0.73);
+  }
+}
+#text-start {
+  width: 33px;
+}
+#text-end {
+  width: 22px;
+}
+#text-start,
+#text-end {
+  position: relative;
+  top: 20px;
+  left: 6px;
+
+  height: 14px;
+
+  padding: 0 5px;
+
+  font-family: 'PT Root UI';
+  font-size: 11px;
+  line-height: 14px;
+  text-align: center;
+
+  background-color: #ffffff;
+  color: #a8c6e8;
+}
+#total-time {
+  position: relative;
+  top: -25px;
+
+  display: inline-block;
+
+  margin-right: 14px;
+
+  z-index: 15;
+}
+
+.error {
+  border: solid 1px red;
+}
+.access {
+  border: 1px solid rgba(45, 97, 232, 0.17);
+}

@@ -17,6 +17,8 @@
 
   text-align: right;
 
+  z-index: 5;
+
   h2 {
     display: inline-block;
 
@@ -97,6 +99,21 @@
   color: #50e092;
 }
 .status-button {
-  margin-bottom: 20px;
-  margin-right: 20px;
+  display: flex;
+  margin: 0 20px 20px 20px;
+  justify-content: space-between;
+}
+.time-duration {
+  display: inline-block;
+  margin: 0;
+
+  font-family: 'PT Root UI';
+  font-size: 14px;
+  line-height: 18px;
+
+  text-decoration-line: underline;
+
+  color: rgba(0, 0, 0, 0.6);
+
+  opacity: 0.5;
 }

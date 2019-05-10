@@ -1,0 +1,35 @@
+.time-line {
+  border: 1px solid rgba(53, 110, 255, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.text-line {
+  width: 37px;
+  height: 16px;
+
+  margin-top: 300px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+
+  color: rgba(53, 110, 255, 0.2);
+}
+.text-line-start,
+.text-line-end {
+  width: 37px;
+  height: 16px;
+
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: center;
+
+  color: rgba(53, 110, 255, 0.2);
+}
