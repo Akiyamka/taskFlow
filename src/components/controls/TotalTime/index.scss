@@ -1,9 +1,20 @@
+@media screen and (min-width: 540px) {
+  #time-start,
+  #time-end {
+    width: 86px;
+  }
+}
+@media screen and (max-width: 541px) {
+  #time-start,
+  #time-end {
+    width: 77px;
+  }
+}
 #time-start {
   border: 1px solid rgba(45, 97, 232, 0.17);
 }
 #time-start,
 #time-end {
-  width: 77px;
   height: 37px;
   right: 14px;
   top: calc(50% - 37px / 2 + 1.5px);

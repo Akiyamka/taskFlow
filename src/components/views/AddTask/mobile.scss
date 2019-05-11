@@ -2,7 +2,7 @@ $button-color: rgba(0, 0, 0, 0.8);
 $text-color: #ffffff;
 
 #add-button {
-  @media screen and (max-width: 500px) {
+  @media screen and (max-width: 540px) {
     height: 50px;
     width: 100%;
 
@@ -16,11 +16,11 @@ $text-color: #ffffff;
   }
   #text-button {
     #icon-plus {
-      @media screen and (max-width: 500px) {
+      @media screen and (max-width: 540px) {
         margin-right: 8px;
       }
     }
-    @media screen and (max-width: 500px) {
+    @media screen and (max-width: 540px) {
       display: flex;
       width: 86px;
       height: 18px;

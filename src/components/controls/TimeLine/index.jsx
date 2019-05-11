@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import TimeStep from '../TimeStep';
-import CurrentTime from '../CurrentTime';
+import TimeStep from '../../views/TimeStep';
+import CurrentTime from '../../views/CurrentTime';
 import { connect } from 'unistore/react';
 import * as C from '../../../data/const.js';
 import './index.scss';

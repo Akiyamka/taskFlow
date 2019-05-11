@@ -3,7 +3,7 @@ import Cards from '../../controls/Cards';
 import Header from '../Header';
 import AddTask from '../AddTask';
 import Footer from '../Footer';
-import TimeLine from '../TimeLine';
+import TimeLine from '../../controls/TimeLine';
 import './index.scss';
 
 const MainView = () => (
