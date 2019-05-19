@@ -1,17 +1,18 @@
 import React from 'react';
-import uuid from 'uuid';
 import { connect } from 'unistore/react';
+import uuid from 'uuid';
 import Frame from '../Frame';
 import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
 import './index.scss';
 
-const FrameAdd = ({ addTask }) => (
+const FrameAdd = ({ addTask, maxIndex }) => (
   <Frame
     id={uuid()}
     frameTitle='Add task'
     buttonName='Cancel'
     status={false}
+    index={maxIndex + 1}
     name=''
     text=''
     backFunction={() => {}}
@@ -23,6 +24,6 @@ const FrameAdd = ({ addTask }) => (
 );
 
 export default connect(
-  'tasks',
+  'maxIndex',
   actions
 )(FrameAdd);

@@ -13,22 +13,6 @@
 #time-start {
   border: 1px solid rgba(45, 97, 232, 0.17);
 }
-#time-start,
-#time-end {
-  height: 37px;
-  right: 14px;
-  top: calc(50% - 37px / 2 + 1.5px);
-
-  box-sizing: border-box;
-  border-radius: 2px;
-
-  font-family: 'PT Root UI';
-  font-size: 18px;
-  line-height: 23px;
-
-  outline: none;
-  color: rgba(0, 0, 0, 0.6);
-}
 #start-container {
   margin-right: 13px;
 }
@@ -62,18 +46,34 @@
   position: relative;
   top: 20px;
   left: 6px;
-
+  
   height: 14px;
-
+  
   padding: 0 5px;
-
+  
   font-family: 'PT Root UI';
   font-size: 11px;
   line-height: 14px;
   text-align: center;
-
+  
   background-color: #ffffff;
   color: #a8c6e8;
+}
+#time-start,
+#time-end {
+  height: 37px;
+  right: 14px;
+  top: calc(50% - 37px / 2 + 1.5px);
+
+  box-sizing: border-box;
+  border-radius: 2px;
+
+  font-family: 'PT Root UI';
+  font-size: 18px;
+  line-height: 23px;
+  
+  background-color: #ffffff;
+  outline: none;
 }
 #total-time {
   position: relative;

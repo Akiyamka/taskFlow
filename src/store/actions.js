@@ -1,6 +1,6 @@
 const actions = (store) => ({
   addTask: ({ tasks }, task) => {
-    return { tasks: [...tasks, task] };
+    return { tasks: [...tasks, task], maxIndex: task.index + 1 };
   },
 
   deleteTask: ({ tasks }, id) => {
@@ -24,6 +24,10 @@ const actions = (store) => ({
     timeLine[type] = [hours, minutes];
     return { timeLine: { ...timeLine } };
   },
+  changeSequence: ({}, tasks) => {
+    console.log(tasks)
+    return { tasks }},
+  addDraggedItem: ({}, draggedItem) => ({ draggedItem }),
 });
 
 export default actions;

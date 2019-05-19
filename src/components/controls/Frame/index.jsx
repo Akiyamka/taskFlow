@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
 
-const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName, backFunction }) => {
+const Frame = ({ name, text, id, status, index, frameTitle, buttonFunction, buttonName, backFunction }) => {
   const [newName, setName] = useState(name);
   const [newText, setText] = useState(text);
 
-  const save = () => buttonFunction({ id, name: newName, text: newText, status });
+  const save = () => buttonFunction({ id, name: newName, text: newText, status, index });
   const remove = () => backFunction(id);
 
   return (
