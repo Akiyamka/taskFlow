@@ -28,10 +28,12 @@ const Card = ({ data, changeTask, getTask }) => {
       </div>
       <p className={`card-${textContain}`}>{data.text}</p>
       <div className='status-button'>
-        <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
-        <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
-          {status}
-        </button>
+        <div>
+          <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
+          <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
+            {status}
+          </button>
+        </div>
       </div>
     </div>
   );

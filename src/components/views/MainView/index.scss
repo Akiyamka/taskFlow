@@ -1,8 +1,10 @@
 #view {
   flex: 1 0 auto;
 }
+
 #main-view {
   display: flex;
-  flex-direction: column;
   height: 100%;
+
+  flex-direction: column;
 }

@@ -4,7 +4,6 @@ import { connect } from 'unistore/react';
 import Frame from '../Frame';
 import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
-import './index.scss';
 
 const FrameAdd = ({ addTask }) => (
   <Frame
