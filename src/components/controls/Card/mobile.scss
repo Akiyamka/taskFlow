@@ -1,9 +1,4 @@
 .card {
-  @media screen and (max-width: 540px) {
-    margin-left: 10%;
-    width: 80%;
-  }
-
   h2 {
     @media screen and (max-width: 600px) {
       font-size: 22px;

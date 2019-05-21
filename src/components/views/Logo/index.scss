@@ -1,28 +1,14 @@
-$text-color: rgba(0, 0, 0, 0.6);
-$vector-color: transparent;
 $rectangle1-color: #50e092;
 $rectangle2-color: #a8c6e8;
 $rectangle3-color: rgba(45, 97, 232, 0.17);
 
 @import url('http://fonts.fontstorage.com/import/ptrootui.css');
 
-@mixin rectangle($left, $right, $top, $bottom, $color) {
-  position: relative;
-  left: $left;
-  right: $right;
-  bottom: $bottom;
-
-  fill: $color;
-}
-
 #logo {
-  display: inline-block;
-  margin-left: 20px;
-  margin-top: 14px;
-
+  display: inline;
   h2 {
     margin: 0;
-    
+
     font-family: 'PT Root UI';
     font-size: 28.5px;
     line-height: 36px;
@@ -32,18 +18,18 @@ $rectangle3-color: rgba(45, 97, 232, 0.17);
 }
 
 #logo-vector {
-  display: inline-block;
+  display: flex;
   width: 114px;
-  height: 6.3px;
-  position: relative;
+
+  justify-content: space-between;
 
   #rectangle1 {
-    @include rectangle(0%, 69.85%, 0%, 8px, $rectangle1-color);
+    fill: $rectangle1-color;
   }
   #rectangle2 {
-    @include rectangle(1.68px, 41.18%, 83.52%, 10px, $rectangle2-color);
+    fill: $rectangle2-color;
   }
   #rectangle3 {
-    @include rectangle(3.32px, 0%, 83.52%, 12px, $rectangle3-color);
+    fill: $rectangle3-color;
   }
 }

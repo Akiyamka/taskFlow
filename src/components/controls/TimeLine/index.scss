@@ -4,21 +4,24 @@
 
 @media screen and (min-width: 540px) {
   #time-board {
-    width: calc(98% - 55px);
-    min-width: 500px;
+    width: 100%;
 
     display: flex;
     flex-direction: column;
     align-items: center;
-  
+    margin: 0;
   }
-  .time-step{
-    width: calc(50% + 80px);
-    min-width: 500px;
+  .time-step {
+    padding-right: 65px;
+    width: calc(100% - 70px);
+    max-width: 560px;
   }
 }
 @media screen and (max-width: 541px) {
   #time-board {
+    width: 100%;
+  }
+  .time-step {
     width: 100%;
   }
 }

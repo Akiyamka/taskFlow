@@ -30,15 +30,18 @@ const Frame = ({ name, text, id, status, index, frameTitle, buttonFunction, butt
           placeholder='Add text...'
         />
 
-        <Link to='/'>
-          <button id={buttonName.toLowerCase()} onClick={remove}>
-            <h3>{buttonName}</h3>
-          </button>
-
-          <button id='save' onClick={save}>
-            <h3>Save</h3>
-          </button>
-        </Link>
+        <div id='frame-bottom'>
+          <Link to='/'>
+            <button id={buttonName.toLowerCase()} onClick={remove}>
+              <h3>{buttonName}</h3>
+            </button>
+          </Link>
+          <Link to='/'>
+            <button id='save' onClick={save}>
+              <h3>Save</h3>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );
