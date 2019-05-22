@@ -24,14 +24,17 @@
 }
 
 .card {
-  display: block;
-  padding: 15px;
-
   min-height: 70px;
 
-  background: #ffffff;
-  border: 2px solid rgba(45, 97, 232, 0.17);
+  padding: 15px;
+  margin: 4px;
+
   border-radius: 4px;
+  box-sizing: border-box;
+  border: 2px solid rgba(45, 97, 232, 0.17);
+
+  overflow: hidden;
+  background: #ffffff;
 
   z-index: 5;
 

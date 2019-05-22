@@ -1,17 +1,17 @@
 #cards-container {
-  display: flex;
-  padding-left: 40px;
-  padding-right: 0;
-  margin: 13px auto 0 auto;
+  position: relative;
+  max-width: 500px;
 
-  width: calc(100% - 40px);
+  margin: auto;
+  padding-left: 60px;
+  padding-right: 60px;
 
-  @media screen and (min-width: 540px) {
-    width: calc(100% - 40px - 70px);
-    max-width: 500px;
+  z-index: 1;
+}
 
-    padding-right: 65px;
+@media (max-width: 450px) {
+  #cards-container {
+    padding-left: 60px;
+    padding-right: 10px;
   }
-
-  flex-direction: column;
 }
