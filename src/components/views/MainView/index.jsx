@@ -10,9 +10,11 @@ const MainView = () => (
   <div id='main-view'>
     <div id='view'>
       <Header />
-      <TimeLine />
       <AddTask />
-      <Cards />
+      <div id='task-list'>
+        <TimeLine />
+        <Cards />
+      </div>
     </div>
     <Footer />
   </div>

@@ -5,8 +5,10 @@
   width: 40px;
   height: 21px;
 
+  margin-left: 9px;
+
   background: #ff0000;
-  border-radius: 4px 4px 4px 0px;
+  border-radius: 4px 4px 0px 4px;
 
   font-family: 'PT Root UI';
   font-size: 14px;
@@ -14,28 +16,18 @@
   text-align: center;
   color: #ffffff;
 }
-#line-now {
-  width: 100%;
 
-  box-sizing: border-box;
-  border: 2px solid #ff0000;
+#line-now {
+  margin-left: 12px;
+
+  border: 1px solid #ff0000;
 }
 #current-time {
   position: absolute;
+  top: 0;
 
-  top: 70px;
-  box-sizing: border-box;
+  width: 100%;
+  max-width: 623px;
 
   z-index: 1;
-}
-@media screen and (min-width: 540px) {
-  #current-time {
-    width: calc(50% + 40px);
-    min-width: 500px;
-  }
-}
-@media screen and (max-width: 541px) {
-  #current-time {
-    width: 77px;
-  }
 }

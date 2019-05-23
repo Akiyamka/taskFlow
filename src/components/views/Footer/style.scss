@@ -1,13 +1,18 @@
-@import './desktop.scss';
-@import './mobile.scss';
+#footer {
+  @media screen and (min-width: 540px) {
+    background-color: transparent;
+  }
+}
 
 #footer {
   flex: 0 0 auto;
-  height: 7%;
 
   background-color: #fff;
+  padding: 17px 0;
 
   h3 {
+    margin: 0;
+
     font-family: 'Roboto';
     font-style: normal;
     font-weight: bold;
