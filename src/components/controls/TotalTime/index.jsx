@@ -13,21 +13,21 @@ const TotalTime = ({ changeTimeLine }) => {
     const timeStart = e.target.value.split(':');
     setStart(e.target.value);
     if (
-      +timeStart[0] < DateNow.getHours() ||
-      (+timeStart[0] === DateNow.getHours() && DateNow.getMinutes() > 0)
+      +timeStart[0] < DateNow.getHours() || //если установленное время старта меньше текущего
+      (+timeStart[0] === DateNow.getHours() && DateNow.getMinutes() > 0) //Если часы совпадают, но отличны минуты
     ) {
       changeTimeLine({ hours: timeStart[0], minutes: timeStart[1], type: 'start' });
-      setStatusStart('access');
-    } else setStatusStart('error');
+      setStatusStart('access'); 
+    } else setStatusStart('error'); //сообщение об ошибке (красный бордер)
   };
   const setEndTime = (e) => {
     const timeEnd = e.target.value.split(':');
     let newTime = start.split(':');
     setEnd(e.target.value);
-    if (+timeEnd[0] > +newTime[0] && +timeEnd[0] > DateNow.getHours()) {
+    if (+timeEnd[0] > +newTime[0] && +timeEnd[0] > DateNow.getHours()) { //Если конечное время больше времени старта и если конечное время больше текущего
       changeTimeLine({ hours: timeEnd[0], minutes: timeEnd[1], type: 'end' });
       setStatusEnd('access');
-    } else setStatusEnd('error');
+    } else setStatusEnd('error');//сообщение об ошибке (красный бордер)
   };
 
   return (
