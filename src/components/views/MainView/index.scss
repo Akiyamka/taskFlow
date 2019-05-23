@@ -1,0 +1,10 @@
+#view {
+  flex: 1 0 auto;
+}
+
+#main-view {
+  display: flex;
+  height: 100%;
+
+  flex-direction: column;
+}
