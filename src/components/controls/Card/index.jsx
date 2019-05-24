@@ -4,14 +4,15 @@ import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import action from '../../../store/actions';
 import database from '../../../dataBase/db';
-import * as C from '../../../data/const';
 import './style.scss';
 
-const Card = ({ data, changeTask, getTask }) => {
+const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterval }) => {
   let ref;
   const [time, setTime] = useState('');
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
+  const [performed, useperformed] = useState('card-no-performed');
   const textContain = data.text ? 'text' : 'hidden';
+
   const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
     setStatus('Completed');
@@ -21,14 +22,18 @@ const Card = ({ data, changeTask, getTask }) => {
 
   useEffect(() => {
     const height = parseInt(getComputedStyle(ref).height);
-    const hours = Math.floor(height / C.COEFFICIENT / C.MAX_MINUTES);
-    const minutes = Math.floor(height / C.COEFFICIENT - hours * C.MAX_MINUTES);
+    const hours = Math.floor(height / coeff / oneMinutes);
+    const minutes = Math.floor(height / coeff - hours * oneMinutes);
     if (hours) setTime(hours + 'h ' + minutes + 'min');
     else setTime(minutes + 'min');
+
+    if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
+      useperformed('card-performed');
+    else useperformed('card-no-performed');
   });
 
   return (
-    <div ref={(node) => (ref = node)} className='card'>
+    <div ref={(node) => (ref = node)} className={'card ' + performed}>
       <div className='task-header'>
         <h2>{data.name}</h2>
         <Link to={`/edit/${data.id}`} onClick={getTaskData}>
@@ -51,7 +56,12 @@ const Card = ({ data, changeTask, getTask }) => {
   );
 };
 
+Card.defaultProps = {
+  coeff: 5,
+  oneMinutes: 60,
+};
+
 export default connect(
-  'edit',
+  'currentTimeInterval',
   action
 )(Card);

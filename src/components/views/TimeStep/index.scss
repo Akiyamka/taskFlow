@@ -1,13 +1,18 @@
 .time-line {
+  position: relative;
+  top: -18px;
   border: 1px solid rgba(53, 110, 255, 0.1);
   width: 100%;
   box-sizing: border-box;
 }
 .time-step {
+  position: relative;
   height: 300px;
 }
 
 .text-line {
+  position: relative;
+  top: -18px;
   width: 37px;
   height: 16px;
 

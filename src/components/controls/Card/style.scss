@@ -30,7 +30,6 @@
 
   border-radius: 4px;
   box-sizing: border-box;
-  border: 2px solid rgba(45, 97, 232, 0.17);
 
   overflow: hidden;
   background: #ffffff;
@@ -45,7 +44,6 @@
 
     color: rgba(0, 0, 0, 0.6);
   }
-
   .card-text {
     padding: 20px 0;
     margin: 0;
@@ -59,7 +57,12 @@
     color: rgba(0, 0, 0, 0.7);
   }
 }
-
+.card-no-performed {
+  border: 2px solid rgba(45, 97, 232, 0.17);
+}
+.card-performed {
+  border: 2px solid #50e092;
+}
 .config-icon {
   color: #a8c6e8;
   padding: 6px;

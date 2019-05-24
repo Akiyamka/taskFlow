@@ -1,55 +1,65 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'unistore/react';
 import TimeStep from '../../views/TimeStep';
 import CurrentTime from '../../views/CurrentTime';
-import { connect } from 'unistore/react';
-import * as C from '../../../data/const.js';
+import actions from '../../../store/actions';
 import './index.scss';
 
-const TimeLine = ({ timeLine, coeff, oneMinutes, milliSeconds, minuteInMill }) => {
-  const timeArray = [];
+const TimeLine = ({ timeLine, coeff, oneMinutes, minuteInMill, digit, milliseconds, saveCurrentTimeInterval }) => {
+  const timeTape = [];
   let timeInterval;
 
   const start = timeLine.start;
   const end = timeLine.end;
 
-  const startTime = (oneMinutes - new Date(start).getMinutes()) * coeff;
-  const endTime = new Date(end).getMinutes() * coeff;
+  const startMinutes = (oneMinutes - new Date(start).getMinutes()) * coeff;
+  const endMinutes = new Date(end).getMinutes() * coeff;
 
-  let timeout = (oneMinutes - new Date().getSeconds()) * milliSeconds;
+  const timeout = minuteInMill - new Date().getSeconds() * milliseconds;
 
-  const defineCurrentTimePosition = (timeNow, start) => ((timeNow - start) / minuteInMill) * coeff + 16;
-
-  const getTime = () => new Date().getHours() + ':' + new Date().getMinutes();
-
-  const [currentTime, setCurrentTime] = useState(getTime());
+  const defineCurrentTimePosition = (timeNow, start) => ((timeNow - start) / minuteInMill) * coeff;
+  const getTime = () => {
+    const minutes = new Date().getMinutes();
+    const currentMinutes = minutes > digit ? minutes : '0' + minutes;
+    return new Date().getHours() + ':' + currentMinutes;
+  };
 
   let interval = defineCurrentTimePosition(new Date().getTime(), start);
+  saveCurrentTimeInterval(interval)
+  
+  const [currentTime, setCurrentTime] = useState(getTime());
+  const hourseEnd = new Date(end).getHours();
+  const hourseStart = new Date(start).getHours();
 
   const updateTime = () => {
     setCurrentTime(getTime());
     interval += 5;
+    saveCurrentTimeInterval(interval)
   };
 
-  if (startTime) timeArray.push(<TimeStep key={start} height={startTime + 'px'} visibility={'hidden'} />);
-  else timeArray.push(<TimeStep key={start} visibility={'hidden'} />);
+  if (startMinutes)
+    timeTape.push(<TimeStep key={start} height={startMinutes + 'px'} visibility={'hidden'} />);
+  else timeTape.push(<TimeStep key={start} visibility={'hidden'} />);
 
-  for (let index = new Date(start).getHours() + 1; index < new Date(end).getHours(); index++)
-    timeArray.push(<TimeStep key={index} time={index + ':00'} />);
+  for (let index = hourseStart + 1; index < hourseEnd; index++)
+    timeTape.push(<TimeStep key={index} time={index + ':00'} />);
 
-  if (endTime)
-    timeArray.push(<TimeStep key={end} height={endTime + 'px'} time={new Date(end).getHours() + ':00'} />);
-  else timeArray.push(<TimeStep key={end} time={new Date(end).getHours() + ':00'} />);
+  if (endMinutes && hourseStart === hourseEnd)
+    timeTape.push(<TimeStep key={end} height={endMinutes + 'px'} time={hourseEnd + 1 + ':00'} />);
+  else if (endMinutes)
+    timeTape.push(<TimeStep key={end} height={endMinutes + 'px'} time={hourseEnd + ':00'} />);
+  else timeTape.push(<TimeStep key={end} time={hourseEnd + ':00'} />);
 
   useEffect(() => clearInterval(timeInterval));
 
   setTimeout(() => {
     updateTime();
-    timeInterval = setInterval(() => updateTime(), C.ONE_MINUTES);
+    timeInterval = setInterval(() => updateTime(), minuteInMill);
   }, timeout);
 
   return (
     <div id='time-board'>
-      {timeArray}
+      {timeTape}
       <CurrentTime height={interval + 'px'} time={currentTime} />
     </div>
   );
@@ -57,9 +67,13 @@ const TimeLine = ({ timeLine, coeff, oneMinutes, milliSeconds, minuteInMill }) =
 
 TimeLine.defaultProps = {
   coeff: 5,
+  digit: 9,
   oneMinutes: 60,
-  milliSeconds: 1000,
   minuteInMill: 60000,
+  milliseconds: 1000,
 };
 
-export default connect('timeLine')(TimeLine);
+export default connect(
+  'timeLine',
+  actions
+)(TimeLine);

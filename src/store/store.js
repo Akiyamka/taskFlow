@@ -8,6 +8,7 @@ const store = createStore({
     start: new Date().setHours(0, 0, 0, 0),
     end: new Date().setHours(23, 59, 0, 0),
   },
+  currentTimeInterval: 0,
 });
 
 database.getAll().then((tasks) => store.setState({ tasks }));

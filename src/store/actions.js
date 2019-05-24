@@ -24,6 +24,9 @@ const actions = (store) => ({
     timeLine[type] = time;
     return { timeLine: { ...timeLine } };
   },
+  saveCurrentTimeInterval: ({}, interval) => {
+    return { currentTimeInterval: interval };
+  },
 });
 
 export default actions;
