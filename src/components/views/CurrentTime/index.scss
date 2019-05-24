@@ -1,12 +1,12 @@
 #time-now {
-  position: relative;
-  top: 2px;
+  position: absolute;
+  bottom: 0;
 
   width: 40px;
   height: 21px;
 
-  margin-left: 9px;
-
+  margin-left: 5px;
+  
   background: #ff0000;
   border-radius: 4px 4px 0px 4px;
 
@@ -18,8 +18,13 @@
 }
 
 #line-now {
-  margin-left: 12px;
+  position: absolute;
+  bottom: 0;
+  left: 13px;
 
+  width: 100%;
+
+  box-sizing: border-box;
   border: 1px solid #ff0000;
 }
 #current-time {
@@ -28,6 +33,7 @@
 
   width: 100%;
   max-width: 623px;
-
+  
+  overflow: hidden;
   z-index: 1;
 }

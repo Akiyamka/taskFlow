@@ -1,12 +1,10 @@
 import React from 'react';
 import './index.scss';
 
-const TimeStep = ({ time, marginTop, marginBottom }) => (
-  <div className='time-step'>
-    <div className='text-line' style={{ marginTop }}>
-      {time}
-    </div>
-    <div className='time-line' style={{ marginBottom }} />
+const TimeStep = ({ time, height, visibility }) => (
+  <div className='time-step' style={{ visibility, height }}>
+    <div className='text-line'>{time}</div>
+    <div className='time-line' />
   </div>
 );
 

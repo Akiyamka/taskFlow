@@ -20,8 +20,8 @@ const actions = (store) => ({
     return { tasks: [...tasks] };
   },
 
-  changeTimeLine: ({ timeLine }, { hours, minutes, type }) => {
-    timeLine[type] = [hours, minutes];
+  changeTimeLine: ({ timeLine }, { time, type }) => {
+    timeLine[type] = time;
     return { timeLine: { ...timeLine } };
   },
 });

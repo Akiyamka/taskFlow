@@ -5,8 +5,8 @@ const store = createStore({
   edit: [],
   tasks: [],
   timeLine: {
-    start: ['00', '00'],
-    end: ['23', '59'],
+    start: new Date().setHours(0, 0, 0, 0),
+    end: new Date().setHours(23, 59, 0, 0),
   },
 });
 

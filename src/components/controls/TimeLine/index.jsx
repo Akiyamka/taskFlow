@@ -5,68 +5,61 @@ import { connect } from 'unistore/react';
 import * as C from '../../../data/const.js';
 import './index.scss';
 
-const TimeLine = ({ timeLine }) => {
+const TimeLine = ({ timeLine, coeff, oneMinutes, milliSeconds, minuteInMill }) => {
   const timeArray = [];
   let timeInterval;
 
   const start = timeLine.start;
   const end = timeLine.end;
 
-  const startTime = (C.MAX_MINUTES - +start[C.MINUTES]) * C.COEFFICIENT; //Определение минут и перевод их в пиксели
-  const endTime = +end[C.MINUTES] * C.COEFFICIENT;
+  const startTime = (oneMinutes - new Date(start).getMinutes()) * coeff;
+  const endTime = new Date(end).getMinutes() * coeff;
 
-  let timeout = (C.MAX_MINUTES - new Date().getSeconds()) * C.ONE_SECONDS;
+  let timeout = (oneMinutes - new Date().getSeconds()) * milliSeconds;
 
-  const defineCurrentTimePosition = (currentTime, startTime) => { //функция для определения позиции текущего времени
-    const hoursDifference = +currentTime[0] - +startTime[0];
-    const minutesDifference = +currentTime[1] - +startTime[1];
-    return (
-      hoursDifference * C.HOURS_DELAY + //сдвиг по часам 
-      minutesDifference * C.COEFFICIENT + //свдвиг по минутам
-      hoursDifference * C.TIME_STEP_HEIGHT - //сдиг по величине временных полосок
-      C.CURRENT_TIME_HEIGHT //свиг по величине полоски (Time Now)
-    );
-  };
-  const getTime = () => new Date().getHours() + ':' + new Date().getMinutes(); // Текущее время
+  const defineCurrentTimePosition = (timeNow, start) => ((timeNow - start) / minuteInMill) * coeff + 16;
 
-  const [currentTime, setCurrentTime] = useState(getTime()); //Текущее время
-  let timeNow = currentTime.split(':');
+  const getTime = () => new Date().getHours() + ':' + new Date().getMinutes();
 
-  let interval = defineCurrentTimePosition(timeNow, start);
+  const [currentTime, setCurrentTime] = useState(getTime());
 
-  const updateTime = () => { //Обновление текущего времени (вначале через n-секунд, а потом каждую минуту)
+  let interval = defineCurrentTimePosition(new Date().getTime(), start);
+
+  const updateTime = () => {
     setCurrentTime(getTime());
     interval += 5;
   };
 
-  if (start[C.MINUTES] !== C.ZERO_MINUTES) //первая полоска времени (отступ в зависимости от минут)
-    timeArray.push(<TimeStep key={start[C.HOURS]} marginTop={startTime + 'px'} time={+start[C.HOURS] + 1 + ':00'} />);
-  else timeArray.push(<TimeStep key={start[C.HOURS]} time={+start[C.HOURS] + 1 + ':00'} />);
+  if (startTime) timeArray.push(<TimeStep key={start} height={startTime + 'px'} visibility={'hidden'} />);
+  else timeArray.push(<TimeStep key={start} visibility={'hidden'} />);
 
-  for (let index = +start[C.HOURS] + 2; index < end[C.HOURS]; index++) { //Остальные полоски времени (отступ 300px)
+  for (let index = new Date(start).getHours() + 1; index < new Date(end).getHours(); index++)
     timeArray.push(<TimeStep key={index} time={index + ':00'} />);
-  }
 
-  if (end[C.MINUTES] !== C.ZERO_MINUTES)//последняя полоска времени (отступ в зависимости от минут)
-    timeArray.push(<TimeStep key={end[C.HOURS]} marginBottom={endTime + 'px'} time={end[C.HOURS] + ':00'} />);
-  else timeArray.push(<TimeStep key={end[C.HOURS]} time={end[C.HOURS] + ':00'} />);
+  if (endTime)
+    timeArray.push(<TimeStep key={end} height={endTime + 'px'} time={new Date(end).getHours() + ':00'} />);
+  else timeArray.push(<TimeStep key={end} time={new Date(end).getHours() + ':00'} />);
 
-  useEffect(() => clearInterval(timeInterval)); //очистка таймера
+  useEffect(() => clearInterval(timeInterval));
 
-  setTimeout(() => { //таймер для Time Now 
+  setTimeout(() => {
     updateTime();
     timeInterval = setInterval(() => updateTime(), C.ONE_MINUTES);
   }, timeout);
 
-  let timeForComponent = currentTime;
-  if (+timeNow[1] < 10) timeForComponent = timeNow[0] + ':0' + timeNow[1];
-
   return (
     <div id='time-board'>
       {timeArray}
-      <CurrentTime marginTop={interval + 'px'} time={timeForComponent} />
+      <CurrentTime height={interval + 'px'} time={currentTime} />
     </div>
   );
+};
+
+TimeLine.defaultProps = {
+  coeff: 5,
+  oneMinutes: 60,
+  milliSeconds: 1000,
+  minuteInMill: 60000,
 };
 
 export default connect('timeLine')(TimeLine);
