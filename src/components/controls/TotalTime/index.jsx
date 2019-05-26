@@ -1,14 +1,24 @@
+// @ts-ignore
 import React, { useState } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../../store/actions';
 import './index.scss';
 
+/* Convert unix time to HH:MM:SS 24h format for HTML time input */
+function unixTimeTo24(unixTime) {
+  return new Date(unixTime)
+    .toISOString()
+    .split('T')[1]
+    .split('.')[0];
+}
+
 const TotalTime = ({ changeTimeLine, timeLine }) => {
-  const [start, setStart] = useState(new Date(timeLine.start).toLocaleTimeString());
-  const [end, setEnd] = useState(new Date(timeLine.end).toLocaleTimeString());
+  const [start, setStart] = useState(unixTimeTo24(timeLine.start));
+  const [end, setEnd] = useState(unixTimeTo24(timeLine.end));
   const [timeStatusStart, setStatusStart] = useState('access');
   const [timeStatusEnd, setStatusEnd] = useState('access');
   const DateNow = new Date();
+  console.log(start)
 
   const setStartTime = (e) => {
     const timeStart = new Date().setHours(...e.target.value.split(':'));
