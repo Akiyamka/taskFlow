@@ -7,6 +7,6 @@
     "semicolons":true,
     "jsxSingleQuote":true,
     "tabWidth": 2,
-    "arrowParens":"always",
+    "arrowParents":"always",
     "semi": true
   }
