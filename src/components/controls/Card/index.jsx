@@ -1,3 +1,6 @@
+/* eslint-disable no-return-assign */
+/* eslint-disable radix */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'unistore/react';
@@ -24,16 +27,16 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
     const height = parseInt(getComputedStyle(ref).height);
     const hours = Math.floor(height / coeff / oneMinutes);
     const minutes = Math.floor(height / coeff - hours * oneMinutes);
-    if (hours) setTime(hours + 'h ' + minutes + 'min');
-    else setTime(minutes + 'min');
+    if (hours) setTime(`${hours}h ${minutes}min`);
+    else setTime(`${minutes}min`);
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
       useperformed('card-performed');
     else useperformed('card-no-performed');
-  });
+  }, [currentTimeInterval]);
 
   return (
-    <div ref={(node) => (ref = node)} className={'card ' + performed}>
+    <div ref={node => (ref = node)} className={`card ${performed}`}>
       <div className='task-header'>
         <h2>{data.name}</h2>
         <Link to={`/edit/${data.id}`} onClick={getTaskData}>
@@ -47,7 +50,7 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
         <p className='time-duration'>{time}</p>
         <div>
           <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
-          <button className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
+          <button type='button' className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
             {status}
           </button>
         </div>

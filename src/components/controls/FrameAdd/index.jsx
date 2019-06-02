@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import uuid from 'uuid';
 import { connect } from 'unistore/react';
@@ -14,7 +15,7 @@ const FrameAdd = ({ addTask }) => (
     name=''
     text=''
     backFunction={() => {}}
-    buttonFunction={(arg) => {
+    buttonFunction={arg => {
       addTask(arg);
       database.add(arg);
     }}

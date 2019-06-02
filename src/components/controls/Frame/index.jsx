@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './index.scss';
@@ -18,27 +19,29 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
       <div id='frame-body'>
         <input
           id='input-title'
-          onChange={(e) => setName(e.target.value)}
+          onChange={e => setName(e.target.value)}
           defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
           id='input-text'
-          onChange={(e) => setText(e.target.value)}
+          onChange={e => setText(e.target.value)}
           defaultValue={newText}
           placeholder='Add text...'
         />
 
-        <Link to='/'>
-          <button id={buttonName.toLowerCase()} onClick={remove}>
-            <h3>{buttonName}</h3>
-          </button>
+        <div id='frame-bottom'>
+          <Link to='/'>
+            <button type='button' id={buttonName.toLowerCase()} onClick={remove}>
+              <h3>{buttonName}</h3>
+            </button>
 
-          <button id='save' onClick={save}>
-            <h3>Save</h3>
-          </button>
-        </Link>
+            <button type='button' id='save' onClick={save}>
+              <h3>Save</h3>
+            </button>
+          </Link>
+        </div>
       </div>
     </div>
   );

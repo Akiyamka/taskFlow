@@ -1,15 +1,15 @@
-// @ts-ignore
+/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../../store/actions';
 import './index.scss';
 
-/* Convert unix time to HH:MM:SS 24h format for HTML time input */
 function unixTimeTo24(unixTime) {
   return new Date(unixTime)
-    .toISOString()
-    .split('T')[1]
-    .split('.')[0];
+    .toString()
+    .split('2019')[1]
+    .split('GMT')[0]
+    .trim();
 }
 
 const TotalTime = ({ changeTimeLine, timeLine }) => {
@@ -18,9 +18,8 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   const [timeStatusStart, setStatusStart] = useState('access');
   const [timeStatusEnd, setStatusEnd] = useState('access');
   const DateNow = new Date();
-  console.log(start)
 
-  const setStartTime = (e) => {
+  const setStartTime = e => {
     const timeStart = new Date().setHours(...e.target.value.split(':'));
     const startTimeLaterThanCurrent = timeStart < DateNow;
 
@@ -31,7 +30,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
     } else setStatusStart('error');
   };
 
-  const setEndTime = (e) => {
+  const setEndTime = e => {
     const timeEnd = new Date().setHours(...e.target.value.split(':'));
 
     const finalTimeMoreThanStartTime = timeEnd > timeLine.start;
@@ -52,7 +51,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
           type='time'
           value={start}
           className={timeStatusStart}
-          onChange={(e) => setStartTime(e)}
+          onChange={e => setStartTime(e)}
           required
         />
       </div>
@@ -63,7 +62,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
           type='time'
           value={end}
           className={timeStatusEnd}
-          onChange={(e) => setEndTime(e)}
+          onChange={e => setEndTime(e)}
           required
         />
       </div>

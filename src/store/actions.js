@@ -1,21 +1,22 @@
-const actions = (store) => ({
+/* eslint-disable no-param-reassign */
+const actions = () => ({
   addTask: ({ tasks }, task) => {
     return { tasks: [...tasks, task] };
   },
 
   deleteTask: ({ tasks }, id) => {
-    const index = tasks.findIndex((task) => task.id === id);
+    const index = tasks.findIndex(task => task.id === id);
     tasks.splice(index, 1);
     return { tasks };
   },
 
   getTask: ({ tasks }, id) => {
-    const index = tasks.findIndex((task) => task.id === id);
+    const index = tasks.findIndex(task => task.id === id);
     return { edit: tasks[index] };
   },
 
   changeTask: ({ tasks }, data) => {
-    const index = tasks.findIndex((task) => data.id === task.id);
+    const index = tasks.findIndex(task => data.id === task.id);
     tasks[index] = { ...tasks[index], ...data };
     return { tasks: [...tasks] };
   },
@@ -24,8 +25,8 @@ const actions = (store) => ({
     timeLine[type] = time;
     return { timeLine: { ...timeLine } };
   },
-  saveCurrentTimeInterval: ({}, interval) => {
-    return { currentTimeInterval: interval };
+  saveCurrentTimeInterval: (store, currentTimeInterval) => {
+    return { currentTimeInterval };
   },
 });
 

@@ -1,3 +1,5 @@
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'unistore/react';
 import Frame from '../Frame';
@@ -14,11 +16,11 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match }) => {
       status={edit.status}
       name={edit.name}
       text={edit.text}
-      backFunction={(id) => {
+      backFunction={id => {
         database.delete(id);
         deleteTask(id);
       }}
-      buttonFunction={(arg) => {
+      buttonFunction={arg => {
         database.put(arg);
         changeTask(arg);
       }}
