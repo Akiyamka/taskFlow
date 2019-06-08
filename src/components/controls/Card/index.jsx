@@ -60,7 +60,7 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
 };
 
 Card.defaultProps = {
-  coeff: 5,
+  coeff: 4.5,
   oneMinutes: 60,
 };
 
