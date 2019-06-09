@@ -10,10 +10,19 @@ import action from '../../../store/actions';
 import database from '../../../dataBase/db';
 import './style.scss';
 
-const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterval, id, index }) => {
+const Card = ({
+  data,
+  resizeFirstClick,
+  changeTask,
+  getTask,
+  coeff,
+  oneMinutes,
+  currentTimeInterval,
+  id,
+  index,
+}) => {
   let ref;
   const [time, setTime] = useState('');
-  const [isResize, setIsResize] = useState(false);
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
   const [performed, useperformed] = useState('card-no-performed');
   const textContain = data.text ? 'text' : 'hidden';
@@ -37,32 +46,20 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
     else useperformed('card-no-performed');
   }, [currentTimeInterval]);
 
-  const getRef = (node, provided) => {
-    ref = node;
-    provided.innerRef(ref)
-
-  }
-  let mousePosition = 0;
   const resizeStart = (e) => {
-    mousePosition = e.clientY;
-    setIsResize(true);
-  }
-
-  const resizeMove = (e) => {
-    console.log( 300 + e.clientY- mousePosition + 'px')
-    if (isResize)
-      ref.style.height = 300 + e.clientY- mousePosition + 'px';
-  }
-
-  const resizeEnd = () => {
-    setIsResize(false)
-  }
+    const resize = {
+      positionY: e.clientY,
+      height: parseInt(getComputedStyle(ref).height),
+      ref: ref,
+    };
+    resizeFirstClick(resize);
+  };
 
   return (
-    <Draggable draggableId={String(id)} isDragDisabled={isResize} index={index}>
+    <Draggable draggableId={String(id)} isDragDisabled={true} index={index}>
       {(provided) => (
-        <div  {...provided.draggableProps} ref={(node) => getRef(node, provided)} {...provided.dragHandleProps}>
-          <div className={`card ${performed}`}>
+        <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
+          <div ref={(node) => (ref = node)} className={`card ${performed}`}>
             <div className='task-header'>
               <h2>{data.name}</h2>
               <Link to={`/edit/${data.id}`} onClick={getTaskData}>
@@ -76,16 +73,19 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
               <p className='time-duration'>{time}</p>
               <div>
                 <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
-                <button type='button' className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
+                <button
+                  type='button'
+                  className={`status-${status.toLocaleLowerCase()}`}
+                  onClick={changeStatus}>
                   {status}
                 </button>
               </div>
             </div>
           </div>
-          <div className='card-resize-line' onMouseDown={resizeStart} onMouseUp={resizeEnd} onMouseMove={resizeMove} />
+          <div className='card-resize-line' onMouseDown={resizeStart} />
         </div>
       )}
-    </Draggable >
+    </Draggable>
   );
 };
 
@@ -95,6 +95,6 @@ Card.defaultProps = {
 };
 
 export default connect(
-  'currentTimeInterval',
+  ['currentTimeInterval'],
   action
 )(Card);

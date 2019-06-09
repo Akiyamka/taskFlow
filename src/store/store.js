@@ -9,11 +9,14 @@ const initialState = {
     start: new Date().setHours(0, 0, 0, 0),
     end: new Date().setHours(23, 59, 0, 0),
   },
+  resize: {
+    isResize: false,
+  },
   currentTimeInterval: 0,
 };
 
 const store =
   process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
 
-database.getAll().then(tasks => store.setState({ tasks }));
+database.getAll().then((tasks) => store.setState({ tasks }));
 export default store;

@@ -1,21 +1,31 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'unistore/react';
-import { DragDropContext } from 'react-beautiful-dnd';
-import { Droppable } from 'react-beautiful-dnd';
+import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
 import Card from '../Card';
 import './index.scss';
 
-const Cards = ({ tasks, changeTasks }) => {
+const Cards = ({ resize, resizeLastClick, tasks, changeTasks }) => {
   const dragEnd = ({ destination, source }) => {
     if (!destination) return;
-    changeTasks({ oldIndex: source.index, newIndex: destination.index })
-  }
+    changeTasks({ oldIndex: source.index, newIndex: destination.index });
+  };
+
+  const resizeMove = (e) => {
+    if (resize.isResize) {
+      // eslint-disable-next-line no-param-reassign
+      resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
+    }
+  };
+
+  const resizeEnd = () => resizeLastClick();
+
   return (
     <DragDropContext onDragEnd={dragEnd}>
-      <div id='cards-container'>
-        <Droppable droppableId={'card-list-droppable'}>
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div id='cards-container' onMouseUp={resizeEnd} onMouseMove={resizeMove}>
+        <Droppable droppableId='card-list-droppable'>
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
               {tasks.map((task, index) => (
@@ -27,7 +37,10 @@ const Cards = ({ tasks, changeTasks }) => {
         </Droppable>
       </div>
     </DragDropContext>
-  )
-}
+  );
+};
 
-export default connect('tasks', action)(Cards);
+export default connect(
+  ['tasks', 'resize'],
+  action
+)(Cards);
