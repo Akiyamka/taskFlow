@@ -1,75 +1,127 @@
+/* eslint-disable no-param-reassign */
+/* eslint-disable react/prop-types */
 import React, { useState, useEffect } from 'react';
+import { connect } from 'unistore/react';
 import TimeStep from '../../views/TimeStep';
 import CurrentTime from '../../views/CurrentTime';
-import { connect } from 'unistore/react';
-import * as C from '../../../data/const.js';
+import actions from '../../../store/actions';
 import './index.scss';
 
-const TimeLine = ({ timeLine }) => {
-  const timeArray = [];
-  let timeInterval;
-  const defineCurrentTimePosition = (currentTime, startTime) => {
-    const hoursDifference = +currentTime[0] - +startTime[0];
-    const timeDifference = +currentTime[1] - +startTime[1];
-    return (
-      hoursDifference * C.HOURS_DELAY +
-      timeDifference * C.COEFFICIENT +
-      hoursDifference * C.TIME_STEP_HEIGHT -
-      C.CURRENT_TIME_HEIGHT
-    );
-  };
-
-  useEffect(() => clearInterval(timeInterval))
-  
-  const [currentTime, setCurrentTime] = useState(new Date().getHours() + ':' + new Date().getMinutes());
-  const updateTime = () => {
-    setCurrentTime(new Date().getHours() + ':' + new Date().getMinutes());
-    interval += 5;
-  };
-
-  const start = timeLine.start;
-  const end = timeLine.end;
-
-  const startTime = (C.MAX_MINUTES - +start[C.MINUTES]) * C.COEFFICIENT;
-  const endTime = +end[C.MINUTES] * C.COEFFICIENT;
-
-  let timeout = (C.MAX_MINUTES - new Date().getSeconds()) * C.ONE_SECONDS;
-
-  let timeNow = currentTime.split(':');
-  let interval = defineCurrentTimePosition(timeNow, start);
-
-  if (start[C.MINUTES] !== C.ZERO_MINUTES)
-    timeArray.push(
-      <TimeStep key={start[C.HOURS]} type='time-line' marginTop={startTime + 'px'} time={+start[C.HOURS] + 1 + ':00'} />);
-  else
-    timeArray.push(
-      <TimeStep key={start[C.HOURS]} type='time-line' marginTop='300px' time={+start[C.HOURS] + 1 + ':00'} />
-    );
-
-  for (let index = +start[C.HOURS] + 2; index < end[C.HOURS]; index++) {
-    timeArray.push(<TimeStep key={index} marginTop='300px' type='time-line' time={index + ':00'} />);
+const TimeLine = ({
+  saveCurrentTimeInterval,
+  timeLine,
+  PIXELS_IN_MINUTE,
+  ONE_MINUTE,
+  ONE_HOUR,
+  ONE_SECOND,
+}) => {
+  function getTimeHeight(timestamp) {
+    return (timestamp / ONE_MINUTE) * PIXELS_IN_MINUTE;
   }
 
-  if (end[C.MINUTES] !== C.ZERO_MINUTES)
-    timeArray.push(
-      <TimeStep key={end[C.HOURS]} marginTop='300px' marginBottom={endTime + 'px'} type='time-line' time={end[C.HOURS] + ':00'} />);
-  else
-    timeArray.push(
-      <TimeStep key={end[C.HOURS]} marginTop='300px' type='time-line' time={end[C.HOURS] + ':00'} />
-    );
+  function getMinutes(timestamp) {
+    const date = new Date(timestamp);
+    return date.getMinutes() * ONE_MINUTE;
+  }
 
-  
-  setTimeout(() => {
-    updateTime();
-    timeInterval = setInterval(() => updateTime(), C.ONE_MINUTES);
-  }, timeout);
+  function getCorrectTime(timestamp) {
+    const date = new Date(timestamp);
+    return `${date.getHours()}:00`;
+  }
+
+  function currentTimeGenerator(start) {
+    const date = new Date();
+    let [hours, minutes] = [date.getHours(), date.getMinutes()];
+    minutes = minutes / 10 > 1 ? minutes : `0${minutes}`;
+    const time = `${hours}:${minutes}`;
+
+    hours -= new Date(start).getHours();
+    minutes -= new Date(start).getMinutes();
+    const height = getTimeHeight(hours * ONE_HOUR + minutes * ONE_MINUTE);
+    return { height, time };
+  }
+
+  // eslint-disable-next-line no-shadow
+  function heightsGenerator(start, end) {
+    if (!Number.isInteger(start)) start = start.getTime();
+    if (!Number.isInteger(end)) end = end.getTime();
+
+    const heights = [];
+
+    const firstTime = ONE_HOUR - getMinutes(start);
+    heights.push({
+      height: getTimeHeight(firstTime),
+      date: getCorrectTime(start),
+      visible: 'hidden',
+    });
+
+    start += firstTime;
+    while (start < end - ONE_HOUR) {
+      heights.push({
+        height: getTimeHeight(ONE_HOUR),
+        date: getCorrectTime(start),
+      });
+
+      start += ONE_HOUR;
+    }
+
+    const lastTime = getMinutes(end);
+    heights.push({
+      height: getTimeHeight(lastTime),
+      date: getCorrectTime(end),
+    });
+
+    return heights;
+  }
+
+  const { start } = timeLine;
+  const { end } = timeLine;
+  const massHeight = heightsGenerator(start, end);
+
+  const timeTape = [];
+  massHeight.map((value, index) =>
+    timeTape.push(
+      // eslint-disable-next-line react/no-array-index-key
+      <TimeStep key={index} height={`${value.height}px`} time={`${value.date}`} visibility={value.visible} />
+    )
+  );
+
+  const timeout = ONE_MINUTE - new Date().getSeconds() * ONE_SECOND;
+
+  const [currentTime, useCurrentTime] = useState(currentTimeGenerator(start));
+
+  useEffect(() => {
+    saveCurrentTimeInterval(currentTime.height);
+  });
+
+  useEffect(() => {
+    useCurrentTime(currentTimeGenerator(start));
+  }, [timeLine]);
+
+  useEffect(() => {
+    const timeInterval = setTimeout(() => {
+      useCurrentTime(currentTimeGenerator(start));
+    }, timeout);
+
+    return () => clearInterval(timeInterval);
+  });
 
   return (
     <div id='time-board'>
-      {timeArray}
-      <CurrentTime marginTop={interval + 'px'} time={currentTime} />
+      {timeTape}
+      <CurrentTime height={`${currentTime.height}px`} time={`${currentTime.time}`} />
     </div>
   );
 };
 
-export default connect('timeLine')(TimeLine);
+TimeLine.defaultProps = {
+  PIXELS_IN_MINUTE: 4.5,
+  ONE_MINUTE: 60000,
+  ONE_HOUR: 3600000,
+  ONE_SECOND: 1000,
+};
+
+export default connect(
+  'timeLine',
+  actions
+)(TimeLine);

@@ -15,7 +15,6 @@
     border-radius: 2px;
 
     box-shadow: 0 0 0 2px rgba(41, 96, 238, 0.73);
-
   }
 
   #text-start,
@@ -26,11 +25,6 @@
 
 #end-container {
   margin-left: 13px;
-}
-
-#time-start {
-  border: 1px solid rgba(45, 97, 232, 0.17);
-  
 }
 
 #text-start {
@@ -46,7 +40,7 @@
   position: relative;
   top: 8px;
   left: 6px;
-  
+
   height: 14px;
 
   padding: 0 5px;
@@ -62,6 +56,7 @@
 }
 #time-start,
 #time-end {
+  width: auto;
   height: 37px;
 
   border-radius: 2px;

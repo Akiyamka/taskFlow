@@ -5,7 +5,7 @@ import './style.scss';
 
 const AddTask = () => (
   <Link to='/add'>
-    <button id='add-button'>
+    <button type='button' id='add-button'>
       <div id='text-button'>
         <FontAwesomeIcon id='icon-plus' icon='plus' />
         <h2>ADD TASK</h2>

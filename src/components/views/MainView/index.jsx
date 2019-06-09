@@ -6,25 +6,18 @@ import Footer from '../Footer';
 import TimeLine from '../../controls/TimeLine';
 import './index.scss';
 
-const MainView = () => {
-  const start = (e) => e.preventDefault();
-  const end = (e) => e.preventDefault();
-  const move = (e) => e.preventDefault();
-  return (
-    <div
-      id='main-view'
-      onTouchStart={(e) => start(e)}
-      onTouchEnd={(e) => end(e)}
-      onTouchMove={(e) => move(e)}>
-      <div id='view'>
-        <Header />
+const MainView = () => (
+  <div id='main-view'>
+    <div id='view'>
+      <Header />
+      <AddTask />
+      <div id='task-list'>
         <TimeLine />
-        <AddTask />
         <Cards />
       </div>
-      <Footer />
     </div>
-  );
-};
+    <Footer />
+  </div>
+);
 
 export default MainView;

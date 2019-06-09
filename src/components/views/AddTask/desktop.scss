@@ -1,9 +1,9 @@
 #add-button {
-  @media screen and (min-width: 541px) {
+  @media screen and (min-width: 451px) {
     width: 53px;
     height: 53px;
 
-    right: 10px;
+    right: 5px;
     top: calc(50% - 26px);
 
     background: #ffffff;
@@ -17,7 +17,7 @@
 }
 #text-button {
   h2 {
-    @media screen and (min-width: 541px) {
+    @media screen and (min-width: 451px) {
       display: none;
     }
   }

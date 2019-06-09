@@ -1,22 +1,19 @@
 import createStore from 'unistore';
+import devtools from 'unistore/devtools';
 import database from '../dataBase/db';
 
-const store = createStore({
+const initialState = {
   edit: [],
   tasks: [],
   timeLine: {
-    start: ['00', '00'],
-    end: ['23', '59'],
+    start: new Date().setHours(0, 0, 0, 0),
+    end: new Date().setHours(23, 59, 0, 0),
   },
-  maxIndex: 0,
-  draggedItem: {},
-});
+  currentTimeInterval: 0,
+};
 
-database.getAll().then((tasks) => {
-  store.setState({ tasks });
-  tasks.map(({ index }) => {
-    if (index > store.getState().maxIndex) store.setState({ maxIndex: index });
-  });
-});
+const store =
+  process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
 
+database.getAll().then(tasks => store.setState({ tasks }));
 export default store;

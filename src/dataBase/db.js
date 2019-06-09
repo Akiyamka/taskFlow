@@ -4,7 +4,7 @@ import 'babel-polyfill';
 const db = new Dexie('taasksDB');
 
 db.version(1).stores({
-  tasks: 'id, name, text, status',
+  tasks: 'id, name, text, status, index',
 });
 
 export default {
