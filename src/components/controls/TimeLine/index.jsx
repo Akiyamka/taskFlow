@@ -32,7 +32,7 @@ const TimeLine = ({
   function currentTimeGenerator(start) {
     const date = new Date();
     let [hours, minutes] = [date.getHours(), date.getMinutes()];
-    minutes = minutes / 10 > 1 ? minutes : `0${minutes}`;
+    minutes = minutes / 10 >= 1 ? minutes : `0${minutes}`;
     const time = `${hours}:${minutes}`;
 
     hours -= new Date(start).getHours();
