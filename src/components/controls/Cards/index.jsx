@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'unistore/react';
@@ -23,7 +24,6 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTasks }) => {
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
       <div id='cards-container' onMouseUp={resizeEnd} onMouseMove={resizeMove}>
         <Droppable droppableId='card-list-droppable'>
           {(provided) => (

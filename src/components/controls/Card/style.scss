@@ -24,6 +24,9 @@
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+
   min-height: 70px;
 
   padding: 15px;
@@ -123,10 +126,12 @@
 
 .status-button {
   display: flex;
+  width: 100%;
+  flex-grow: 1;
   
   align-self: flex-end;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .time-duration {
@@ -147,5 +152,5 @@
 .card-resize-line{
   height: 15px;
   width: auto;
-  background-color: #50e092;
+  background-color: #bde2ce;
 }

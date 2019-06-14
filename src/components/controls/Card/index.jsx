@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable no-return-assign */
 /* eslint-disable radix */
 /* eslint-disable react/prop-types */
@@ -11,6 +12,7 @@ import database from '../../../dataBase/db';
 import './style.scss';
 
 const Card = ({
+  resize,
   data,
   resizeFirstClick,
   changeTask,
@@ -26,6 +28,7 @@ const Card = ({
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
   const [performed, useperformed] = useState('card-no-performed');
   const textContain = data.text ? 'text' : 'hidden';
+  const [dragDisable, setDragDisable] = useState(false);
 
   const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
@@ -44,22 +47,26 @@ const Card = ({
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
       useperformed('card-performed');
     else useperformed('card-no-performed');
-  }, [currentTimeInterval]);
+  }, [currentTimeInterval, resize]);
 
   const resizeStart = (e) => {
-    const resize = {
+    const resizeEvent = {
       positionY: e.clientY,
       height: parseInt(getComputedStyle(ref).height),
-      ref: ref,
+      ref,
     };
-    resizeFirstClick(resize);
+    resizeFirstClick(resizeEvent);
   };
 
   return (
-    <Draggable draggableId={String(id)} isDragDisabled={true} index={index}>
+    <Draggable draggableId={String(id)} isDragDisabled={dragDisable} index={index}>
       {(provided) => (
         <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
-          <div ref={(node) => (ref = node)} className={`card ${performed}`}>
+          <div
+            ref={(node) => (ref = node)}
+            className={`card ${performed}`}
+            onMouseMove={() => setDragDisable(false)}>
+
             <div className='task-header'>
               <h2>{data.name}</h2>
               <Link to={`/edit/${data.id}`} onClick={getTaskData}>
@@ -68,7 +75,9 @@ const Card = ({
                 </div>
               </Link>
             </div>
+
             <p className={`card-${textContain}`}>{data.text}</p>
+
             <div className='status-button'>
               <p className='time-duration'>{time}</p>
               <div>
@@ -81,8 +90,13 @@ const Card = ({
                 </button>
               </div>
             </div>
+
           </div>
-          <div className='card-resize-line' onMouseDown={resizeStart} />
+          <div
+            className='card-resize-line'
+            onMouseMove={() => setDragDisable(true)}
+            onMouseDown={resizeStart}
+          />
         </div>
       )}
     </Draggable>
@@ -95,6 +109,6 @@ Card.defaultProps = {
 };
 
 export default connect(
-  ['currentTimeInterval'],
+  ['currentTimeInterval', 'resize'],
   action
 )(Card);
