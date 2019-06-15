@@ -29,7 +29,7 @@
 
   min-height: 70px;
 
-  padding: 15px;
+  padding: 20px;
 
   border-radius: 4px;
   box-sizing: border-box;
@@ -44,7 +44,7 @@
     margin: 0;
     word-wrap: break-word;
     overflow: hidden;
-
+    font-weight: normal;
     color: rgba(0, 0, 0, 0.6);
   }
   .card-text {
@@ -87,31 +87,17 @@
 }
 
 .status-completed {
-  display: inline-block;
-
   @include font('PT Root UI', 14px, 18px);
   text-align: right;
-  align-items: center;
-
-  border: 0;
-  background-color: transparent;
-
-  outline: none;
-
+  padding-right: 0; 
   color: #50e092;
+  &:focus {
+    box-shadow: none
+  }
 }
 
 .status-done {
-  display: inline;
-  padding: 5px 10px;
-
-  border: 0;
-  border-radius: 2px;
-
-  @include font('PT Root UI', 14px, 18px);
-
   background: #50e092;
-
   color: #ffffff;
 }
 

@@ -33,12 +33,12 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
 
         <div id='frame-bottom'>
           <Link to='/'>
-            <button type='button' id={buttonName.toLowerCase()} onClick={remove}>
-              <h3>{buttonName}</h3>
+            <button type='button' className={`btn-${buttonName.toLowerCase()}`} onClick={remove}>
+              {buttonName}
             </button>
 
-            <button type='button' id='save' onClick={save}>
-              <h3>Save</h3>
+            <button type='button' className='btn-save' onClick={save}>
+              Save
             </button>
           </Link>
         </div>
