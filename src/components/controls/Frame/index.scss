@@ -40,25 +40,20 @@
   #input-title {
     font-size: 24px;
     line-height: 30px;
-
     color: rgba(0, 0, 0, 0.6);
   }
 
   #input-text {
     font-size: 16px;
     line-height: 20px;
-
     color: rgba(0, 0, 0, 0.7);
   }
 
   input,
   textarea {
     width: 100%;
-
     border: none;
-
     font-family: 'PT Root UI';
-
     outline: none;
   }
   textarea {
@@ -68,58 +63,20 @@
 
 #frame-bottom {
   display: flex;
-  padding: 5px 0;
-
   justify-content: flex-end;
+  margin-top: 20px;
+  button {
+    margin-left: 14px
+  }
 }
 
-#save,
-#cancel,
-#delete {
-  padding: 5px 10px;
-
+.btn-save {
   background: #50e092;
-  border-radius: 2px;
-  border: 0;
-
-  outline: none;
-
-  h3 {
-    margin: 0;
-
-    font-family: 'PT Root UI';
-    font-size: 14px;
-    line-height: 18px;
-    align-items: center;
-    text-align: center;
-  }
+  color: white
 }
 
-#save {
-  h3 {
-    color: #ffffff;
-  }
-}
-
-#cancel {
-  margin-right: 10px;
-
-  background-color: transparent;
-
-  h3 {
-    color: rgba(0, 0, 0, 0.6);
-  }
-}
-
-#delete {
-  margin-right: 10px;
-
+.btn-delete {
   box-sizing: border-box;
   border: solid 1px #fd6161;
-
-  background-color: transparent;
-
-  h3 {
-    color: #fd6161;
-  }
+  color: #fd6161;
 }
