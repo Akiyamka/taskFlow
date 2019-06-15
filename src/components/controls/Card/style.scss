@@ -24,6 +24,8 @@
 }
 
 .card {
+  position: relative;
+
   display: flex;
   flex-direction: column;
 
@@ -89,10 +91,10 @@
 .status-completed {
   @include font('PT Root UI', 14px, 18px);
   text-align: right;
-  padding-right: 0; 
+  padding-right: 0;
   color: #50e092;
   &:focus {
-    box-shadow: none
+    box-shadow: none;
   }
 }
 
@@ -114,7 +116,7 @@
   display: flex;
   width: 100%;
   flex-grow: 1;
-  
+
   align-self: flex-end;
   justify-content: space-between;
   align-items: flex-end;
@@ -135,8 +137,18 @@
   opacity: 0.5;
 }
 
-.card-resize-line{
+.card-resize-line {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
   height: 15px;
-  width: auto;
-  background-color: #bde2ce;
+  width: 100%;
+
+  background-color: transparent;
+  border: 0;
+  outline: none;
+}
+.card-resize-line:focus {
+  box-shadow: none;
 }

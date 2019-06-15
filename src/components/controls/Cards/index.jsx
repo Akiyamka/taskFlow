@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -25,8 +26,8 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
   const resizeMove = (e) => {
     if (resize.isResize) {
-      // eslint-disable-next-line no-param-reassign
-      resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
+      if (e.clientY) resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
+      else resize.ref.style.height = `${resize.height + (e.changedTouches[0].clientY - resize.positionY)}px`;
     }
   };
 
@@ -34,7 +35,12 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
-      <div id='cards-container' onMouseUp={resizeEnd} onMouseMove={resizeMove}>
+      <div
+        id='cards-container'
+        onMouseUp={resizeEnd}
+        onMouseMove={resizeMove}
+        onTouchMove={resizeMove}
+        onTouchEnd={resizeEnd}>
         <Droppable droppableId='card-list-droppable'>
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>

@@ -28,7 +28,6 @@ const Card = ({
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
   const [performed, useperformed] = useState('card-no-performed');
   const textContain = data.text ? 'text' : 'hidden';
-  const [dragDisable, setDragDisable] = useState(false);
 
   const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
@@ -51,22 +50,20 @@ const Card = ({
 
   const resizeStart = (e) => {
     const resizeEvent = {
-      positionY: e.clientY,
       height: parseInt(getComputedStyle(ref).height),
       ref,
     };
+    if (e.clientY) resizeEvent.positionY = e.clientY;
+    else resizeEvent.positionY = e.changedTouches[0].clientY;
+
     resizeFirstClick(resizeEvent);
   };
 
   return (
-    <Draggable draggableId={String(id)} isDragDisabled={dragDisable} index={index}>
+    <Draggable draggableId={String(id)} index={index}>
       {(provided) => (
         <div {...provided.draggableProps} ref={provided.innerRef} {...provided.dragHandleProps}>
-          <div
-            ref={(node) => (ref = node)}
-            className={`card ${performed}`}
-            onMouseMove={() => setDragDisable(false)}>
-
+          <div ref={(node) => (ref = node)} className={`card ${performed}`}>
             <div className='task-header'>
               <h2>{data.name}</h2>
               <Link to={`/edit/${data.id}`} onClick={getTaskData}>
@@ -90,13 +87,13 @@ const Card = ({
                 </button>
               </div>
             </div>
-
+            <button
+              type='button'
+              className='card-resize-line'
+              onMouseDown={resizeStart}
+              onTouchStart={resizeStart}
+            />
           </div>
-          <div
-            className='card-resize-line'
-            onMouseMove={() => setDragDisable(true)}
-            onMouseDown={resizeStart}
-          />
         </div>
       )}
     </Draggable>
