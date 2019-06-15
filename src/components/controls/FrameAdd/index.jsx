@@ -6,7 +6,7 @@ import Frame from '../Frame';
 import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
 
-const FrameAdd = ({ addTask }) => (
+const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
   <Frame
     id={uuid()}
     frameTitle='Add task'
@@ -14,9 +14,10 @@ const FrameAdd = ({ addTask }) => (
     status={false}
     name=''
     text=''
-    backFunction={() => { }}
-    buttonFunction={arg => {
-      const index = new Date().getTime()
+    backFunction={() => {}}
+    buttonFunction={(arg) => {
+      const index = lastIndex;
+      lastIndexChange(lastIndex + 1);
       addTask({ ...arg, index });
       database.add({ ...arg, index });
     }}
@@ -24,6 +25,6 @@ const FrameAdd = ({ addTask }) => (
 );
 
 export default connect(
-  'tasks',
+  'tasks, lastIndex',
   actions
 )(FrameAdd);

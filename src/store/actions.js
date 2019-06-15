@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-param-reassign */
 const actions = () => ({
   addTask: ({ tasks }, task) => {
@@ -21,12 +22,7 @@ const actions = () => ({
     return { tasks: [...tasks] };
   },
 
-  changeTasks: ({ tasks }, data) => {
-    const newTask = tasks;
-    const task = newTask.splice(data.oldIndex, 1);
-    newTask.splice(data.newIndex, 0, ...task);
-    return { tasks: [...newTask] };
-  },
+  lastIndexChange: (store, lastIndex) => ({ lastIndex }),
 
   changeTimeLine: ({ timeLine }, { time, type }) => {
     timeLine[type] = time;

@@ -1,16 +1,26 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'unistore/react';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
+import database from '../../../dataBase/db';
 import Card from '../Card';
 import './index.scss';
 
-const Cards = ({ resize, resizeLastClick, tasks, changeTasks }) => {
+const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   const dragEnd = ({ destination, source }) => {
     if (!destination) return;
-    changeTasks({ oldIndex: source.index, newIndex: destination.index });
+
+    const newTask = tasks;
+    const task = newTask.splice(source.index, 1);
+    newTask.splice(destination.index, 0, ...task);
+    newTask.map((task, index) => {
+      changeTask({ id: task.id, index });
+      database.put({ ...task, index });
+    });
   };
 
   const resizeMove = (e) => {
@@ -28,9 +38,11 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTasks }) => {
         <Droppable droppableId='card-list-droppable'>
           {(provided) => (
             <div {...provided.droppableProps} ref={provided.innerRef}>
-              {tasks.map((task, index) => (
-                <Card data={task} key={task.id} id={task.id} index={index} />
-              ))}
+              {tasks
+                .sort((a, b) => a.index - b.index)
+                .map((task, index) => (
+                  <Card data={task} key={task.id} id={task.id} index={index} />
+                ))}
               {provided.placeholder}
             </div>
           )}
