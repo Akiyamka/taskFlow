@@ -14,7 +14,6 @@ import './index.scss';
 const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   const dragEnd = ({ destination, source }) => {
     if (!destination) return;
-
     const newTask = tasks;
     const task = newTask.splice(source.index, 1);
     newTask.splice(destination.index, 0, ...task);
@@ -28,6 +27,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     if (resize.isResize) {
       if (e.clientY) resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
       else resize.ref.style.height = `${resize.height + (e.changedTouches[0].clientY - resize.positionY)}px`;
+      resize.ref.className = resize.ref.className.replace(' flex-grow-cards', '');
     }
   };
 
@@ -35,25 +35,25 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
-      <div
-        id='cards-container'
-        onMouseUp={resizeEnd}
-        onMouseMove={resizeMove}
-        onTouchMove={resizeMove}
-        onTouchEnd={resizeEnd}>
-        <Droppable droppableId='card-list-droppable'>
-          {(provided) => (
-            <div {...provided.droppableProps} ref={provided.innerRef}>
-              {tasks
-                .sort((a, b) => a.index - b.index)
-                .map((task, index) => (
-                  <Card data={task} key={task.id} id={task.id} index={index} />
-                ))}
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </div>
+      <Droppable droppableId='card-list-droppable'>
+        {(provided) => (
+          <div
+            {...provided.droppableProps}
+            ref={provided.innerRef}
+            id='cards-container'
+            onMouseUp={resizeEnd}
+            onMouseMove={resizeMove}
+            onTouchMove={resizeMove}
+            onTouchEnd={resizeEnd}>
+            {tasks
+              .sort((a, b) => a.index - b.index)
+              .map((task, index) => (
+                <Card data={task} key={task.id} id={task.id} index={index} growStatus={task.growStatus} />
+              ))}
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
     </DragDropContext>
   );
 };

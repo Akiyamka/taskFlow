@@ -19,36 +19,31 @@ module.exports = {
         },
       },
       {
-        test: /\.((s*)css|sass)$/,
-        exclude: path.resolve(__dirname, 'src/app'),
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              url: false,
+              hmr: process.env.NODE_ENV === 'development',
             },
           },
-          {
-            loader: 'sass-loader',
-            options:{
-              url: false,
-            }
-          },
+          'css-loader',
+          // 'postcss-loader',
+          'sass-loader',
         ],
       },
       {
         test: /\.((s*)css|sass)$/,
         include: path.resolve(__dirname, 'src/app'),
-        loader: 'raw-loader'
-    }
+        loader: 'raw-loader',
+      },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
     new MiniCssExtractPlugin({

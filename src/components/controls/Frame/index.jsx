@@ -7,7 +7,8 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const [newName, setName] = useState(name);
   const [newText, setText] = useState(text);
 
-  const save = () => buttonFunction({ id, name: newName, text: newText, status });
+  const save = () =>
+    buttonFunction({ id, name: newName, text: newText, status, growStatus: 'flex-grow-cards' });
   const remove = () => backFunction(id);
 
   return (
@@ -19,14 +20,14 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
       <div id='frame-body'>
         <input
           id='input-title'
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
           id='input-text'
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           defaultValue={newText}
           placeholder='Add text...'
         />
