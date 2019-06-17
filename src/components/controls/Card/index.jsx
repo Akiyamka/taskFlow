@@ -20,7 +20,6 @@ const Card = ({
   coeff,
   oneMinutes,
   currentTimeInterval,
-  id,
   index,
   growStatus,
 }) => {
@@ -58,8 +57,9 @@ const Card = ({
   const resizeStart = (e) => {
     const resizeEvent = {
       height: parseInt(getComputedStyle(ref).height),
-      ref,
+      id: data.id,
       isHeight: false,
+      ref,
     };
     if (e.clientY) resizeEvent.positionY = e.clientY;
     else resizeEvent.positionY = e.changedTouches[0].clientY;
@@ -68,7 +68,7 @@ const Card = ({
   };
 
   return (
-    <Draggable draggableId={String(id)} index={index}>
+    <Draggable draggableId={String(data.id)} index={index}>
       {(provided) => (
         <div
           {...provided.draggableProps}
@@ -77,7 +77,8 @@ const Card = ({
             ref = node;
           }}
           {...provided.dragHandleProps}
-          className={`card ${performed} ${growStatus}`}>
+          className={`card ${performed} ${growStatus}`}
+          style={{ height: data.height }}>
           <div className='task-header'>
             <h2>{data.name}</h2>
             <Link to={`/edit/${data.id}`} onClick={getTaskData}>

@@ -28,20 +28,13 @@ const actions = () => ({
     timeLine[type] = time;
     return { timeLine: { ...timeLine } };
   },
+
   saveCurrentTimeInterval: (store, currentTimeInterval) => {
     return { currentTimeInterval };
   },
 
-  resizeFirstClick: (store, { positionY, height, ref }) => {
-    return {
-      resize: {
-        ref,
-        height,
-        positionY,
-        isResize: true,
-      },
-    };
-  },
+  resizeFirstClick: (store, data) => ({ resize: { ...data, isResize: true } }),
+
   resizeLastClick: () => {
     return {
       resize: {

@@ -31,7 +31,13 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     }
   };
 
-  const resizeEnd = () => resizeLastClick();
+  const resizeEnd = () => {
+    if (resize.isResize) {
+      resizeLastClick();
+      changeTask({ id: resize.id, height: resize.height });
+      database.put({ id: resize.id, height: resize.height });
+    }
+  };
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
