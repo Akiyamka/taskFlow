@@ -19,7 +19,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   const [timeStatusEnd, setStatusEnd] = useState('access');
   const DateNow = new Date();
 
-  const setStartTime = e => {
+  const setStartTime = (e) => {
     const timeStart = new Date().setHours(...e.target.value.split(':'));
     const startTimeLaterThanCurrent = timeStart < DateNow;
 
@@ -30,7 +30,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
     } else setStatusStart('error');
   };
 
-  const setEndTime = e => {
+  const setEndTime = (e) => {
     const timeEnd = new Date().setHours(...e.target.value.split(':'));
 
     const finalTimeMoreThanStartTime = timeEnd > timeLine.start;
@@ -51,7 +51,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
           type='time'
           value={start}
           className={timeStatusStart}
-          onChange={e => setStartTime(e)}
+          onChange={(e) => setStartTime(e)}
           required
         />
       </div>
@@ -62,7 +62,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
           type='time'
           value={end}
           className={timeStatusEnd}
-          onChange={e => setEndTime(e)}
+          onChange={(e) => setEndTime(e)}
           required
         />
       </div>
