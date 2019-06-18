@@ -21,7 +21,6 @@ const Card = ({
   oneMinutes,
   currentTimeInterval,
   index,
-  growStatus,
 }) => {
   let ref;
   const [time, setTime] = useState('');
@@ -30,35 +29,42 @@ const Card = ({
   const textContain = data.text ? 'text' : 'hidden';
 
   const getTaskData = () => getTask(data.id);
+
   const changeStatus = () => {
     setStatus('Completed');
-    database.put({ ...data, status: true });
-    changeTask({ id: data.id, status: true });
 
     const height = parseInt(getComputedStyle(ref).height);
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height) {
       ref.style.height = `${currentTimeInterval - ref.offsetTop}px`;
     }
+
+    database.put({ ...data, status: true, height: ref.style.height });
+    changeTask({ id: data.id, status: true, height: ref.style.height });
   };
 
   useEffect(() => {
     const height = parseInt(getComputedStyle(ref).height);
     const hours = Math.floor(height / coeff / oneMinutes);
     const minutes = Math.floor(height / coeff - hours * oneMinutes);
+
     if (hours) setTime(`${hours}h ${minutes}min`);
     else setTime(`${minutes}min`);
+  }, [resize]);
+
+  useEffect(() => {
+    const { height } = resize;
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
       usePerformed('card-performed');
     else usePerformed('card-no-performed');
-  }, [currentTimeInterval, resize]);
+  }, [currentTimeInterval]);
 
   const resizeStart = (e) => {
     const resizeEvent = {
       height: parseInt(getComputedStyle(ref).height),
       id: data.id,
-      isHeight: false,
+      isHeight: !!data.height,
       ref,
     };
     if (e.clientY) resizeEvent.positionY = e.clientY;
@@ -76,9 +82,9 @@ const Card = ({
             provided.innerRef(node);
             ref = node;
           }}
-          {...provided.dragHandleProps}
-          className={`card ${performed} ${growStatus}`}
-          style={{ height: data.height }}>
+          className={`card ${performed} ${data.height ? '' : data.growStatus}`}
+          style={{ ...provided.draggableProps.style, height: data.height }}
+          {...provided.dragHandleProps}>
           <div className='task-header'>
             <h2>{data.name}</h2>
             <Link to={`/edit/${data.id}`} onClick={getTaskData}>
