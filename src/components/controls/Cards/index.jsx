@@ -43,23 +43,27 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   return (
     <DragDropContext onDragEnd={dragEnd}>
       <Droppable droppableId='card-list-droppable'>
-        {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            id='cards-container'
-            onMouseUp={resizeEnd}
-            onMouseMove={resizeMove}
-            onTouchMove={resizeMove}
-            onTouchEnd={resizeEnd}>
-            {tasks
-              .sort((a, b) => a.index - b.index)
-              .map((task, index) => (
-                <Card data={task} key={task.id} id={task.id} index={index} />
-              ))}
-            {provided.placeholder}
-          </div>
-        )}
+        {(provided) => {
+          const st = resize.isTouch;
+          return (
+            <div
+              {...provided.droppableProps}
+              className={st ? 'mobile' : 'pc'}
+              ref={provided.innerRef}
+              id='cards-container'
+              onMouseUp={resizeEnd}
+              onMouseMove={resizeMove}
+              onTouchMove={resizeMove}
+              onTouchEnd={resizeEnd}>
+              {tasks
+                .sort((a, b) => a.index - b.index)
+                .map((task, index) => (
+                  <Card data={task} key={task.id} id={task.id} index={index} />
+                ))}
+              {provided.placeholder}
+            </div>
+          );
+        }}
       </Droppable>
     </DragDropContext>
   );

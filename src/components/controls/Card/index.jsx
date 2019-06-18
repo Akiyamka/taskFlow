@@ -68,7 +68,10 @@ const Card = ({
       ref,
     };
     if (e.clientY) resizeEvent.positionY = e.clientY;
-    else resizeEvent.positionY = e.changedTouches[0].clientY;
+    else {
+      resizeEvent.isTouch = true;
+      resizeEvent.positionY = e.changedTouches[0].clientY;
+    }
 
     resizeFirstClick(resizeEvent);
   };

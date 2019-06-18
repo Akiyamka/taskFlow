@@ -39,6 +39,7 @@ const actions = () => ({
     return {
       resize: {
         isResize: false,
+        isTouch: false,
       },
     };
   },
