@@ -1,9 +1,9 @@
 import React from 'react';
-import Cards from '../../controls/Cards';
-import Header from '../Header';
-import AddTask from '../AddTask';
-import Footer from '../Footer';
-import TimeLine from '../../controls/TimeLine';
+import Header from 'Views/Header';
+import AddTask from 'Views/AddTask';
+import Footer from 'Views/Footer';
+import TimeLine from 'Controls/TimeLine';
+import Cards from 'Controls/Cards';
 import './index.scss';
 
 const MainView = () => (

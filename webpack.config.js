@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './src/index.js',
@@ -19,40 +20,40 @@ module.exports = {
         },
       },
       {
-        test: /\.((s*)css|sass)$/,
+        test: /\.(sa|sc|c)ss$/,
         exclude: path.resolve(__dirname, 'src/app'),
         use: [
-          MiniCssExtractPlugin.loader,
           {
-            loader: 'css-loader',
+            loader: MiniCssExtractPlugin.loader,
             options: {
-              url: false,
+              hmr: process.env.NODE_ENV === 'development',
+              reloadAll: true,
             },
           },
           {
+            loader: 'css-loader',
+          },
+          {
             loader: 'sass-loader',
-            options:{
-              url: false,
-            }
           },
         ],
-      },
-      {
-        test: /\.((s*)css|sass)$/,
-        include: path.resolve(__dirname, 'src/app'),
-        loader: 'raw-loader'
-    }
+      }
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      Controls: path.resolve(__dirname, 'src/components/controls/'),
+      Views: path.resolve(__dirname, 'src/components/views/'),
+    }
   },
   devServer: {
     historyApiFallback: true
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'style.css',
+      filename: devMode ? '[name].css' : '[name].[hash].css',
+      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
     }),
     new HtmlWebpackPlugin({
       template: './src/index.html',

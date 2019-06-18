@@ -1,26 +1,92 @@
 {
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
-
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
   "env": {
     "browser": true,
     "node": true,
     "jest": true
   },
-
+  "settings": {
+    "react": {
+      "createClass": "createReactClass",
+      "pragma": "React",
+      "version": "detect"
+    },
+    "propWrapperFunctions": [
+      "forbidExtraProps",
+      {
+        "property": "freeze",
+        "object": "Object"
+      },
+      {
+        "property": "myFavoriteWrapper"
+      }
+    ],
+    "linkComponents": [
+      "Hyperlink",
+      {
+        "name": "Link",
+        "linkAttribute": "to"
+      }
+    ]
+  },
   "globals": {
     "React": true
   },
-  
-  "parser": "babel-eslint",
-
   "ecmaFeatures": {
     "jsx": true
   },
-
-  "plugins": ["prettier"],
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "prettier",
+    "react",
+    "react-hooks"
+  ],
   "rules": {
     "prettier/prettier": "error",
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/destructuring-assignment": ["never"]
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".js",
+          ".jsx"
+        ]
+      }
+    ],
+    "react/destructuring-assignment": [
+      "never"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "react/prop-types": [
+      "warn"
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

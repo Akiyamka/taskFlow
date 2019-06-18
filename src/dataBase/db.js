@@ -1,5 +1,4 @@
 import Dexie from 'dexie';
-import 'babel-polyfill';
 
 const db = new Dexie('taasksDB');
 
