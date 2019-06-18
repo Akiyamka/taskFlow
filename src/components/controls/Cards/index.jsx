@@ -6,7 +6,7 @@ import './index.scss';
 
 const Cards = ({ tasks }) => (
   <div id='cards-container'>
-    {tasks.map(task => (
+    {tasks.map((task) => (
       <Card key={task.id} data={task} />
     ))}
   </div>

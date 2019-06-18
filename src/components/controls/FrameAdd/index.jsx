@@ -15,7 +15,7 @@ const FrameAdd = ({ addTask }) => (
     name=''
     text=''
     backFunction={() => {}}
-    buttonFunction={arg => {
+    buttonFunction={(arg) => {
       addTask(arg);
       database.add(arg);
     }}

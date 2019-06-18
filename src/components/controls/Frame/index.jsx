@@ -19,14 +19,14 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
       <div id='frame-body'>
         <input
           id='input-title'
-          onChange={e => setName(e.target.value)}
+          onChange={(e) => setName(e.target.value)}
           defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
           id='input-text'
-          onChange={e => setText(e.target.value)}
+          onChange={(e) => setText(e.target.value)}
           defaultValue={newText}
           placeholder='Add text...'
         />

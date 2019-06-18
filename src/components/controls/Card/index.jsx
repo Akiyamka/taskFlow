@@ -36,7 +36,7 @@ const Card = ({ data, changeTask, getTask, coeff, oneMinutes, currentTimeInterva
   }, [currentTimeInterval]);
 
   return (
-    <div ref={node => (ref = node)} className={`card ${performed}`}>
+    <div ref={(node) => (ref = node)} className={`card ${performed}`}>
       <div className='task-header'>
         <h2>{data.name}</h2>
         <Link to={`/edit/${data.id}`} onClick={getTaskData}>

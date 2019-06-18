@@ -15,5 +15,5 @@ const initialState = {
 const store =
   process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
 
-database.getAll().then(tasks => store.setState({ tasks }));
+database.getAll().then((tasks) => store.setState({ tasks }));
 export default store;
