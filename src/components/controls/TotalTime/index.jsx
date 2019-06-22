@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../../store/actions';
-import './index.scss';
+import style from './index.styl';
 
 function unixTimeTo24(unixTime) {
   return new Date(unixTime)
@@ -43,25 +43,25 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   };
 
   return (
-    <form id='total-time'>
-      <div id='start-container'>
-        <h3 id='text-start'>START</h3>
+    <form id={style.totalTime}>
+      <div id={style.startContainer}>
+        <h3 id={style.textStart}>START</h3>
         <input
-          id='time-start'
+          id={style.timeStart}
           type='time'
           value={start}
-          className={timeStatusStart}
+          className={style[timeStatusStart]}
           onChange={(e) => setStartTime(e)}
           required
         />
       </div>
-      <div id='end-container'>
-        <h3 id='text-end'>END</h3>
+      <div id={style.endContainer}>
+        <h3 id={style.textEnd}>END</h3>
         <input
-          id='time-end'
+          id={style.timeEnd}
           type='time'
           value={end}
-          className={timeStatusEnd}
+          className={style[timeStatusEnd]}
           onChange={(e) => setEndTime(e)}
           required
         />

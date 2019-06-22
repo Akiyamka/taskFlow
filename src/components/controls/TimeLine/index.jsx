@@ -5,7 +5,7 @@ import { connect } from 'unistore/react';
 import TimeStep from '../../views/TimeStep';
 import CurrentTime from '../../views/CurrentTime';
 import actions from '../../../store/actions';
-import './index.scss';
+import style from './index.styl';
 
 const TimeLine = ({
   saveCurrentTimeInterval,
@@ -107,7 +107,7 @@ const TimeLine = ({
   });
 
   return (
-    <div id='time-board'>
+    <div id={style.timeBoard}>
       {timeTape}
       <CurrentTime height={`${currentTime.height}px`} time={`${currentTime.time}`} />
     </div>

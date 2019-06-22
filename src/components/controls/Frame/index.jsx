@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import './index.scss';
+import style from './index.styl';
 
 const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName, backFunction }) => {
   const [newName, setName] = useState(name);
@@ -11,33 +11,33 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const remove = () => backFunction(id);
 
   return (
-    <div id='frame'>
-      <div id='frame-title'>
+    <div id={style.frame}>
+      <div id={style.frameTitle}>
         <h3>{frameTitle}</h3>
       </div>
 
-      <div id='frame-body'>
+      <div id={style.frameBody}>
         <input
-          id='input-title'
+          id={style.inputTitle}
           onChange={(e) => setName(e.target.value)}
           defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
-          id='input-text'
+          id={style.inputText}
           onChange={(e) => setText(e.target.value)}
           defaultValue={newText}
           placeholder='Add text...'
         />
 
-        <div id='frame-bottom'>
+        <div id={style.frameBottom}>
           <Link to='/'>
-            <button type='button' className={`btn-${buttonName.toLowerCase()}`} onClick={remove}>
+            <button type='button' className={style[`btn${buttonName}`]} onClick={remove}>
               {buttonName}
             </button>
 
-            <button type='button' className='btn-save' onClick={save}>
+            <button type='button' className={style.btnSave} onClick={save}>
               Save
             </button>
           </Link>

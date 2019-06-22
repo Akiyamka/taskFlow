@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './index.scss';
+import style from './index.styl';
 
 const CurrentTime = ({ time, height }) => (
-  <div style={{ height }} id='current-time'>
-    <div id='time-now'>{time}</div>
-    <div id='line-now' />
+  <div style={{ height }} id={style.currentTime}>
+    <div id={style.timeNow}>{time}</div>
+    <div id={style.lineNow} />
   </div>
 );
 

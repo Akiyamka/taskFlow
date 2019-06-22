@@ -1,10 +1,10 @@
 import React from 'react';
 import Logo from '../Logo';
 import TotalTime from '../../controls/TotalTime';
-import './index.scss';
+import style from  './index.styl';
 
 const Header = () => (
-  <div id='header'>
+  <div id={style.header}>
     <Logo />
     <TotalTime />
   </div>

@@ -1,8 +1,6 @@
 /* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const devMode = process.env.NODE_ENV !== 'production';
 
 module.exports = {
   entry: './src/index.js',
@@ -20,24 +18,38 @@ module.exports = {
         },
       },
       {
-        test: /\.(sa|sc|c)ss$/,
-        exclude: path.resolve(__dirname, 'src/app'),
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
+          },
+          'stylus-loader',
+          'sass-loader',
+        ]
+      },
+      {
+        test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              hmr: process.env.NODE_ENV === 'development',
-              reloadAll: true,
-            },
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
-          },
-          {
-            loader: 'sass-loader',
-          },
-        ],
-      }
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]_[local]_[hash:base64]',
+              sourceMap: true,
+              minimize: true
+            }
+          }
+        ]
+      },
     ],
   },
   resolve: {
@@ -45,16 +57,12 @@ module.exports = {
     alias: {
       Controls: path.resolve(__dirname, 'src/components/controls/'),
       Views: path.resolve(__dirname, 'src/components/views/'),
-    }
+    },
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: devMode ? '[name].css' : '[name].[hash].css',
-      chunkFilename: devMode ? '[id].css' : '[id].[hash].css',
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
