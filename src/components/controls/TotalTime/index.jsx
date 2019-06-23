@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../../store/actions';
-import './index.scss';
+import style from './index.styl';
 
 function unixTimeTo24(unixTime) {
   return new Date(unixTime)
@@ -19,7 +19,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   const [timeStatusEnd, setStatusEnd] = useState('access');
   const DateNow = new Date();
 
-  const setStartTime = e => {
+  const setStartTime = (e) => {
     const timeStart = new Date().setHours(...e.target.value.split(':'));
     const startTimeLaterThanCurrent = timeStart < DateNow;
 
@@ -30,7 +30,7 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
     } else setStatusStart('error');
   };
 
-  const setEndTime = e => {
+  const setEndTime = (e) => {
     const timeEnd = new Date().setHours(...e.target.value.split(':'));
 
     const finalTimeMoreThanStartTime = timeEnd > timeLine.start;
@@ -43,26 +43,26 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   };
 
   return (
-    <form id='total-time'>
-      <div id='start-container'>
-        <h3 id='text-start'>START</h3>
+    <form id={style.totalTime}>
+      <div id={style.startContainer}>
+        <h3 id={style.textStart}>START</h3>
         <input
-          id='time-start'
+          id={style.timeStart}
           type='time'
           value={start}
-          className={timeStatusStart}
-          onChange={e => setStartTime(e)}
+          className={style[timeStatusStart]}
+          onChange={(e) => setStartTime(e)}
           required
         />
       </div>
-      <div id='end-container'>
-        <h3 id='text-end'>END</h3>
+      <div id={style.endContainer}>
+        <h3 id={style.textEnd}>END</h3>
         <input
-          id='time-end'
+          id={style.timeEnd}
           type='time'
           value={end}
-          className={timeStatusEnd}
-          onChange={e => setEndTime(e)}
+          className={style[timeStatusEnd]}
+          onChange={(e) => setEndTime(e)}
           required
         />
       </div>

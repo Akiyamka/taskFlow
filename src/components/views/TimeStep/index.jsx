@@ -1,11 +1,11 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import './index.scss';
+import style from './index.styl';
 
 const TimeStep = ({ time, height, visibility }) => (
-  <div className='time-step' style={{ visibility, height }}>
-    <div className='text-line'>{time}</div>
-    <div className='time-line' />
+  <div className={style.timeStep} style={{ visibility, height }}>
+    <div className={style.textLine}>{time}</div>
+    <div className={style.timeLine} />
   </div>
 );
 

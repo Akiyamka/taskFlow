@@ -7,9 +7,9 @@ import React from 'react';
 import { connect } from 'unistore/react';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
-import database from '../../../dataBase/db';
+import database from '../../../dataBase/index';
 import Card from '../Card';
-import './index.scss';
+import style from './index.styl';
 
 const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   const dragEnd = ({ destination, source }) => {
@@ -27,7 +27,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     if (resize.isResize) {
       if (e.clientY) resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
       else resize.ref.style.height = `${resize.height + (e.changedTouches[0].clientY - resize.positionY)}px`;
-      resize.ref.className = resize.ref.className.replace(' flex-grow-cards', '');
+      resize.ref.className = resize.ref.className.replace('flexGrowCards', '');
     }
   };
 
@@ -35,12 +35,12 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
-      <Droppable droppableId='card-list-droppable'>
+      <Droppable droppableId='cardListDroppable'>
         {(provided) => (
           <div
             {...provided.droppableProps}
             ref={provided.innerRef}
-            id='cards-container'
+            id={style.cardsContainer}
             onMouseUp={resizeEnd}
             onMouseMove={resizeMove}
             onTouchMove={resizeMove}

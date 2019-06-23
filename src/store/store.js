@@ -1,6 +1,6 @@
 import createStore from 'unistore';
 import devtools from 'unistore/devtools';
-import database from '../dataBase/db';
+import database from '../dataBase/index';
 
 const initialState = {
   edit: [],

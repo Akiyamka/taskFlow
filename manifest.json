@@ -1,0 +1,19 @@
+{
+  "name": "TaskFlow",
+  "short_name": "TaskFlow",
+  "start_url": "./?utm_source=web_app_manifest",
+  "display": "standalone",
+  "background_color": "#e8f0f9",
+  "theme_color": "#e8f0f9",
+  "version": "0.1",
+  "manifest_version": 2,
+  "related_applications": [
+    {
+      "platform": "web"
+    },
+    {
+      "platform": "play",
+      "url": "https://github.com/Akiyamka/taskFlow"
+    }
+  ]
+}

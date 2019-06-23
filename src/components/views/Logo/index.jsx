@@ -1,11 +1,11 @@
 import React from 'react';
-import './index.scss';
+import style from './index.styl';
 
 const Logo = () => (
-  <div id='logo'>
+  <div id={style.logo}>
     <h2>Taskflow</h2>
-    <div id='logo-vector'>
-      <svg width='34.37px' height='6.3px' id='rectangle1'>
+    <div id={style.logoVector}>
+      <svg width='34.37px' height='6.3px' id={style.rectangle1}>
         <path
           d='M 0, 0 
           L 6.1, 6.3
@@ -13,7 +13,7 @@ const Logo = () => (
           L 34.37, 0 z'
         />
       </svg>
-      <svg width='31.01px' height='4.4px' id='rectangle2'>
+      <svg width='31.01px' height='4.4px' id={style.rectangle2}>
         <path
           d='M 0, 0 
           L 0, 4.4
@@ -21,7 +21,7 @@ const Logo = () => (
           L 31.01, 0 z'
         />
       </svg>
-      <svg width='45.26px' height='2.3px' id='rectangle3'>
+      <svg width='45.26px' height='2.3px' id={style.rectangle3}>
         <path
           d='M 0, 0 
           L 0, 2.4

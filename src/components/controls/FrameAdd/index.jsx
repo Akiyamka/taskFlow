@@ -3,7 +3,7 @@ import React from 'react';
 import uuid from 'uuid';
 import { connect } from 'unistore/react';
 import Frame from '../Frame';
-import database from '../../../dataBase/db';
+import database from '../../../dataBase/index';
 import actions from '../../../store/actions';
 
 const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (

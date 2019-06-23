@@ -8,8 +8,8 @@ import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Draggable } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
-import database from '../../../dataBase/db';
-import './style.scss';
+import database from '../../../dataBase/index';
+import style from './style.styl';
 
 const Card = ({
   resize,
@@ -27,8 +27,8 @@ const Card = ({
   let ref;
   const [time, setTime] = useState('');
   const [status, setStatus] = useState(data.status ? 'Completed' : 'Done');
-  const [performed, usePerformed] = useState('card-no-performed');
-  const textContain = data.text ? 'text' : 'hidden';
+  const [performed, usePerformed] = useState('cardNoPerformed');
+  const textContain = data.text ? 'Text' : 'Hidden';
 
   const getTaskData = () => getTask(data.id);
   const changeStatus = () => {
@@ -51,8 +51,8 @@ const Card = ({
     else setTime(`${minutes}min`);
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
-      usePerformed('card-performed');
-    else usePerformed('card-no-performed');
+      usePerformed('cardPerformed');
+    else usePerformed('cardNoPerformed');
   }, [currentTimeInterval, resize]);
 
   const resizeStart = (e) => {
@@ -77,30 +77,30 @@ const Card = ({
             ref = node;
           }}
           {...provided.dragHandleProps}
-          className={`card ${performed} ${growStatus}`}>
-          <div className='task-header'>
+          className={[style.card, style[performed], style[growStatus]].join(' ')}>
+          <div className={style.taskHeader}>
             <h2>{data.name}</h2>
             <Link to={`/edit/${data.id}`} onClick={getTaskData}>
-              <div className='config'>
-                <FontAwesomeIcon className='config-icon' icon='pen' />
+              <div className={style.config}>
+                <FontAwesomeIcon className={style.configIcon} icon='pen' />
               </div>
             </Link>
           </div>
 
-          <p className={`card-${textContain}`}>{data.text}</p>
+          <p className={style[`card${textContain}`]}>{data.text}</p>
 
-          <div className='status-button'>
-            <p className='time-duration'>{time}</p>
+          <div className={style.statusButton}>
+            <p className={style.timeDuration}>{time}</p>
             <div>
-              <FontAwesomeIcon className={`check-icon-${status.toLocaleLowerCase()}`} icon='check' />
-              <button type='button' className={`status-${status.toLocaleLowerCase()}`} onClick={changeStatus}>
+              <FontAwesomeIcon className={style[`checkIcon${status}`]} icon='check' />
+              <button type='button' className={style[`status${status}`]} onClick={changeStatus}>
                 {status}
               </button>
             </div>
           </div>
           <button
             type='button'
-            className='card-resize-line'
+            className={style.cardResizeLine}
             onMouseDown={resizeStart}
             onTouchStart={resizeStart}
           />
