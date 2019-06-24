@@ -25,34 +25,45 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
   const resizeMove = (e) => {
     if (resize.isResize) {
+      if (!resize.height) resize.ref.className = resize.ref.className.replace(' flexGrowCards', '');
       if (e.clientY) resize.ref.style.height = `${resize.height + (e.clientY - resize.positionY)}px`;
       else resize.ref.style.height = `${resize.height + (e.changedTouches[0].clientY - resize.positionY)}px`;
-      resize.ref.className = resize.ref.className.replace('flexGrowCards', '');
     }
   };
 
-  const resizeEnd = () => resizeLastClick();
+  const resizeEnd = () => {
+    if (resize.isResize) {
+      resizeLastClick();
+      const index = tasks.findIndex((task) => resize.id === task.id);
+      changeTask({ id: resize.id, height: resize.ref.style.height });
+      database.put({ id: resize.id, ...tasks[index], height: resize.ref.style.height });
+    }
+  };
 
   return (
     <DragDropContext onDragEnd={dragEnd}>
       <Droppable droppableId='cardListDroppable'>
-        {(provided) => (
-          <div
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            id={style.cardsContainer}
-            onMouseUp={resizeEnd}
-            onMouseMove={resizeMove}
-            onTouchMove={resizeMove}
-            onTouchEnd={resizeEnd}>
-            {tasks
-              .sort((a, b) => a.index - b.index)
-              .map((task, index) => (
-                <Card data={task} key={task.id} id={task.id} index={index} growStatus={task.growStatus} />
-              ))}
-            {provided.placeholder}
-          </div>
-        )}
+        {(provided) => {
+          const st = resize.isTouch;
+          return (
+            <div
+              {...provided.droppableProps}
+              className={st ? style.mobile : style.pc}
+              ref={provided.innerRef}
+              id={style.cardsContainer}
+              onMouseUp={resizeEnd}
+              onMouseMove={resizeMove}
+              onTouchMove={resizeMove}
+              onTouchEnd={resizeEnd}>
+              {tasks
+                .sort((a, b) => a.index - b.index)
+                .map((task, index) => (
+                  <Card data={task} key={task.id} id={task.id} index={index} />
+                ))}
+              {provided.placeholder}
+            </div>
+          );
+        }}
       </Droppable>
     </DragDropContext>
   );
