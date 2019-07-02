@@ -18,6 +18,9 @@
       #root {
         height: 100%;
       }
+      .flexGrowCards {
+        flex: 1;
+      }
     </style>
     <div id="root"></div>
     <script>
@@ -26,6 +29,13 @@
           .register('src/service-worker.js')
           .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
           .catch((err) => console.log(err));
+          Notification.requestPermission(function(result) {
+            if (result === 'granted') {
+              navigator.serviceWorker.ready.then(function(registration) {
+              registration.showNotification('Notification with ServiceWorker');
+            });
+          }
+        });
       }
     </script>
   </body>

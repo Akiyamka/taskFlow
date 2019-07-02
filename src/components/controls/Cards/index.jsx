@@ -58,7 +58,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
               {tasks
                 .sort((a, b) => a.index - b.index)
                 .map((task, index) => (
-                  <Card data={task} key={task.id} id={task.id} index={index} />
+                  <Card data={task} key={task.id} id={task.id} index={index} growStatus={task.growStatus} />
                 ))}
               {provided.placeholder}
             </div>

@@ -21,6 +21,10 @@ const Card = ({
   oneMinutes,
   currentTimeInterval,
   index,
+  taskInFocuse,
+  notificationTask,
+  remaining,
+  growStatus,
 }) => {
   let ref;
   const [time, setTime] = useState('');
@@ -53,10 +57,25 @@ const Card = ({
   }, [resize]);
 
   useEffect(() => {
-    const { height } = resize;
+    const bottomLimit = ref.offsetTop + parseInt(getComputedStyle(ref).height);
 
-    if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height)
+    if (ref.offsetTop < currentTimeInterval && currentTimeInterval < bottomLimit) {
       usePerformed('cardPerformed');
+      if (data.id !== notificationTask.id)
+        taskInFocuse({ id: data.id, notification: true })
+
+      if (bottomLimit - currentTimeInterval < remaining) {
+        if (data.id === notificationTask.id && notificationTask.notification) {
+          taskInFocuse({ id: data.id, notification: false })
+          new Notification("Ending time for the tusk - " + data.name, {
+            icon: 'icon.png',
+            body: 'Remaining: ' + Math.round((bottomLimit - currentTimeInterval) / 4.5) + 'min',
+            vibrate: true,
+            requireInteraction: false,
+          })
+        }
+      }
+    }
     else usePerformed('cardNoPerformed');
   }, [currentTimeInterval]);
 
@@ -85,7 +104,7 @@ const Card = ({
             provided.innerRef(node);
             ref = node;
           }}
-          className={[st.card, st[performed], st[data.growStatus]].join(' ')}
+          className={[st.card, st[performed], data.height ? '' : growStatus].join(' ')}
           style={{ ...provided.draggableProps.style, height: data.height }}
           {...provided.dragHandleProps}>
           <div className={st.taskHeader}>
@@ -123,9 +142,10 @@ const Card = ({
 Card.defaultProps = {
   coeff: 4.5,
   oneMinutes: 60,
+  remaining: 5 * 4.5,
 };
 
 export default connect(
-  ['currentTimeInterval', 'resize'],
+  ['currentTimeInterval', 'resize', 'notificationTask'],
   action
 )(Card);

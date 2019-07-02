@@ -14,6 +14,10 @@ const initialState = {
   },
   currentTimeInterval: 0,
   lastIndex: 0,
+  notificationTask: {
+    id: '',
+    notification: false,
+  },
 };
 
 const store =

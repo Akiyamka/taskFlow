@@ -35,6 +35,8 @@ const actions = () => ({
 
   resizeFirstClick: (store, data) => ({ resize: { ...data, isResize: true } }),
 
+  taskInFocuse: (store, notificationTask) => ({ notificationTask }),
+
   resizeLastClick: () => {
     return {
       resize: {
