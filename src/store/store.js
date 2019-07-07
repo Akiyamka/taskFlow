@@ -1,6 +1,6 @@
 import createStore from 'unistore';
 import devtools from 'unistore/devtools';
-import database from '../dataBase/index';
+import firebase from '../dataBase/firebase';
 
 const initialState = {
   edit: [],
@@ -23,5 +23,10 @@ const initialState = {
 const store =
   process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
 
-database.getAll().then((tasks) => store.setState({ tasks, lastIndex: tasks.length }));
+firebase.getTasks().then((querySnapshot) => {
+  const tasks = [];
+  [...querySnapshot.docs].map((val) => tasks.push({ ...val.data(), id: val.id }));
+  store.setState({ tasks, lastIndex: tasks.length })
+}).catch(console.log)
+
 export default store;

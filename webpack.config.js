@@ -1,15 +1,17 @@
 /* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
     bundle: './src/index.js',
-    'service-worker': './src/service-worker',
+    'service-worker': './src/service-worker.js',
   },
   output: {
     path: path.join(__dirname, './build'),
     filename: '[name].js',
+    globalObject: 'self',
   },
   module: {
     rules: [
@@ -19,18 +21,6 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      },
-      {
-        type: 'javascript/auto',
-        test: /\.json$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: './[name].[ext]',
-            },
-          },
-        ],
       },
       {
         test: /\.styl$/,
@@ -76,10 +66,15 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyPlugin([
+      { from: 'src/manifest.json', to: 'src' },
+      { from: 'src/icon.png', to: 'src' },
+    ]),
   ],
 };

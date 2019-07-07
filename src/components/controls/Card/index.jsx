@@ -8,7 +8,7 @@ import { connect } from 'unistore/react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Draggable } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
-import database from '../../../dataBase/index';
+import firebase from '../../../dataBase/firebase';
 import st from './style.styl';
 
 const Card = ({
@@ -42,8 +42,7 @@ const Card = ({
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height) {
       ref.style.height = `${currentTimeInterval - ref.offsetTop}px`;
     }
-
-    database.put({ ...data, status: true, height: ref.style.height });
+    firebase.put(data.id, { ...data, status: true, height: ref.style.height });
     changeTask({ id: data.id, status: true, height: ref.style.height });
   };
 

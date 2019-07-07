@@ -7,7 +7,7 @@ import React from 'react';
 import { connect } from 'unistore/react';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
-import database from '../../../dataBase/index';
+import firebase from '../../../dataBase/firebase'
 import Card from '../Card';
 import style from './index.styl';
 
@@ -19,7 +19,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     newTask.splice(destination.index, 0, ...task);
     newTask.map((task, index) => {
       changeTask({ id: task.id, index });
-      database.put({ ...task, index });
+      firebase.put(task.id, { ...task, index })
     });
   };
 
@@ -36,7 +36,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
       resizeLastClick();
       const index = tasks.findIndex((task) => resize.id === task.id);
       changeTask({ id: resize.id, height: resize.ref.style.height });
-      database.put({ id: resize.id, ...tasks[index], height: resize.ref.style.height });
+      firebase.put(resize.id,{ ...tasks[index], height: resize.ref.style.height }).catch(console.log)
     }
   };
 
