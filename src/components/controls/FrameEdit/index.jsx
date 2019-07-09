@@ -18,7 +18,7 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match, tasks }) => {
       name={edit.name}
       text={edit.text}
       backFunction={(id) => {
-        firebase.delete(id)
+        firebase.delete(id);
         deleteTask(id);
         tasks
           .sort((a, b) => a.index - b.index)

@@ -23,10 +23,13 @@ const initialState = {
 const store =
   process.env.NODE_ENV === 'production' ? createStore(initialState) : devtools(createStore(initialState));
 
-firebase.getTasks().then((querySnapshot) => {
-  const tasks = [];
-  [...querySnapshot.docs].map((val) => tasks.push({ ...val.data(), id: val.id }));
-  store.setState({ tasks, lastIndex: tasks.length })
-}).catch(console.log)
+firebase
+  .getTasks()
+  .then((querySnapshot) => {
+    const tasks = [];
+    [...querySnapshot.docs].map((val) => tasks.push({ ...val.data(), id: val.id }));
+    store.setState({ tasks, lastIndex: tasks.length });
+  })
+  .catch(console.log);
 
 export default store;

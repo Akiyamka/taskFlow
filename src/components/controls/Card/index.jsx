@@ -60,22 +60,20 @@ const Card = ({
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < bottomLimit) {
       usePerformed('cardPerformed');
-      if (data.id !== notificationTask.id)
-        taskInFocuse({ id: data.id, notification: true })
+      if (data.id !== notificationTask.id) taskInFocuse({ id: data.id, notification: true });
 
       if (bottomLimit - currentTimeInterval < remaining) {
         if (data.id === notificationTask.id && notificationTask.notification) {
-          taskInFocuse({ id: data.id, notification: false })
-          new Notification("Ending time for the tusk - " + data.name, {
+          taskInFocuse({ id: data.id, notification: false });
+          new Notification(`Ending time for the tusk - ${data.name}`, {
             icon: 'icon.png',
-            body: 'Remaining: ' + Math.round((bottomLimit - currentTimeInterval) / 4.5) + 'min',
+            body: `Remaining: ${Math.round((bottomLimit - currentTimeInterval) / 4.5)}min`,
             vibrate: true,
             requireInteraction: false,
-          })
+          });
         }
       }
-    }
-    else usePerformed('cardNoPerformed');
+    } else usePerformed('cardNoPerformed');
   }, [currentTimeInterval]);
 
   const resizeStart = (e) => {
