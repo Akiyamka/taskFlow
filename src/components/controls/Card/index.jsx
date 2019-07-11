@@ -2,6 +2,8 @@
 /* eslint-disable no-return-assign */
 /* eslint-disable radix */
 /* eslint-disable react/prop-types */
+/* eslint-disable no-new */
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'unistore/react';
@@ -66,9 +68,9 @@ const Card = ({
         if (data.id === notificationTask.id && notificationTask.notification) {
           taskInFocuse({ id: data.id, notification: false });
           new Notification(`Ending time for the tusk - ${data.name}`, {
-            icon: 'icon.png',
+            icon: 'src/icon.png',
             body: `Remaining: ${Math.round((bottomLimit - currentTimeInterval) / 4.5)}min`,
-            vibrate: true,
+            vibrate: [200, 100, 200],
             requireInteraction: false,
           });
         }

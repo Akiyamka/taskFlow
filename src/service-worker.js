@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
 import firebase from 'firebase/app';
 
@@ -47,6 +48,7 @@ const getOriginFromUrl = (url) => {
 self.addEventListener('fetch', (event) => {
   const requestProcessor = (idToken) => {
     let req = event.request;
+
     if (
       self.location.origin === getOriginFromUrl(event.request.url) &&
       (self.location.protocol === 'https:' || self.location.hostname === 'localhost') &&
@@ -75,7 +77,7 @@ self.addEventListener('fetch', (event) => {
         console.log(e);
       }
     }
-    return fetch(req);
+    return fetch(req).catch(console.log);
   };
 
   event.respondWith(
@@ -89,7 +91,7 @@ const CACHE = 'cache-update-and-refresh-v1';
 
 const urlsToCache = [
   '/index.html',
-  '/service-worker.js',
+  // '/service-worker.js',
   '/bundle.js',
   '/src/manifest.json',
   '/src/icon.png',
@@ -97,6 +99,10 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(urlsToCache)));
+});
+
+self.addEventListener('push', (event) => {
+  console.log(event);
 });
 
 self.addEventListener('offline', (event) => {
@@ -107,18 +113,25 @@ self.addEventListener('offline', (event) => {
   );
 });
 
+// self.addEventListener('sync', function(event) {
+//   if (event.tag == 'myFirstSync') {
+//     event.waitUntil(doSomeStuff());
+//   }
+// });
+
 self.addEventListener('activate', (event) => {
   const cacheWhitelist = [CACHE];
 
   event.waitUntil(
-    caches.keys().then((cacheNames) =>
-      Promise.all(
-        cacheNames.map((cacheName) => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            return caches.delete(cacheName);
-          }
-        })
-      )
-    )
+    //   caches.keys().then((cacheNames) =>
+    //     Promise.all(
+    //       cacheNames.map((cacheName) => {
+    //         if (cacheWhitelist.indexOf(cacheName) === -1) {
+    //           return caches.delete(cacheName);
+    //         }
+    //       })
+    //     )
+    //   )
+    clients.claim()
   );
 });

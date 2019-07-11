@@ -1,40 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#536878" />
+    <link rel="manifest" crossorigin="use-credentials" href="./src/manifest.json" />
+    <link rel="stylesheet" href="src/fonts/PT%20Root%20UI_Regular.css" type="text/css" charset="utf-8" />
+    <title>Task flow</title>
+    <base href="/" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-  <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="theme-color" content="#536878" />
-  <link rel="manifest" crossorigin="use-credentials" href="./src/manifest.json" />
-  <link rel="stylesheet" href="http://fonts.fontstorage.com/import/ptrootui.css" />
-  <title>Task flow</title>
-  <base href="/" />
-</head>
+  <body>
+    <style>
+      #root {
+        height: 100%;
+      }
 
-<body>
-  <style>
-    #root {
-      height: 100%;
-    }
-
-    .flexGrowCards {
-      flex: 1;
-    }
-  </style>
-  <div id="root"></div>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker
-        .register('service-worker.js')
-        .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
-        .catch(console.log());
-
+      .flexGrowCards {
+        flex: 1;
+      }
+    </style>
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('service-worker.js')
+          .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
+          .catch(console.log());
+      }
       Notification.requestPermission();
-    }
-  </script>
-</body>
-
+    </script>
+  </body>
 </html>
