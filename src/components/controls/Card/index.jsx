@@ -40,11 +40,12 @@ const Card = ({
     setStatus('Completed');
 
     const height = parseInt(getComputedStyle(ref).height);
+    const collection = localStorage.getItem('id');
 
     if (ref.offsetTop < currentTimeInterval && currentTimeInterval < ref.offsetTop + height) {
       ref.style.height = `${currentTimeInterval - ref.offsetTop}px`;
     }
-    firebase.put(data.id, { ...data, status: true, height: ref.style.height });
+    firebase.put(data.id, { ...data, status: true, height: ref.style.height }, collection);
     changeTask({ id: data.id, status: true, height: ref.style.height });
   };
 

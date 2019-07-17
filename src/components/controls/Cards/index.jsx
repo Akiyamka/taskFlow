@@ -18,8 +18,10 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     const task = newTask.splice(source.index, 1);
     newTask.splice(destination.index, 0, ...task);
     newTask.map((task, index) => {
+      const collection = localStorage.getItem('id');
+
       changeTask({ id: task.id, index });
-      firebase.put(task.id, { ...task, index });
+      firebase.put(task.id, { ...task, index }, collection);
     });
   };
 
@@ -35,8 +37,12 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
     if (resize.isResize) {
       resizeLastClick();
       const index = tasks.findIndex((task) => resize.id === task.id);
+      const collection = localStorage.getItem('id');
+
       changeTask({ id: resize.id, height: resize.ref.style.height });
-      firebase.put(resize.id, { ...tasks[index], height: resize.ref.style.height }).catch(console.log);
+      firebase
+        .put(resize.id, { ...tasks[index], height: resize.ref.style.height }, collection)
+        .catch(console.log);
     }
   };
 

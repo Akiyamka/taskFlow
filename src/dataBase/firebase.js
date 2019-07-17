@@ -14,13 +14,15 @@ const fb = firebase.initializeApp(config);
 const provider = new firebase.auth.GoogleAuthProvider();
 provider.addScope('https://www.googleapis.com/auth/contacts.readonly');
 
-const store = firebase.firestore().collection('tasks');
+const firestore = (collection) => firebase.firestore().collection(collection);
 export default {
   auth: () => fb.auth().signInWithPopup(provider),
   signOut: () => fb.auth().signOut(),
-  put: (id, items) => store.doc(id).update(items),
-  add: (id, items) => store.doc(id).set(items),
-  delete: (id) => store.doc(id).delete(),
-  getTasks: () => store.get(),
+  put: (id, items, collection) => firestore(collection).doc(id).update(items),
+  add: (id, items, collection) => firestore(collection).doc(id).set(items),
+  delete: (id, collection) => firestore(collection).doc(id).delete(),
+  getTasks: (collection) => firestore(collection).get(),
+  provider,
+  firebase,
   fb,
 };

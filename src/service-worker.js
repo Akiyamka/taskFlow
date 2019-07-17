@@ -1,22 +1,6 @@
 /* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
-import firebase from 'firebase/app';
-
-const config = {
-  apiKey: 'AIzaSyCpGwibkYz3Rfc3F94V5a7Ls9b1N1tUWzw',
-  authDomain: 'taskflow-6a51f.firebaseapp.com',
-  databaseURL: 'https://taskflow-6a51f.firebaseio.com',
-  projectId: 'taskflow-6a51f',
-  storageBucket: 'taskflow-6a51f.appspot.com',
-  messagingSenderId: '350776321817',
-  appId: '1:350776321817:web:8711f05ea7805e6a',
-};
-
-try {
-  firebase.initializeApp(config);
-} catch (e) {
-  console.log(e);
-}
+import firebase from 'firebase';
 
 const getIdToken = () => {
   return new Promise((resolve) => {

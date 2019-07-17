@@ -66,6 +66,7 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
+    // https: true,
     headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
@@ -75,6 +76,7 @@ module.exports = {
     new CopyPlugin([
       { from: 'src/manifest.json', to: 'src' },
       { from: 'src/icon.png', to: 'src' },
+      { from: 'src/fonts', to: 'src' },
     ]),
   ],
 };

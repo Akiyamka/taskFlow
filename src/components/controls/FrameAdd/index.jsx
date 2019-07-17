@@ -17,9 +17,10 @@ const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
     backFunction={() => {}}
     buttonFunction={(arg) => {
       const index = lastIndex;
+      const collection = localStorage.getItem('id');
       lastIndexChange(lastIndex + 1);
       addTask({ ...arg, index });
-      firebase.add(arg.id, { ...arg, index });
+      firebase.add(arg.id, { ...arg, index }, collection);
     }}
   />
 );
