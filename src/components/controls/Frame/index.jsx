@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import style from './index.styl';
+import style from './style.styl';
 
 const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName, backFunction }) => {
   const [newName, setName] = useState(name);

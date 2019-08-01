@@ -1,27 +1,19 @@
-#addButton {
-  @media screen and (max-width: 450px) {
-    display: flex;
-    bottom: 0;
+#addButton
+  @media screen and (max-width: 450px)
+    display: flex
+    bottom: 0
+    width: 100%
+    padding: 15px 0
+    border: none
+    background: rgba(0, 0, 0, 0.8)
+    color: #ffffff
 
-    width: 100%;
-    padding: 15px 0;
+  #textButton
+    #iconPlus
+      @media screen and (max-width: 450px)
+        margin-right: 8px
 
-    border: none;
-
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-  }
-
-  #textButton {
-    #iconPlus {
-      @media screen and (max-width: 450px) {
-        margin-right: 8px;
-      }
-    }
-    @media screen and (max-width: 450px) {
-      display: flex;
-      width: 86px;
-      height: 18px;
-    }
-  }
-}
+    @media screen and (max-width: 450px)
+      display: flex
+      width: 86px
+      height: 18px

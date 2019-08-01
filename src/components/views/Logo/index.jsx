@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './index.styl';
+import style from './style.styl';
 
 const Logo = () => (
   <div id={style.logo}>

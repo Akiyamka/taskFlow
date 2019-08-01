@@ -4,7 +4,7 @@ import AddTask from 'Views/AddTask';
 import Footer from 'Views/Footer';
 import TimeLine from 'Controls/TimeLine';
 import Cards from 'Controls/Cards';
-import style from './index.styl';
+import style from './style.styl';
 
 const MainView = () => (
   <div id={style.mainView}>
