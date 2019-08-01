@@ -1,4 +1,4 @@
-@mixin font($family, $size, $lineHeight) {
+fontMixin($family, $size, $lineHeight) {
   font-family: $family;
   font-size: $size;
   line-height: $lineHeight;
@@ -16,7 +16,7 @@ body {
 
 button {
   padding: 6px 12px;
-  @include font('PT Root UI', 14px, 18px);
+  fontMixin('PT Root UI', 14px, 18px);
   border: 0;
   border-radius: 2px;
   display: inline-block;
