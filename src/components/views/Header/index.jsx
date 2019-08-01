@@ -4,7 +4,7 @@ import TotalTime from '../../controls/TotalTime';
 import style from  './style.styl';
 
 const Header = () => (
-  <div id={style.header}>
+  <div className={style.header}>
     <Logo />
     <TotalTime />
   </div>

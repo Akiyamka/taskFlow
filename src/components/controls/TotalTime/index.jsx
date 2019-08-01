@@ -43,11 +43,11 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
   };
 
   return (
-    <form id={style.totalTime}>
-      <div id={style.startContainer}>
-        <h3 id={style.textStart}>START</h3>
+    <form className={style.totalTime}>
+      <div className={style.startContainer}>
+        <h3 className={style.textStart}>START</h3>
         <input
-          id={style.timeStart}
+          className={style.timeStart}
           type='time'
           value={start}
           className={style[timeStatusStart]}
@@ -55,10 +55,10 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
           required
         />
       </div>
-      <div id={style.endContainer}>
-        <h3 id={style.textEnd}>END</h3>
+      <div className={style.endContainer}>
+        <h3 className={style.textEnd}>END</h3>
         <input
-          id={style.timeEnd}
+          className={style.timeEnd}
           type='time'
           value={end}
           className={style[timeStatusEnd]}
