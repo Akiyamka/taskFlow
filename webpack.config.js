@@ -1,7 +1,6 @@
 /* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   entry: {
     index: __dirname + '/src/index.js',
@@ -10,6 +9,7 @@ module.exports = {
     filename: '[name].[contenthash].bundle.js',
     chunkFilename: '[name].[contenthash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: process.env.NODE_ENV === 'development' ? './' : '/taskFlow/'
   },
   module: {
     rules: [
