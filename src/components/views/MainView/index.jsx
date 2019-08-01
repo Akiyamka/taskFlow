@@ -1,16 +1,20 @@
 import React from 'react';
-import Cards from '../../controls/Cards';
-import Header from '../Header';
-import AddTask from '../AddTask';
-import Footer from '../Footer';
-import './index.scss';
+import Header from 'Views/Header';
+import AddTask from 'Views/AddTask';
+import Footer from 'Views/Footer';
+import TimeLine from 'Controls/TimeLine';
+import Cards from 'Controls/Cards';
+import style from './style.styl';
 
 const MainView = () => (
-  <div id='main-view'>
-    <div id='view'>
+  <div className={style.mainView}>
+    <div className={style.view}>
       <Header />
       <AddTask />
-      <Cards />
+      <div className={style.taskList}>
+        <TimeLine />
+        <Cards />
+      </div>
     </div>
     <Footer />
   </div>

@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "Controls/*": ["src/components/controls/*"],
+      "Views/*": ["src/components/views/*"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

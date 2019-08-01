@@ -1,11 +1,11 @@
 /* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
 module.exports = {
   entry: './src/index.js',
   output: {
-    path: path.join(__dirname, './dist'),
+    path: path.join(__dirname, './build'),
     filename: 'bundle.js',
   },
   module: {
@@ -18,41 +18,50 @@ module.exports = {
         },
       },
       {
-        test: /\.((s*)css|sass)$/,
-        exclude: path.resolve(__dirname, 'src/app'),
+        test: /\.styl$/,
         use: [
-          MiniCssExtractPlugin.loader,
+          'style-loader',
           {
             loader: 'css-loader',
             options: {
-              url: false,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options:{
-              url:false,
+              modules: true,
+              localIdentName: '[name]__[local]___[hash:base64:5]'
             }
           },
-        ],
+          'stylus-loader',
+        ]
       },
       {
-        test: /\.((s*)css|sass)$/,
-        include: path.resolve(__dirname, 'src/app'),
-        loader: 'raw-loader'
-    }
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              importLoaders: 1,
+              localIdentName: '[name]_[local]_[hash:base64]',
+              sourceMap: true,
+              minimize: true
+            }
+          }
+        ]
+      },
     ],
   },
   resolve: {
     extensions: ['.js', '.jsx'],
+    alias: {
+      Controls: path.resolve(__dirname, 'src/components/controls/'),
+      Views: path.resolve(__dirname, 'src/components/views/'),
+    },
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: 'style.css',
-    }),
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),

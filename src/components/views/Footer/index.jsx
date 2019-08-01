@@ -1,12 +1,12 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import './style.scss';
+import style from './style.styl';
 
 const Footer = () => (
-  <div id='footer'>
+  <div className={style.footer}>
     <h3>
       MADE WITH
-      <FontAwesomeIcon id='footer-icon' icon='heart' />
+      <FontAwesomeIcon className={style.footerIcon} icon='heart' />
       IN BELARUS
     </h3>
   </div>

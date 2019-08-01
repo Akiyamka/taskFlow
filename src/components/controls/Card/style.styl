@@ -1,0 +1,121 @@
+fontMixin($family, $size, $lineHeight)
+  font-family: $family
+  font-size: $size
+  line-height: $lineHeight
+
+.card
+  h2
+    @media screen and (max-width: 600px)
+      font-size: 22px
+
+    @media screen and (max-width: 300px)
+      font-size: 15px
+
+  p
+    @media screen and (max-width: 600px)
+      font-size: 15px
+
+    @media screen and (max-width: 300px)
+      font-size: 10px
+
+.card
+  position: relative
+  display: flex
+  flex-direction: column
+  min-height: 70px
+  padding: 20px
+  border-radius: 4px
+  box-sizing: border-box
+  overflow: hidden
+  background: #ffffff
+  z-index: 5
+
+  h2
+    fontMixin('PT Root UI', 24px, 30px)
+    margin: 0
+    word-wrap: break-word
+    overflow: hidden
+    font-weight: normal
+    color: rgba(0, 0, 0, 0.6)
+
+  .cardText
+    padding: 20px 0
+    margin: 0
+    fontMixin('PT Root UI', 16px, 20px)
+    text-overflow: ellipsis
+    word-wrap: break-word
+    text-align: left
+    overflow: hidden
+    color: rgba(0, 0, 0, 0.7)
+
+.cardNoPerformed
+  border: 2px solid rgba(45, 97, 232, 0.17)
+
+.cardPerformed
+  border: 2px solid #50e092
+
+.configIcon
+  color: #a8c6e8
+  padding: 6px
+
+.config
+  display: inline-block
+  border: 1px solid rgba(45, 97, 232, 0.17)
+  box-sizing: border-box
+  border-radius: 2px
+
+.taskHeader
+  display: flex
+  justify-content: space-between
+  align-items: center
+
+.statusCompleted
+  fontMixin('PT Root UI', 14px, 18px)
+  text-align: right
+  padding-right: 0
+  color: #50e092
+
+  &:focus
+    box-shadow: none
+
+.statusDone
+  background: #50e092
+  color: #ffffff
+
+.checkIconDone
+  visibility: hidden
+
+.checkIconCompleted
+  visibility: visible
+  color: #50e092
+
+.statusButton
+  display: flex
+  width: 100%
+  flex-grow: 1
+  align-self: flex-end
+  justify-content: space-between
+  align-items: flex-end
+
+.timeDuration
+  display: inline-block
+  margin: 0
+  font-family: 'PT Root UI'
+  font-size: 14px
+  line-height: 18px
+  text-decoration-line: underline
+  color: rgba(0, 0, 0, 0.6)
+  opacity: 0.5
+
+.cardResizeLine
+  position: absolute
+  bottom: 0
+  left: 0
+  height: 15px
+  width: 100%
+  background-color: transparent
+  border: 0
+  outline: none
+
+.cardResizeLine:focus
+  box-shadow: none

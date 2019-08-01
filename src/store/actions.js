@@ -1,4 +1,6 @@
-const actions = (store) => ({
+/* eslint-disable no-plusplus */
+/* eslint-disable no-param-reassign */
+const actions = () => ({
   addTask: ({ tasks }, task) => {
     return { tasks: [...tasks, task] };
   },
@@ -18,6 +20,34 @@ const actions = (store) => ({
     const index = tasks.findIndex((task) => data.id === task.id);
     tasks[index] = { ...tasks[index], ...data };
     return { tasks: [...tasks] };
+  },
+
+  lastIndexChange: (store, lastIndex) => ({ lastIndex }),
+
+  changeTimeLine: ({ timeLine }, { time, type }) => {
+    timeLine[type] = time;
+    return { timeLine: { ...timeLine } };
+  },
+  saveCurrentTimeInterval: (store, currentTimeInterval) => {
+    return { currentTimeInterval };
+  },
+
+  resizeFirstClick: (store, { positionY, height, ref }) => {
+    return {
+      resize: {
+        ref,
+        height,
+        positionY,
+        isResize: true,
+      },
+    };
+  },
+  resizeLastClick: () => {
+    return {
+      resize: {
+        isResize: false,
+      },
+    };
   },
 });
 

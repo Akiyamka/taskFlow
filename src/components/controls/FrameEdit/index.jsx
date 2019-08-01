@@ -1,10 +1,13 @@
+/* eslint-disable array-callback-return */
+/* eslint-disable no-shadow */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { connect } from 'unistore/react';
 import Frame from '../Frame';
 import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
 
-const FrameEdit = ({ edit, deleteTask, changeTask, match }) => {
+const FrameEdit = ({ edit, deleteTask, changeTask, match, tasks }) => {
   const { id } = match.params;
   return (
     <Frame
@@ -17,6 +20,14 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match }) => {
       backFunction={(id) => {
         database.delete(id);
         deleteTask(id);
+        tasks
+          .sort((a, b) => a.index - b.index)
+          .map((task, index) => {
+            if (task.index !== index - 1) {
+              database.put({ ...task, index });
+              changeTask({ id: task.id, index });
+            }
+          });
       }}
       buttonFunction={(arg) => {
         database.put(arg);
@@ -27,6 +38,6 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match }) => {
 };
 
 export default connect(
-  'edit',
+  'edit,tasks',
   actions
 )(FrameEdit);
