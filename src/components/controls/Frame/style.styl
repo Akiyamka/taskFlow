@@ -1,82 +1,64 @@
-#frame {
-  display: flex;
+#frame
+  display: flex
+  height: 100%
+  flex-direction: column
+  background: #e8f0f9
 
-  height: 100%;
+#frameTitle
+  padding: 17px 20px
+  background: #ffffff
+  box-shadow: 0px 2px 4px rgba(168, 198, 232, 0.2)
+  border-radius: 0px 0px 4px 4px
+  font-family: 'PT Root UI'
+  font-size: 28.5px
+  line-height: 36px
+  color: rgba(0, 0, 0, 0.6)
 
-  flex-direction: column;
-  background: #e8f0f9;
-}
+  h3
+    margin: 0
 
-#frameTitle {
-  padding: 17px 20px;
+#frameBody
+  display: flex
+  margin: 13px 10px
+  padding: 20px
+  flex-grow: 1
+  flex-direction: column
+  background: #ffffff
+  border: 2px solid rgba(45, 97, 232, 0.17)
+  border-radius: 4px
 
-  background: #ffffff;
-  box-shadow: 0px 2px 4px rgba(168, 198, 232, 0.2);
-  border-radius: 0px 0px 4px 4px;
+  #inputTitle
+    font-size: 24px
+    line-height: 30px
+    color: rgba(0, 0, 0, 0.6)
 
-  font-family: 'PT Root UI';
-  font-size: 28.5px;
-  line-height: 36px;
+  #inputText
+    font-size: 16px
+    line-height: 20px
+    color: rgba(0, 0, 0, 0.7)
 
-  color: rgba(0, 0, 0, 0.6);
+  input, textarea
+    width: 100%
+    border: none
+    font-family: 'PT Root UI'
+    outline: none
 
-  h3 {
-    margin: 0;
-  }
-}
+  textarea
+    flex-grow: 1
 
-#frameBody {
-  display: flex;
-  margin: 13px 10px;
-  padding: 20px;
+#frameBottom
+  display: flex
+  justify-content: flex-end
+  margin-top: 20px
 
-  flex-grow: 1;
-  flex-direction: column;
+  button
+    margin-left: 14px
 
-  background: #ffffff;
-  border: 2px solid rgba(45, 97, 232, 0.17);
-  border-radius: 4px;
+.btnSave
+  background: #50e092
+  color: white
 
-  #inputTitle {
-    font-size: 24px;
-    line-height: 30px;
-    color: rgba(0, 0, 0, 0.6);
-  }
-
-  #inputText {
-    font-size: 16px;
-    line-height: 20px;
-    color: rgba(0, 0, 0, 0.7);
-  }
-
-  input,
-  textarea {
-    width: 100%;
-    border: none;
-    font-family: 'PT Root UI';
-    outline: none;
-  }
-  textarea {
-    flex-grow: 1;
-  }
-}
-
-#frameBottom {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  button {
-    margin-left: 14px;
-  }
-}
-
-.btnSave {
-  background: #50e092;
-  color: white;
-}
-
-.btnDelete {
-  box-sizing: border-box;
-  border: solid 1px #fd6161;
-  color: #fd6161;
-}
+.btnDelete
+  box-sizing: border-box
+  border: solid 1px #fd6161
+  color: #fd6161
