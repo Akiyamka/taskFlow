@@ -9,7 +9,7 @@ import { Droppable, DragDropContext } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
 import firebase from '../../../dataBase/firebase';
 import Card from '../Card';
-import style from './index.styl';
+import style from './style.styl';
 
 const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   const dragEnd = ({ destination, source }) => {

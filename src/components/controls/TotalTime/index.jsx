@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { connect } from 'unistore/react';
 import actions from '../../../store/actions';
-import style from './index.styl';
+import style from './style.styl';
 
 function unixTimeTo24(unixTime) {
   return new Date(unixTime)

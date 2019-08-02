@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import style from './index.styl';
+import style from './style.styl';
 
 const CurrentTime = ({ time, height }) => (
   <div style={{ height }} id={style.currentTime}>

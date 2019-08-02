@@ -5,7 +5,7 @@ import { connect } from 'unistore/react';
 import TimeStep from '../../views/TimeStep';
 import CurrentTime from '../../views/CurrentTime';
 import actions from '../../../store/actions';
-import style from './index.styl';
+import style from './style.styl';
 
 const TimeLine = ({
   saveCurrentTimeInterval,
