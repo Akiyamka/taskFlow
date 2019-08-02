@@ -12,27 +12,27 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const remove = () => backFunction(id);
 
   return (
-    <div id={style.frame}>
-      <div id={style.frameTitle}>
+    <div className={style.frame}>
+      <div className={style.frameTitle}>
         <h3>{frameTitle}</h3>
       </div>
 
-      <div id={style.frameBody}>
+      <div className={style.frameBody}>
         <input
-          id={style.inputTitle}
+          className={style.inputTitle}
           onChange={(e) => setName(e.target.value)}
           defaultValue={newName}
           placeholder='Add title...'
         />
 
         <textarea
-          id={style.inputText}
+          className={style.inputText}
           onChange={(e) => setText(e.target.value)}
           defaultValue={newText}
           placeholder='Add text...'
         />
 
-        <div id={style.frameBottom}>
+        <div className={style.frameBottom}>
           <Link to='/'>
             <button type='button' className={style[`btn${buttonName}`]} onClick={remove}>
               {buttonName}

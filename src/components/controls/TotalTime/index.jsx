@@ -42,26 +42,25 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
     } else setStatusEnd('error');
   };
 
+
   return (
-    <form id={style.totalTime}>
-      <div id={style.startContainer}>
-        <h3 id={style.textStart}>START</h3>
+    <form className={style.totalTime}>
+      <div className={style.startContainer}>
+        <h3 className={style.textStart}>START</h3>
         <input
-          id={style.timeStart}
+          className={[style.timeStart, style[timeStatusStart]].join(' ')}
           type='time'
           value={start}
-          className={style[timeStatusStart]}
           onChange={(e) => setStartTime(e)}
           required
         />
       </div>
-      <div id={style.endContainer}>
-        <h3 id={style.textEnd}>END</h3>
+      <div className={style.endContainer}>
+        <h3 className={style.textEnd}>END</h3>
         <input
-          id={style.timeEnd}
           type='time'
           value={end}
-          className={style[timeStatusEnd]}
+          className={[style.timeEnd, style[timeStatusEnd]].join(' ')}
           onChange={(e) => setEndTime(e)}
           required
         />

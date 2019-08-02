@@ -56,7 +56,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
               {...provided.droppableProps}
               className={st ? style.mobile : style.pc}
               ref={provided.innerRef}
-              id={style.cardsContainer}
+              className={style.cardsContainer}
               onMouseUp={resizeEnd}
               onMouseMove={resizeMove}
               onTouchMove={resizeMove}

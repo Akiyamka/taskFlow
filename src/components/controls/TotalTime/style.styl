@@ -1,27 +1,28 @@
-#totalTime
+.totalTime
   text-align: right
 
-#startContainer, #endContainer
+.startContainer, .endContainer
   display: inline-block
 
-#startContainer:hover, #endContainer:hover
-  #timeStart, #timeEnd
-    border-radius: 2px
-    box-shadow: 0 0 0 2px rgba(41, 96, 238, 0.73)
-
-  #textStart, #textEnd
+.startContainer, .endContainer
+  .textStart, .textEnd
     color: rgba(41, 96, 238, 0.73)
 
-#endContainer
+  &:hover
+    .timeStart, .timeEnd
+      border-radius: 2px
+      box-shadow: 0 0 0 2px rgba(41, 96, 238, 0.73)
+
+.endContainer
   margin-left: 13px
 
-#textStart
+.textStart
   width: 33px
 
-#textEnd
+.textEnd
   width: 22px
 
-#textStart, #textEnd
+.textStart, .textEnd
   position: relative
   top: 8px
   left: 6px
@@ -35,7 +36,7 @@
   background-color: #ffffff
   color: #a8c6e8
 
-#timeStart, #timeEnd
+.timeStart, .timeEnd
   width: auto
   height: 37px
   padding-left: 0.5em

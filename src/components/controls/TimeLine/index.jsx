@@ -107,7 +107,7 @@ const TimeLine = ({
   });
 
   return (
-    <div id={style.timeBoard}>
+    <div className={style.timeBoard}>
       {timeTape}
       <CurrentTime height={`${currentTime.height}px`} time={`${currentTime.time}`} />
     </div>
