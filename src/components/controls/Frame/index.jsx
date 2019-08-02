@@ -32,7 +32,7 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
         />
 
         <div className={style.frameBottom}>
-          <Link to='/'>
+          <Link to='/taskFlow/'>
             <button type='button' className={style[`btn${buttonName}`]} onClick={remove}>
               {buttonName}
             </button>

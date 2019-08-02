@@ -16,8 +16,8 @@ const Routing = () => (
     <Provider store={store}>
       <Switch>
         <Route exact path='/taskFlow' component={MainView} />
-        <Route extra path='/add' component={FrameAdd} />
-        <Route extra path='/edit/:id' component={FrameEdit} />
+        <Route extra path='/taskFlow/add' component={FrameAdd} />
+        <Route extra path='/taskFlow/edit/:id' component={FrameEdit} />
         <Route path='**' component={PageNotFound} />
       </Switch>
     </Provider>
