@@ -1,4 +1,4 @@
-@mixin font($family, $size, $lineHeight) {
+font($family, $size, $lineHeight) {
   font-family: $family;
   font-size: $size;
   line-height: $lineHeight;
@@ -42,7 +42,7 @@
   z-index: 5;
 
   h2 {
-    @include font('PT Root UI', 24px, 30px);
+    font('PT Root UI', 24px, 30px);
     margin: 0;
     word-wrap: break-word;
     overflow: hidden;
@@ -53,7 +53,7 @@
     padding: 20px 0;
     margin: 0;
 
-    @include font('PT Root UI', 16px, 20px);
+    font('PT Root UI', 16px, 20px);
     text-overflow: ellipsis;
     word-wrap: break-word;
     text-align: left;
@@ -89,7 +89,7 @@
 }
 
 .statusCompleted {
-  @include font('PT Root UI', 14px, 18px);
+  font('PT Root UI', 14px, 18px);
   text-align: right;
   padding-right: 0;
   color: #50e092;

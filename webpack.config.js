@@ -34,7 +34,6 @@ module.exports = {
             },
           },
           'stylus-loader',
-          'sass-loader',
         ],
       },
       {
