@@ -15,7 +15,7 @@ const Routing = () => (
   <BrowserRouter>
     <Provider store={store}>
       <Switch>
-        <Route exact path='/' component={MainView} />
+        <Route exact path='/taskFlow' component={MainView} />
         <Route extra path='/add' component={FrameAdd} />
         <Route extra path='/edit/:id' component={FrameEdit} />
         <Route path='**' component={PageNotFound} />
