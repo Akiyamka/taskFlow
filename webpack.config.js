@@ -5,13 +5,15 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    bundle: './src/index.js',
+    index: __dirname + '/src/index.js',
     'service-worker': './src/service-worker.js',
   },
   output: {
-    path: path.join(__dirname, './build'),
-    filename: '[name][hash].js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
+    path: path.resolve(__dirname, 'dist'),
     globalObject: 'self',
+    publicPath: process.env.NODE_ENV === 'development' ? './' : '/taskFlow/'
   },
   module: {
     rules: [
@@ -30,17 +32,17 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
           },
           'stylus-loader',
-        ],
+        ]
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
@@ -49,10 +51,10 @@ module.exports = {
               importLoaders: 1,
               localIdentName: '[name]_[local]_[hash:base64]',
               sourceMap: true,
-              minimize: true,
-            },
-          },
-        ],
+              minimize: true
+            }
+          }
+        ]
       },
     ],
   },
@@ -65,8 +67,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    // https: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
     new HtmlWebpackPlugin({

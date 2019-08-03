@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import style from './style.styl';
 
 const AddTask = () => (
-  <Link to='/add'>
+  <Link to='/taskFlow/add'>
     <button type='button' className={style.addButton}>
       <div className={style.textButton}>
         <FontAwesomeIcon className={style.iconPlus} icon='plus' />

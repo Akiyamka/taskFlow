@@ -6,10 +6,10 @@ Todo list that helps plan your time
   <img src="https://i.imgur.com/5NztYQz.png">
 </p>
 
-[Figma](https://www.figma.com/file/Ihx7qsUp2KXrxVAVrycHiOlL/Task-Flow?node-id=0%3A1)
+[Figma](https://www.figma.com/file/aUsrfBfc8gO0mLgyufUauyuN/Task-Flow?node-id=0%3A1)
 
 ## RoadMap
-#### v0.1
+#### v0.1 ✔️
 - Add task
 - Edit task
 - Delete task

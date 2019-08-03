@@ -1,4 +1,4 @@
-font($family, $size, $lineHeight)
+fontMixin($family, $size, $lineHeight)
   font-family: $family
   font-size: $size
   line-height: $lineHeight
@@ -13,7 +13,7 @@ html, body
 
 button
   padding: 6px 12px
-  font('PT Root UI', 14px, 18px)
+  fontMixin('PT Root UI', 14px, 18px)
   border: 0
   border-radius: 2px
   display: inline-block
@@ -24,3 +24,6 @@ button
   &:focus
     outline: none
     box-shadow: 0 0 1px #516bf0, 0 0 1px 3px rgba(0, 126, 255, 0.16)
+
+input[type="time"]
+  padding: 8px 6px 6px 6px
