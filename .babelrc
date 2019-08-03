@@ -1,13 +1,13 @@
 {
   "presets": [
-   [
-     "@babel/env",
-     {
-      "targets": [">0.25%", "not ie 11"],
-      "corejs": { "version": "3" },
-      "useBuiltIns": "usage",
-    }
-   ],
-  "@babel/preset-react",
+    [
+      "@babel/env",
+      {
+        "targets": [">0.25%", "not ie 11"],
+        "corejs": { "version": "3" },
+        "useBuiltIns": "usage"
+      }
+    ],
+    "@babel/preset-react"
   ]
 }

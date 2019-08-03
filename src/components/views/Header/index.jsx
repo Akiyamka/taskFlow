@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../Logo';
 import TotalTime from '../../controls/TotalTime';
-import style from  './style.styl';
+import style from './style.styl';
 
 const Header = () => (
   <div className={style.header}>

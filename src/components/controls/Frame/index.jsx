@@ -7,7 +7,8 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const [newName, setName] = useState(name);
   const [newText, setText] = useState(text);
 
-  const save = () => buttonFunction({ id, name: newName, text: newText, status });
+  const save = () =>
+    buttonFunction({ id, name: newName, text: newText, status, growStatus: 'flexGrowCards' });
   const remove = () => backFunction(id);
 
   return (
@@ -32,7 +33,7 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
         />
 
         <div className={style.frameBottom}>
-          <Link to='/taskFlow'>
+          <Link to='/taskFlow/'>
             <button type='button' className={style[`btn${buttonName}`]} onClick={remove}>
               {buttonName}
             </button>

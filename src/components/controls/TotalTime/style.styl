@@ -4,13 +4,14 @@
 .startContainer, .endContainer
   display: inline-block
 
-.startContainer:hover, .endContainer:hover
-  .timeStart, .timeEnd
-    border-radius: 2px
-    box-shadow: 0 0 0 2px rgba(41, 96, 238, 0.73)
-
+.startContainer, .endContainer
   .textStart, .textEnd
     color: rgba(41, 96, 238, 0.73)
+
+  &:hover
+    .timeStart, .timeEnd
+      border-radius: 2px
+      box-shadow: 0 0 0 2px rgba(41, 96, 238, 0.73)
 
 .endContainer
   margin-left: 13px

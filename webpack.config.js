@@ -1,14 +1,18 @@
 /* eslint-disable */
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+
 module.exports = {
   entry: {
     index: __dirname + '/src/index.js',
+    'service-worker': './src/service-worker.js',
   },
   output: {
-    filename: '[name].[contenthash].bundle.js',
-    chunkFilename: '[name].[contenthash].bundle.js',
+    filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
+    globalObject: 'self',
     publicPath: process.env.NODE_ENV === 'development' ? './' : '/taskFlow/'
   },
   module: {
@@ -68,5 +72,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyPlugin([
+      { from: 'src/manifest.json', to: 'src' },
+      { from: 'src/icon.png', to: 'src' },
+      { from: 'src/fonts', to: 'src' },
+    ]),
   ],
 };

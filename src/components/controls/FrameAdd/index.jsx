@@ -3,8 +3,8 @@ import React from 'react';
 import uuid from 'uuid';
 import { connect } from 'unistore/react';
 import Frame from '../Frame';
-import database from '../../../dataBase/db';
 import actions from '../../../store/actions';
+import firebase from '../../../dataBase/firebase';
 
 const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
   <Frame
@@ -17,9 +17,10 @@ const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
     backFunction={() => {}}
     buttonFunction={(arg) => {
       const index = lastIndex;
+      const collection = localStorage.getItem('id');
       lastIndexChange(lastIndex + 1);
       addTask({ ...arg, index });
-      database.add({ ...arg, index });
+      firebase.add(arg.id, { ...arg, index }, collection);
     }}
   />
 );
