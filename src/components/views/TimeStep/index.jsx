@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-import style from './index.styl';
+import style from './style.styl';
 
 const TimeStep = ({ time, height, visibility }) => (
   <div className={style.timeStep} style={{ visibility, height }}>

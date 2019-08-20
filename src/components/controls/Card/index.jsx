@@ -111,7 +111,7 @@ const Card = ({
           {...provided.dragHandleProps}>
           <div className={st.taskHeader}>
             <h2>{data.name}</h2>
-            <Link to={`/edit/${data.id}`} onClick={getTaskData}>
+            <Link to={`/taskFlow/edit/${data.id}`} onClick={getTaskData}>
               <div className={st.config}>
                 <FontAwesomeIcon className={st.configIcon} icon='pen' />
               </div>

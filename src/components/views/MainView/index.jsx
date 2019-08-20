@@ -4,14 +4,14 @@ import AddTask from '../AddTask';
 import Footer from '../Footer';
 import TimeLine from '../../controls/TimeLine';
 import Cards from '../../controls/Cards';
-import style from './index.styl';
+import style from './style.styl';
 
 const MainView = () => (
-  <div id={style.mainView}>
-    <div id={style.view}>
+  <div className={style.mainView}>
+    <div className={style.view}>
       <Header />
       <AddTask />
-      <div id={style.taskList}>
+      <div className={style.taskList}>
         <TimeLine />
         <Cards />
       </div>

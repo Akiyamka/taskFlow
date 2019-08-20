@@ -1,156 +1,122 @@
-@mixin font($family, $size, $lineHeight) {
-  font-family: $family;
-  font-size: $size;
-  line-height: $lineHeight;
-}
+fontMixin($family, $size, $lineHeight)
+  font-family: $family
+  font-size: $size
+  line-height: $lineHeight
 
-.card {
-  h2 {
-    @media screen and (max-width: 600px) {
-      font-size: 22px;
-    }
-    @media screen and (max-width: 300px) {
-      font-size: 15px;
-    }
-  }
-  p {
-    @media screen and (max-width: 600px) {
-      font-size: 15px;
-    }
-    @media screen and (max-width: 300px) {
-      font-size: 10px;
-    }
-  }
-}
+.card
+  h2
+    @media screen and (max-width: 600px)
+      font-size: 22px
 
-.card {
-  position: relative;
+    @media screen and (max-width: 300px)
+      font-size: 15px
 
-  display: flex;
-  flex-direction: column;
+  p
+    @media screen and (max-width: 600px)
+      font-size: 15px
 
-  min-height: 70px;
+    @media screen and (max-width: 300px)
+      font-size: 10px
 
-  padding: 20px;
+.card
+  position: relative
+  display: flex
+  flex-direction: column
+  min-height: 70px
+  padding: 20px
+  border-radius: 4px
+  box-sizing: border-box
+  overflow: hidden
+  background: #ffffff
+  z-index: 5
 
-  border-radius: 4px;
-  box-sizing: border-box;
+  h2
+    fontMixin('PT Root UI', 24px, 30px)
+    margin: 0
+    word-wrap: break-word
+    overflow: hidden
+    font-weight: normal
+    color: rgba(0, 0, 0, 0.6)
 
-  overflow: hidden;
-  background: #ffffff;
+  .cardText
+    padding: 20px 0
+    margin: 0
+    fontMixin('PT Root UI', 16px, 20px)
+    text-overflow: ellipsis
+    word-wrap: break-word
+    text-align: left
+    overflow: hidden
+    color: rgba(0, 0, 0, 0.7)
 
-  z-index: 5;
+.cardNoPerformed
+  border: 2px solid rgba(45, 97, 232, 0.17)
 
-  h2 {
-    @include font('PT Root UI', 24px, 30px);
-    margin: 0;
-    word-wrap: break-word;
-    overflow: hidden;
-    font-weight: normal;
-    color: rgba(0, 0, 0, 0.6);
-  }
-  .cardText {
-    padding: 20px 0;
-    margin: 0;
+.cardPerformed
+  border: 2px solid #50e092
 
-    @include font('PT Root UI', 16px, 20px);
-    text-overflow: ellipsis;
-    word-wrap: break-word;
-    text-align: left;
+.configIcon
+  color: #a8c6e8
+  padding: 6px
 
-    overflow: hidden;
-    color: rgba(0, 0, 0, 0.7);
-  }
-}
-.cardNoPerformed {
-  border: 2px solid rgba(45, 97, 232, 0.17);
-}
-.cardPerformed {
-  border: 2px solid #50e092;
-}
-.configIcon {
-  color: #a8c6e8;
-  padding: 6px;
-}
+.config
+  display: inline-block
+  border: 1px solid rgba(45, 97, 232, 0.17)
+  box-sizing: border-box
+  border-radius: 2px
 
-.config {
-  display: inline-block;
+.taskHeader
+  display: flex
+  justify-content: space-between
+  align-items: center
 
-  border: 1px solid rgba(45, 97, 232, 0.17);
-  box-sizing: border-box;
-  border-radius: 2px;
-}
+.statusCompleted
+  fontMixin('PT Root UI', 14px, 18px)
+  text-align: right
+  padding-right: 0
+  color: #50e092
 
-.taskHeader {
-  display: flex;
+  &:focus
+    box-shadow: none
 
-  justify-content: space-between;
-  align-items: center;
-}
+.statusDone
+  background: #50e092
+  color: #ffffff
 
-.statusCompleted {
-  @include font('PT Root UI', 14px, 18px);
-  text-align: right;
-  padding-right: 0;
-  color: #50e092;
-  &:focus {
-    box-shadow: none;
-  }
-}
+.checkIconDone
+  visibility: hidden
 
-.statusDone {
-  background: #50e092;
-  color: #ffffff;
-}
+.checkIconCompleted
+  visibility: visible
+  color: #50e092
 
-.checkIconDone {
-  visibility: hidden;
-}
+.statusButton
+  display: flex
+  width: 100%
+  flex-grow: 1
+  align-self: flex-end
+  justify-content: space-between
+  align-items: flex-end
 
-.checkIconCompleted {
-  visibility: visible;
-  color: #50e092;
-}
+.timeDuration
+  display: inline-block
+  margin: 0
+  font-family: 'PT Root UI'
+  font-size: 14px
+  line-height: 18px
+  text-decoration-line: underline
+  color: rgba(0, 0, 0, 0.6)
+  opacity: 0.5
 
-.statusButton {
-  display: flex;
-  width: 100%;
-  flex-grow: 1;
+.cardResizeLine
+  position: absolute
+  bottom: 0
+  left: 0
+  height: 15px
+  width: 100%
+  background-color: transparent
+  border: 0
+  outline: none
+  touch-action: none
 
-  align-self: flex-end;
-  justify-content: space-between;
-  align-items: flex-end;
-}
-
-.timeDuration {
-  display: inline-block;
-  margin: 0;
-
-  font-family: 'PT Root UI';
-  font-size: 14px;
-  line-height: 18px;
-
-  text-decoration-line: underline;
-
-  color: rgba(0, 0, 0, 0.6);
-
-  opacity: 0.5;
-}
-
-.cardResizeLine {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-
-  height: 15px;
-  width: 100%;
-
-  background-color: transparent;
-  border: 0;
-  outline: none;
-
-  touch-action: none;
-}
-.cardResizeLine:focus {
-  box-shadow: none;
-}
+.cardResizeLine:focus
+  box-shadow: none

@@ -5,13 +5,15 @@ const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
-    bundle: './src/index.js',
+    index: __dirname + '/src/index.js',
     'service-worker': './src/service-worker.js',
   },
   output: {
-    path: path.join(__dirname, './build'),
     filename: '[name].js',
     globalObject: 'this',
+    chunkFilename: '[name].js',
+    // path: path.resolve(__dirname, 'dist'),
+    // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/'
   },
   module: {
     rules: [
@@ -30,18 +32,17 @@ module.exports = {
             loader: 'css-loader',
             options: {
               modules: true,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-            },
+              localIdentName: '[name]__[local]___[hash:base64:5]'
+            }
           },
           'stylus-loader',
-          'sass-loader',
-        ],
+        ]
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: 'style-loader'
           },
           {
             loader: 'css-loader',
@@ -50,10 +51,10 @@ module.exports = {
               importLoaders: 1,
               localIdentName: '[name]_[local]_[hash:base64]',
               sourceMap: true,
-              minimize: true,
-            },
-          },
-        ],
+              minimize: true
+            }
+          }
+        ]
       },
     ],
   },
@@ -72,9 +73,9 @@ module.exports = {
       template: './src/index.html',
     }),
     new CopyPlugin([
-      { from: 'src/manifest.json', to: 'src' },
-      { from: 'src/icon.png', to: 'src' },
-      { from: 'src/fonts', to: 'src' },
+      { from: 'src/icon.png', to: 'taskFlow/src' },
+      { from: 'src/fonts', to: 'taskFlow/src' },
+      { from: 'src/manifest.json', to: 'taskFlow/src' },
     ]),
   ],
 };
