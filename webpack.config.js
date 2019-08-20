@@ -11,7 +11,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, './build'),
     filename: '[name].js',
-    globalObject: 'self',
+    globalObject: 'this',
   },
   module: {
     rules: [
@@ -66,8 +66,6 @@ module.exports = {
   },
   devServer: {
     historyApiFallback: true,
-    // https: true,
-    headers: { 'Access-Control-Allow-Origin': '*' },
   },
   plugins: [
     new HtmlWebpackPlugin({

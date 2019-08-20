@@ -4,6 +4,7 @@ import uuid from 'uuid';
 import { connect } from 'unistore/react';
 import Frame from '../Frame';
 import actions from '../../../store/actions';
+import db from '../../../dataBase/indexDb';
 import firebase from '../../../dataBase/firebase';
 
 const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
@@ -21,6 +22,7 @@ const FrameAdd = ({ addTask, lastIndex, lastIndexChange }) => (
       lastIndexChange(lastIndex + 1);
       addTask({ ...arg, index });
       firebase.add(arg.id, { ...arg, index }, collection);
+      db.add({ ...arg, index });
     }}
   />
 );

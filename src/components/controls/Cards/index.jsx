@@ -10,6 +10,7 @@ import action from '../../../store/actions';
 import firebase from '../../../dataBase/firebase';
 import Card from '../Card';
 import style from './index.styl';
+import db from '../../../dataBase/indexDb';
 
 const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
   const dragEnd = ({ destination, source }) => {
@@ -22,6 +23,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
 
       changeTask({ id: task.id, index });
       firebase.put(task.id, { ...task, index }, collection);
+      db.put({ ...task, index });
     });
   };
 
@@ -43,6 +45,7 @@ const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
       firebase
         .put(resize.id, { ...tasks[index], height: resize.ref.style.height }, collection)
         .catch(console.log);
+      db.put({ ...tasks[index], height: resize.ref.style.height });
     }
   };
 
