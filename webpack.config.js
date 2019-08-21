@@ -6,14 +6,14 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     index: __dirname + '/src/index.js',
-    'service-worker': './src/service-worker.js',
+    'service-worker': __dirname + '/src/service-worker.js',
   },
   output: {
     filename: '[name].js',
     globalObject: 'this',
     chunkFilename: '[name].js',
-    // path: path.resolve(__dirname, 'dist'),
-    // publicPath: process.env.NODE_ENV === 'development' ? '/' : '/'
+    path: path.resolve(__dirname, 'dist'),
+    publicPath: process.env.NODE_ENV === 'development' ? '/' : '/'
   },
   module: {
     rules: [
@@ -73,9 +73,9 @@ module.exports = {
       template: './src/index.html',
     }),
     new CopyPlugin([
-      { from: 'src/icon.png', to: 'taskFlow/src' },
-      { from: 'src/fonts', to: 'taskFlow/src' },
-      { from: 'src/manifest.json', to: 'taskFlow/src' },
+      { from: 'src/icon.png', to: 'src' },
+      { from: 'src/fonts', to: 'src' },
+      { from: 'src/manifest.json', to: 'src' },
     ]),
   ],
 };

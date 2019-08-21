@@ -3,16 +3,31 @@
 /* eslint-disable no-shadow */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable react/prop-types */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'unistore/react';
 import { Droppable, DragDropContext } from 'react-beautiful-dnd';
+import store from '../../../store/store';
 import action from '../../../store/actions';
 import firebase from '../../../dataBase/firebase';
 import Card from '../Card';
-import style from './index.styl';
+import style from './style.styl';
 import db from '../../../dataBase/indexDb';
 
 const Cards = ({ resize, resizeLastClick, tasks, changeTask }) => {
+
+  useEffect(()=>{
+    const collection = localStorage.getItem('id');
+    if (collection)
+    firebase
+    .getTasks(collection)
+    .then((querySnapshot) => {
+      const tasks = [];
+      [...querySnapshot.docs].map((val) => tasks.push({ ...val.data(), id: val.id }));
+      store.setState({ tasks, lastIndex: tasks.length });
+    })
+    else window.location = '/login';
+  },[])
+
   const dragEnd = ({ destination, source }) => {
     if (!destination) return;
     const newTask = tasks;
