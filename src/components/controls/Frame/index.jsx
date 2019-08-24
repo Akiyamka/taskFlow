@@ -10,6 +10,7 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
   const save = () =>
     buttonFunction({ id, name: newName, text: newText, status, growStatus: 'flexGrowCards' });
   const remove = () => backFunction(id);
+  const path = process.env.NODE_ENV === 'production';
 
   return (
     <div className={style.frame}>
@@ -33,7 +34,7 @@ const Frame = ({ name, text, id, status, frameTitle, buttonFunction, buttonName,
         />
 
         <div className={style.frameBottom}>
-          <Link to='/taskFlow/'>
+          <Link to={path ? '/taskFlow/' : '/'}>
             <button type='button' className={style[`btn${buttonName}`]} onClick={remove}>
               {buttonName}
             </button>

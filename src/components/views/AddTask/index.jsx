@@ -3,8 +3,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import style from './style.styl';
 
+const path = process.env.NODE_ENV === 'production';
+
 const AddTask = () => (
-  <Link to='/taskFlow/add'>
+  <Link to={path ? '/taskFlow/add' : '/add'}>
     <button type='button' className={style.addButton}>
       <div className={style.textButton}>
         <FontAwesomeIcon className={style.iconPlus} icon='plus' />

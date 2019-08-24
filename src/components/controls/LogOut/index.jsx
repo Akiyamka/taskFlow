@@ -11,8 +11,10 @@ const LogOut = () => {
     db.clear();
   };
 
+  const path = process.env.NODE_ENV === 'production';
+
   return (
-    <Link to='/login' className={s.link}>
+    <Link to={path ? '/taskFlow/login': '/login'} className={s.link}>
       <button className={s.signOut} onClick={logOut}>
         Sign out
       </button>
