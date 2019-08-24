@@ -12,7 +12,7 @@ module.exports = {
     filename: '[name].js',
     globalObject: 'this',
     chunkFilename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname + '/taskFlow', 'dist'),
     publicPath: process.env.NODE_ENV === 'production'
     ? '/taskFlow/'
     : '/'
