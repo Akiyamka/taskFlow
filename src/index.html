@@ -27,7 +27,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register('/src/service-worker.js')
+          .register('service-worker.js')
           .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
           .catch(console.log());
       }

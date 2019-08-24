@@ -34,9 +34,7 @@ const getOriginFromUrl = (url) => {
 };
 
 function fromCache(request) {
-  return caches
-    .open(CACHE)
-    .then((cache) => cache.match(request).then((matching) => matching || Promise.reject('no-match')));
+  return caches.open(CACHE).then((cache) => cache.match(request).then((matching) => matching || {}));
 }
 
 function update(request) {
@@ -50,26 +48,23 @@ function update(request) {
 function refresh(response) {
   return self.clients.matchAll().then((clients) => {
     clients.forEach((client) => {
-      // Подробнее про ETag можно прочитать тут
-      // https://en.wikipedia.org/wiki/HTTP_ETag
       const message = {
         type: 'refresh',
         url: response.url,
         eTag: response.headers.get('ETag'),
       };
-      // Уведомляем клиент об обновлении данных.
       client.postMessage(JSON.stringify(message));
     });
   });
 }
 
 const urlsToCache = [
-  '/index.html',
-  '/bundle.js',
-  '/src/manifest.json',
-  '/src/icon.png',
-  '/src/fonts/PT Root UI_Regular.css',
   '/src/fonts/PT Root UI_Regular.woff2',
+  '/src/fonts/PT Root UI_Regular.css',
+  '/src/icon.png',
+  '/src/manifest.json',
+  '/index.js',
+  '/index.html',
 ];
 
 self.addEventListener('fetch', (event) => {
@@ -86,24 +81,20 @@ self.addEventListener('fetch', (event) => {
       }
 
       headers.append('Authorization', `Bearer ${idToken}`);
-      try {
-        req = new Request(req.url, {
-          method: req.method,
-          headers,
-          mode: 'same-origin',
-          credentials: req.credentials,
-          cache: req.cache,
-          redirect: req.redirect,
-          referrer: req.referrer,
-          body: req.body,
-          bodyUsed: req.bodyUsed,
-          context: req.context,
-        });
-      } catch (e) {
-        console.log(e);
-      }
+      req = new Request(req.url, {
+        method: req.method,
+        headers,
+        mode: 'same-origin',
+        credentials: req.credentials,
+        cache: req.cache,
+        redirect: req.redirect,
+        referrer: req.referrer,
+        body: req.body,
+        bodyUsed: req.bodyUsed,
+        context: req.context,
+      });
     }
-    return fetch(req).catch(console.log);
+    return fetch(req);
   };
 
   if (req.url.includes('google')) {
@@ -114,11 +105,7 @@ self.addEventListener('fetch', (event) => {
     );
   } else {
     event.respondWith(fromCache(event.request));
-    event.waitUntil(
-      update(event.request)
-        // В конце, после получения "свежих" данных от сервера уведомляем всех клиентов.
-        .then(refresh)
-    );
+    event.waitUntil(update(event.request).then(refresh));
   }
 });
 
