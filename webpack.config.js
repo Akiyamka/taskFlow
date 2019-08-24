@@ -13,9 +13,9 @@ module.exports = {
     globalObject: 'this',
     chunkFilename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
-    // publicPath: process.env.NODE_ENV === 'production'
-    // ? '/taskFlow/'
-    // : '/'
+    publicPath: process.env.NODE_ENV === 'production'
+    ? '/taskFlow/'
+    : '/'
   },
   module: {
     rules: [
