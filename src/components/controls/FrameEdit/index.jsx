@@ -6,6 +6,7 @@ import { connect } from 'unistore/react';
 import Frame from '../Frame';
 import firebase from '../../../dataBase/firebase';
 import actions from '../../../store/actions';
+import db from '../../../dataBase/indexDb';
 
 const FrameEdit = ({ edit, deleteTask, changeTask, match, tasks }) => {
   const { id } = match.params;
@@ -21,12 +22,14 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match, tasks }) => {
         const collection = localStorage.getItem('id');
         firebase.delete(id, collection);
         deleteTask(id);
+        db.delete(id);
         tasks
           .sort((a, b) => a.index - b.index)
           .map((task, index) => {
             if (task.index !== index - 1) {
               firebase.put(task.id, { ...task, index }, collection);
               changeTask({ id: task.id, index });
+              db.put({ ...task, index });
             }
           });
       }}
@@ -34,6 +37,7 @@ const FrameEdit = ({ edit, deleteTask, changeTask, match, tasks }) => {
         const collection = localStorage.getItem('id');
         firebase.put(arg.id, arg, collection);
         changeTask(arg);
+        db.put({ ...arg });
       }}
     />
   );

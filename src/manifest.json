@@ -10,7 +10,7 @@
   "content_security_policy": "https://apis.google.com",
   "icons": [
     {
-      "src": "/src/icon.png",
+      "src": "icon.png",
       "sizes": "192x192",
       "type": "image/png"
     }

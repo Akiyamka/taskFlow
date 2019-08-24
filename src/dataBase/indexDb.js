@@ -14,6 +14,11 @@ export default {
     });
     return b;
   },
+  addAll: (tasks) => {
+    db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.add(...tasks);
+    });
+  },
   add: (data) => {
     db.transaction('rw', db.tasks, (e) => {
       e.db.tasks.add(data);
@@ -29,4 +34,9 @@ export default {
       e.db.tasks.delete(id);
     });
   },
+  clear: ()=>{
+    db.transaction('rw', db.tasks, (e) => {
+      e.db.tasks.clear();
+    });
+  }
 };

@@ -18,9 +18,18 @@ const firestore = (collection) => firebase.firestore().collection(collection);
 export default {
   auth: () => fb.auth().signInWithPopup(provider),
   signOut: () => fb.auth().signOut(),
-  put: (id, items, collection) => firestore(collection).doc(id).update(items),
-  add: (id, items, collection) => firestore(collection).doc(id).set(items),
-  delete: (id, collection) => firestore(collection).doc(id).delete(),
+  put: (id, items, collection) =>
+    firestore(collection)
+      .doc(id)
+      .update(items),
+  add: (id, items, collection) =>
+    firestore(collection)
+      .doc(id)
+      .set(items),
+  delete: (id, collection) =>
+    firestore(collection)
+      .doc(id)
+      .delete(),
   getTasks: (collection) => firestore(collection).get(),
   provider,
   firebase,

@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Draggable } from 'react-beautiful-dnd';
 import action from '../../../store/actions';
 import firebase from '../../../dataBase/firebase';
+import db from '../../../dataBase/indexDb';
 import st from './style.styl';
 
 const Card = ({
@@ -46,6 +47,7 @@ const Card = ({
       ref.style.height = `${currentTimeInterval - ref.offsetTop}px`;
     }
     firebase.put(data.id, { ...data, status: true, height: ref.style.height }, collection);
+    db.put({ id: data.id, status: true, height: ref.style.height });
     changeTask({ id: data.id, status: true, height: ref.style.height });
   };
 
