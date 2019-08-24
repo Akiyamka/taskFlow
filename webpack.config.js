@@ -76,9 +76,6 @@ module.exports = {
       base: process.env.NODE_ENV === 'production'
       ? '/taskFlow/'
       : '/',
-      path: process.env.NODE_ENV === 'production'
-      ? '/taskFlow/'
-      : '/',
     }),
     new CopyPlugin([
       { from: 'src/icon.png', to: 'src' },
