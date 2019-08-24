@@ -11,15 +11,16 @@ import FrameEdit from '../controls/FrameEdit';
 import Login from '../controls/Login';
 
 library.add(faPlus, faPen, faHeart, faCheck);
+const path = process.env.NODE_ENV === 'production';
 
 const Routing = () => (
   <BrowserRouter>
     <Provider store={store}>
       <Switch>
-        <Route exact path='/' component={MainView} />
-        <Route exact path='/login' component={Login} />
-        <Route extra path='/add' component={FrameAdd} />
-        <Route extra path='/edit/:id' component={FrameEdit} />
+        <Route exact path={path ? '/taskFlow' : '/'} component={MainView} />
+        <Route exact path={path ? '/taskFlow/login' : '/login'} component={Login} />
+        <Route extra path={path ? '/taskFlow/add' : '/add'} component={FrameAdd} />
+        <Route extra path={path ? '/taskFlow/edit/:id' : '/edit/:id'} component={FrameEdit} />
         <Route path='**' component={PageNotFound} />
       </Switch>
     </Provider>

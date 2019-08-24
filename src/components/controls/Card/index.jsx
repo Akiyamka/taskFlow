@@ -96,6 +96,7 @@ const Card = ({
 
     resizeFirstClick(resizeEvent);
   };
+  const path = process.env.NODE_ENV === 'production';
 
   return (
     <Draggable draggableId={String(data.id)} index={index}>
@@ -111,7 +112,7 @@ const Card = ({
           {...provided.dragHandleProps}>
           <div className={st.taskHeader}>
             <h2>{data.name}</h2>
-            <Link to={`/taskFlow/edit/${data.id}`} onClick={getTaskData}>
+            <Link to={path ? `/taskFlow/edit/${data.id}` : `/edit/${data.id}`} onClick={getTaskData}>
               <div className={st.config}>
                 <FontAwesomeIcon className={st.configIcon} icon='pen' />
               </div>
