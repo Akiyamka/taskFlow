@@ -12,10 +12,10 @@ module.exports = {
     filename: '[name].js',
     globalObject: 'this',
     chunkFilename: '[name].js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: process.env.NODE_ENV === 'production'
-    ? '/taskFlow/'
-    : '/'
+    path: path.resolve(__dirname, 'dist/taskFlow'),
+    // publicPath: process.env.NODE_ENV === 'production'
+    // ? '/taskFlow/'
+    // : '/'
   },
   module: {
     rules: [
@@ -72,15 +72,12 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
-      base: process.env.NODE_ENV === 'production'
-      ? '/taskFlow/'
-      : '/',
+      template: './src/index.html'
     }),
     new CopyPlugin([
-      { from: 'src/icon.png', to: 'src' },
-      { from: 'src/fonts', to: 'src' },
-      { from: 'src/manifest.json', to: 'src' },
+      { from: 'src/icon.png', to: 'taskFlow/src' },
+      { from: 'src/fonts', to: 'taskFlow/src' },
+      { from: 'src/manifest.json', to: 'taskFlow/src' },
     ]),
   ],
 };
