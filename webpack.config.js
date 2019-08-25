@@ -75,9 +75,9 @@ module.exports = {
       template: './src/index.html'
     }),
     new CopyPlugin([
-      { from: 'src/icon.png', to: '/' },
-      { from: 'src/fonts', to: '/' },
-      { from: 'src/manifest.json', to: '/' },
+      { from: 'src/icon.png', to: '' },
+      { from: 'src/fonts', to: '' },
+      { from: 'src/manifest.json', to: '' },
     ]),
   ],
 };
