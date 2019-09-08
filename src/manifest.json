@@ -1,7 +1,7 @@
 {
   "name": "TaskFlow",
   "short_name": "TaskFlow",
-  "start_url": "/taskFlow/index.html",
+  "start_url": "/taskFlow/",
   "description": "Application for managing and tracking your tasks",
   "display": "standalone",
   "background_color": "#e8f0f9",

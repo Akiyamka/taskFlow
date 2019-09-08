@@ -64,6 +64,7 @@ const urlsToCache = [
   '/taskFlow/icon.png',
   '/taskFlow/manifest.json',
   '/taskFlow/index.js',
+  '/taskFlow/service-worker.js',
   '/taskFlow/index.html',
 ];
 
