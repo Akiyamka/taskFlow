@@ -59,12 +59,12 @@ function refresh(response) {
 }
 
 const urlsToCache = [
-  '/src/fonts/PT Root UI_Regular.woff2',
-  '/src/fonts/PT Root UI_Regular.css',
-  '/src/icon.png',
-  '/src/manifest.json',
-  '/index.js',
-  '/index.html',
+  '/taskFlow/src/fonts/PT Root UI_Regular.woff2',
+  '/taskFlow/src/fonts/PT Root UI_Regular.css',
+  '/taskFlow/src/icon.png',
+  '/taskFlow/src/manifest.json',
+  '/taskFlow/index.js',
+  '/taskFlow/index.html',
 ];
 
 self.addEventListener('fetch', (event) => {
