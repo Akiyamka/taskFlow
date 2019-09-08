@@ -7,7 +7,7 @@
   "background_color": "#e8f0f9",
   "theme_color": "#e8f0f9",
   "color": "#fff",
-  "version": "0.1",
+  "version": "0.5",
   "manifest_version": 2,
   "prefer_related_applications": false,
   "related_applications": [
