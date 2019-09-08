@@ -10,9 +10,10 @@
   "version": "0.1",
   "manifest_version": 2,
   "prefer_related_applications": false,
+  "scope": "/taskFlow/",
   "serviceworker": {
     "src": "/taskFlow/service-worker.js",
-    "scope": "/"
+    "scope": "/taskFlow/"
   },
   "related_applications": [
     {
