@@ -59,10 +59,10 @@ function refresh(response) {
 }
 
 const urlsToCache = [
-  '/taskFlow/src/fonts/PT Root UI_Regular.woff2',
-  '/taskFlow/src/fonts/PT Root UI_Regular.css',
-  '/taskFlow/src/icon.png',
-  '/taskFlow/src/manifest.json',
+  '/taskFlow/fonts/PT Root UI_Regular.woff2',
+  '/taskFlow/fonts/PT Root UI_Regular.css',
+  '/taskFlow/icon.png',
+  '/taskFlow/manifest.json',
   '/taskFlow/index.js',
   '/taskFlow/index.html',
 ];
