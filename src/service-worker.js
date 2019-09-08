@@ -34,7 +34,7 @@ const getOriginFromUrl = (url) => {
 };
 
 function fromCache(request) {
-  return caches.open(CACHE).then((cache) => cache.match(request).then((matching) => matching || {}));
+  return caches.open(CACHE).then((cache) => cache.match(request).then((matching) => matching || fetch(request)));
 }
 
 function update(request) {
