@@ -32,7 +32,7 @@
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker
-          .register('/taskFlow/service-worker.js')
+          .register('/taskFlow/service-worker.js', { scope: '/taskFlow/' })
           .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
           .catch(console.log());
       }
