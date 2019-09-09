@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { withRouter } from 'react-router-dom';
 import LogOut from 'Controls/LogOut';
 import TimeLine from 'Controls/TimeLine';
 import Cards from 'Controls/Cards';
@@ -10,7 +11,7 @@ import store from '../../../store/store';
 import db from '../../../dataBase/indexDb';
 import style from './style.styl';
 
-const MainView = () => {
+const MainView = ({ history }) => {
   useEffect(() => {
     const collection = localStorage.getItem('id');
     if (collection)
@@ -28,6 +29,7 @@ const MainView = () => {
           store.setState({ tasks, lastIndex: tasks.length });
         }
       });
+      else history.push('/taskFlow/login');
   }, []);
 
   return (
@@ -46,4 +48,4 @@ const MainView = () => {
   );
 };
 
-export default MainView;
+export default withRouter(MainView);
