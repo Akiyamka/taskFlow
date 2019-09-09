@@ -40,7 +40,7 @@ export default {
       e.db.tasks.clear();
     });
   },
-  getRequest: (request) => {
+  addRequest: (request) => {
     db.transaction('rw', db.request, (e) => {
       e.db.request.add(request);
     });
