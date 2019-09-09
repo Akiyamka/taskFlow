@@ -18,11 +18,11 @@ const getIdToken = () => {
             resolve(idToken);
           },
           () => {
-            self.location = '/login';
+            // self.location = '/login';
           }
         );
       } else {
-        self.location = '/login';
+        // self.location = '/login';
       }
     });
   });
