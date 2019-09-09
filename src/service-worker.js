@@ -6,7 +6,7 @@ import firebase from 'firebase/app';
 import db from './dataBase/indexDb'
 
 const CACHE = 'cache-update-and-refresh-v1';
-let onLine = window.navigator.onLine;
+let onLine = self.navigator.onLine;
 
 const getIdToken = () => {
   return new Promise((resolve) => {
@@ -112,7 +112,7 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
-
+    db.addRequest(req);
   }
 });
 
