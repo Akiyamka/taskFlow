@@ -18,11 +18,11 @@ const getIdToken = () => {
             resolve(idToken);
           },
           () => {
-            // self.location = '/login';
+            self.location = '/login';
           }
         );
       } else {
-        // self.location = '/login';
+        self.location = '/login';
       }
     });
   });
@@ -104,8 +104,7 @@ self.addEventListener('fetch', (event) => {
     if (req.url.includes('google')) {
       event.respondWith(
         getIdToken()
-          .then(requestProcessor)
-          .catch(()=> self.location = '/login')
+          .then(requestProcessor,requestProcessor)
       );
     } else {
       event.respondWith(fromCache(event.request));
