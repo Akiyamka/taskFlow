@@ -4,6 +4,7 @@ const db = new Dexie('taasksDB');
 
 db.version(1).stores({
   tasks: 'id, name, text, status, index',
+  request: 'request',
 });
 
 export default {
@@ -34,9 +35,26 @@ export default {
       e.db.tasks.delete(id);
     });
   },
-  clear: ()=>{
+  clear: ()=> {
     db.transaction('rw', db.tasks, (e) => {
       e.db.tasks.clear();
+    });
+  },
+  getRequest: (request) => {
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.add(request);
+    });
+  },
+  getAllRequest: async () => {
+    const b = [];
+    await db.transaction('rw', db.request, (e) => {
+      e.db.request.each((contact) => b.push(contact));
+    });
+    return b;
+  },
+  clearRequst: ()=>{
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.clear();
     });
   }
 };

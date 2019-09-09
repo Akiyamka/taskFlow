@@ -3,8 +3,10 @@
 /* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
 import firebase from 'firebase/app';
+import db from './dataBase/indexDb'
 
 const CACHE = 'cache-update-and-refresh-v1';
+let onLine = window.navigator.onLine;
 
 const getIdToken = () => {
   return new Promise((resolve) => {
@@ -70,49 +72,59 @@ const urlsToCache = [
 
 self.addEventListener('fetch', (event) => {
   let req = event.request;
-  const requestProcessor = (idToken) => {
-    if (
-      self.location.origin === getOriginFromUrl(event.request.url) &&
-      (self.location.protocol === 'https:' || self.location.hostname === 'localhost') &&
-      idToken
-    ) {
-      const headers = new Headers();
-      for (const entry of req.headers.entries()) {
-        headers.append(entry[0], entry[1]);
+  if(onLine){
+    const requestProcessor = (idToken) => {
+      if (
+        self.location.origin === getOriginFromUrl(event.request.url) &&
+        (self.location.protocol === 'https:' || self.location.hostname === 'localhost') &&
+        idToken
+      ) {
+        const headers = new Headers();
+        for (const entry of req.headers.entries()) {
+          headers.append(entry[0], entry[1]);
+        }
+
+        headers.append('Authorization', `Bearer ${idToken}`);
+        req = new Request(req.url, {
+          method: req.method,
+          headers,
+          mode: 'same-origin',
+          credentials: req.credentials,
+          cache: req.cache,
+          redirect: req.redirect,
+          referrer: req.referrer,
+          body: req.body,
+          bodyUsed: req.bodyUsed,
+          context: req.context,
+        });
       }
+      return fetch(req);
+    };
 
-      headers.append('Authorization', `Bearer ${idToken}`);
-      req = new Request(req.url, {
-        method: req.method,
-        headers,
-        mode: 'same-origin',
-        credentials: req.credentials,
-        cache: req.cache,
-        redirect: req.redirect,
-        referrer: req.referrer,
-        body: req.body,
-        bodyUsed: req.bodyUsed,
-        context: req.context,
-      });
+    if (req.url.includes('google')) {
+      event.respondWith(
+        getIdToken()
+          .then(requestProcessor)
+          .catch(()=> self.location = '/login')
+      );
+    } else {
+      event.respondWith(fromCache(event.request));
+      event.waitUntil(update(event.request).then(refresh));
     }
-    return fetch(req);
-  };
-
-  if (req.url.includes('google')) {
-    event.respondWith(
-      getIdToken()
-        .then(requestProcessor, requestProcessor)
-        .catch(console.log)
-    );
   } else {
-    event.respondWith(fromCache(event.request));
-    event.waitUntil(update(event.request).then(refresh));
+
   }
 });
 
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(urlsToCache)));
 });
+
+self.ononline = () => {
+  db.getAllRequest().then((request) => {
+    fetch(request).catch(console.log);
+  })
+}
 
 // self.addEventListener('offline', (event) => {
 //   event.respondWith(
