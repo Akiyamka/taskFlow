@@ -112,6 +112,7 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
+    event.respondWith({}.cache(console.log))
     db.addRequest(req);
   }
 });
