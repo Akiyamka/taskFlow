@@ -36,7 +36,7 @@ const getOriginFromUrl = (url) => {
 };
 
 function fromCache(request) {
-  return caches.open(CACHE).then((cache) => cache.match(request).then((matching) => matching || fetch(request)));
+  return caches.open(CACHE).then((cache) => cache.match(request).then((matching) => matching || {}));
 }
 
 function update(request) {
@@ -111,7 +111,7 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
-    event.respondWith({}.cache(console.log))
+    event.respondWith({})
     db.addRequest(req);
   }
 });
@@ -121,6 +121,8 @@ self.addEventListener('install', (event) => {
 });
 
 self.ononline = () => {
+  onLine = self.navigator.onLine;
+
   db.getAllRequest().then((requests) => {
     console.log(requests)
     requests.map(request => {
@@ -130,6 +132,10 @@ self.ononline = () => {
   }).then(()=>{
     db.clearRequst();
   })
+}
+
+self.onoffline = () => {
+  onLine = self.navigator.onLine;
 }
 
 // self.addEventListener('offline', (event) => {
