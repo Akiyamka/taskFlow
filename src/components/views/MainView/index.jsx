@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
-import LogOut from 'Controls/LogOut';
 import TimeLine from 'Controls/TimeLine';
 import Cards from 'Controls/Cards';
 import Header from 'Views/Header';
@@ -36,7 +35,6 @@ const MainView = ({ history }) => {
     <div className={style.mainView}>
       <div className={style.view}>
         <Header />
-        <LogOut />
         <AddTask />
         <div className={style.taskList}>
           <TimeLine />
