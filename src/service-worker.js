@@ -111,7 +111,7 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
-    event.respondWith({})
+    event.respondWith(new Promise({}))
     db.addRequest(req);
   }
 });
