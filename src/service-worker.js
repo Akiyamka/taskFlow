@@ -120,18 +120,9 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----2')
     event.respondWith(new Promise(() => {}));
-
-    getIdToken().then(idToken => {
-
-      const headers = new Headers();
-      for (const entry of req.headers.entries()) {
-        headers.append(entry[0], entry[1]);
-      }
-
-      headers.append('Authorization', `Bearer ${idToken}`);
       const newReq = new Request(req.url, {
           method: req.method,
-          headers,
+          headers: req.headers,
           mode: 'same-origin',
           credentials: req.credentials,
           cache: req.cache,
@@ -144,7 +135,6 @@ self.addEventListener('fetch', (event) => {
         db.transaction('rw', db.request, (e) => {
           e.db.request.add({id: uuid(), newReq});
         });
-      })
   }
 });
 
