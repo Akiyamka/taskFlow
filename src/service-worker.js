@@ -120,13 +120,31 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----2')
     event.respondWith(new Promise(() => {}));
-    console.log(req)
-    db.transaction('rw', db.request, (e) => {
-      e.db.request.add(JSON.parse(JSON.stringify({id: uuid(), req})));
-    });
-    // event.waitUntil(function (){
-    //   db.add({id: uuid(), req})
-    // })
+
+    getIdToken().then(idToken => {
+
+      const headers = new Headers();
+      for (const entry of req.headers.entries()) {
+        headers.append(entry[0], entry[1]);
+      }
+
+      headers.append('Authorization', `Bearer ${idToken}`);
+      const newReq = new Request(req.url, {
+          method: req.method,
+          headers,
+          mode: 'same-origin',
+          credentials: req.credentials,
+          cache: req.cache,
+          redirect: req.redirect,
+          referrer: req.referrer,
+          body: req.body,
+          bodyUsed: req.bodyUsed,
+          context: req.context,
+        });
+        db.transaction('rw', db.request, (e) => {
+          e.db.request.add({id: uuid(), newReq});
+        });
+      })
   }
 });
 
