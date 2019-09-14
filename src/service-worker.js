@@ -120,8 +120,9 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----2')
     event.respondWith(new Promise(() => {}));
+    console.log(req)
     db.transaction('rw', db.request, (e) => {
-      e.db.request.add(JSON.parse(JSON.stringify({id: uuid(), ...req})));
+      e.db.request.add(JSON.parse(JSON.stringify({id: uuid(), req})));
     });
     // event.waitUntil(function (){
     //   db.add({id: uuid(), req})
