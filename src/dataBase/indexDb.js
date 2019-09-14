@@ -4,7 +4,7 @@ const db = new Dexie('taasksDB');
 
 db.version(1).stores({
   tasks: 'id',
-  request: 'index',
+  request: '++id',
 });
 
 export default {
