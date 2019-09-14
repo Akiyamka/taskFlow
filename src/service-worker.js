@@ -143,14 +143,12 @@ self.addEventListener('install', (event) => {
 });
 
 self.ononline = () => {
-  db.getAllRequest().then((requests) => {
-    console.log(requests)
-    requests.map(request => {
-      console.log(request)
-      fetch(request).catch(console.log);
-    })
-  }).then(()=>{
-    db.clearRequst();
+  db.transaction('rw', db.request, (e) => {
+    e.db.request.each((request) => etch(request).catch(console.log));
+  }).then(()=> {
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.clear();
+    });
   })
 }
 
