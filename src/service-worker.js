@@ -4,6 +4,7 @@
 /* eslint-disable no-restricted-globals */
 import firebase from 'firebase/app';
 import db from './dataBase/indexDb'
+import uuid from 'uuid';
 
 const CACHE = 'cache-update-and-refresh-v1';
 
@@ -112,7 +113,7 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----')
     event.respondWith(new Promise({}))
-    db.addRequest(req);
+    db.addRequest({id: uuid(), req});
   }
 });
 
