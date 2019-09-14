@@ -112,7 +112,7 @@ self.addEventListener('fetch', (event) => {
     }
   } else {
     console.log('----offline----')
-    db.addRequest({id: uuid(), req});
+    db.add({id: uuid(), req});
     event.respondWith(new Promise({}))
   }
 });
