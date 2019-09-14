@@ -72,6 +72,7 @@ const urlsToCache = [
 
 self.addEventListener('fetch', (event) => {
   let req = event.request;
+  console.log('----offline----1')
   if(self.navigator.onLine){
     const requestProcessor = (idToken) => {
       if (
@@ -111,9 +112,11 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
-    console.log('----offline----')
-    event.respondWith({});
-    event.waitUntil(db.addAll({id: uuid(), req}))
+    console.log('----offline----2')
+    event.respondWith(fromCache(event.request));
+    event.waitUntil(async function (){
+      await db.addAll({id: uuid(), req})
+    }.then(()=>console.log('----------3---------')))
   }
 });
 
