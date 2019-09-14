@@ -3,8 +3,14 @@
 /* eslint-disable func-names */
 /* eslint-disable no-restricted-globals */
 import firebase from 'firebase/app';
-import db from './dataBase/indexDb'
 import uuid from 'uuid';
+import Dexie from 'dexie';
+
+const db = new Dexie('reqDB');
+
+db.version(1).stores({
+  request: 'id',
+});
 
 const CACHE = 'cache-update-and-refresh-v1';
 
@@ -114,9 +120,12 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----2')
     event.respondWith(new Promise(() => {}));
-    event.waitUntil(async function (){
-      await db.add({id: uuid(), req})
-    })
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.add(req);
+    });
+    // event.waitUntil(function (){
+    //   db.add({id: uuid(), req})
+    // })
   }
 });
 
