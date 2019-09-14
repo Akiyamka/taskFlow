@@ -135,7 +135,6 @@ self.addEventListener('fetch', (event) => {
         db.transaction('rw', db.request, (e) => {
           e.db.request.add({id: uuid(), newReq});
         });
-      })
   }
 });
 
