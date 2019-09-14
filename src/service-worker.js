@@ -112,8 +112,8 @@ self.addEventListener('fetch', (event) => {
     }
   } else {
     console.log('----offline----')
-    db.add({id: uuid(), req});
-    event.respondWith(new Promise({}))
+    event.respondWith({});
+    event.waitUntil(db.addAll({id: uuid(), req}))
   }
 });
 
