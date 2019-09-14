@@ -120,7 +120,8 @@ self.addEventListener('fetch', (event) => {
   } else {
     console.log('----offline----2')
     event.respondWith(new Promise(() => {}));
-      const newReq = new Request(req.url, {
+      const newReq =  {
+          url: req.url,
           method: req.method,
           headers: req.headers,
           mode: 'same-origin',
@@ -131,7 +132,7 @@ self.addEventListener('fetch', (event) => {
           body: req.body,
           bodyUsed: req.bodyUsed,
           context: req.context,
-        });
+        };
         db.transaction('rw', db.request, (e) => {
           e.db.request.add({id: uuid(), newReq});
         });
