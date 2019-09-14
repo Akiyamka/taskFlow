@@ -113,7 +113,7 @@ self.addEventListener('fetch', (event) => {
     }
   } else {
     console.log('----offline----2')
-    event.respondWith(new Promise({}));
+    event.respondWith(new Promise(() => {}));
     event.waitUntil(async function (){
       await db.addAll({id: uuid(), req})
     })
