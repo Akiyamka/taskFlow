@@ -123,7 +123,6 @@ self.addEventListener('fetch', (event) => {
       const newReq =  {
           url: req.url,
           method: req.method,
-          headers: req.headers,
           mode: 'same-origin',
           credentials: req.credentials,
           cache: req.cache,
