@@ -6,8 +6,10 @@ import style from './style.styl';
 
 const Header = () => (
   <div className={style.header}>
-    <Menu />
-    <Logo />
+    <div className={style.leftBlock}>
+      <Menu />
+      <Logo />
+    </div>
     <TotalTime />
   </div>
 );

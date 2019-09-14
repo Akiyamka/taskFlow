@@ -6,7 +6,6 @@ import firebase from 'firebase/app';
 import db from './dataBase/indexDb'
 
 const CACHE = 'cache-update-and-refresh-v1';
-let onLine = self.navigator.onLine;
 
 const getIdToken = () => {
   return new Promise((resolve) => {
@@ -72,7 +71,7 @@ const urlsToCache = [
 
 self.addEventListener('fetch', (event) => {
   let req = event.request;
-  if(onLine){
+  if(self.navigator.onLine){
     const requestProcessor = (idToken) => {
       if (
         self.location.origin === getOriginFromUrl(event.request.url) &&
@@ -111,6 +110,7 @@ self.addEventListener('fetch', (event) => {
       event.waitUntil(update(event.request).then(refresh));
     }
   } else {
+    console.log('----offline----')
     event.respondWith(new Promise({}))
     db.addRequest(req);
   }
@@ -121,8 +121,6 @@ self.addEventListener('install', (event) => {
 });
 
 self.ononline = () => {
-  onLine = self.navigator.onLine;
-
   db.getAllRequest().then((requests) => {
     console.log(requests)
     requests.map(request => {
@@ -132,10 +130,6 @@ self.ononline = () => {
   }).then(()=>{
     db.clearRequst();
   })
-}
-
-self.onoffline = () => {
-  onLine = self.navigator.onLine;
 }
 
 // self.addEventListener('offline', (event) => {

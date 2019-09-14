@@ -31,7 +31,7 @@ const Menu = ({ history }) => {
     }
 
     return (
-        <dib className = {style.menu}>
+        <div className = {style.menu}>
             <FontAwesomeIcon icon='bars' className = {style.menuIcon} onClick={openMenu}/>
             {state.showMenu && <div className={style.menuBackground}>
                 <div className={style.menuList}>
@@ -45,7 +45,7 @@ const Menu = ({ history }) => {
                     </div>
                 </div>
             </div>}
-        </dib>
+        </div>
     )
 }
 
