@@ -1,15 +1,11 @@
 import Dexie from 'dexie';
 
 const db = new Dexie('taasksDB');
-const requestDb = new Dexie('requestDB');
 
 db.version(1).stores({
   tasks: 'id',
+  request: 'index',
 });
-
-requestDb.version(1).stores({
-  request: 'id',
-})
 
 export default {
   getAll: async () => {
@@ -45,20 +41,20 @@ export default {
     });
   },
   addRequest: (request) => {
-    requestDb.transaction('rw', requestDb.request, (e) => {
-      e.requestDb.request.add(request);
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.add(request);
     });
   },
   getAllRequest: async () => {
     const b = [];
-    await requestDb.transaction('rw', requestDb.request, (e) => {
-      e.requestDb.request.each((contact) => b.push(contact));
+    await db.transaction('rw', db.request, (e) => {
+      e.db.request.each((contact) => b.push(contact));
     });
     return b;
   },
   clearRequst: ()=>{
-    requestDb.transaction('rw', requestDb.request, (e) => {
-      e.requestDb.request.clear();
+    db.transaction('rw', db.request, (e) => {
+      e.db.request.clear();
     });
   }
 };
