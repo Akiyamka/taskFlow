@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base href="/taskFlow" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name = "Description" content = "Application for managing and tracking your tasks" >
+    <link rel="icon" sizes="192x192" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
+    <meta name="apple-mobile-web-app-status-bar-style" content="white">
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#536878" />
+    <link rel="manifest" crossorigin="use-credentials" href="/taskFlow/manifest.json" />
+    <link rel="stylesheet" href="/taskFlow/PT%20Root%20UI_Regular.css" type="text/css" charset="utf-8" />
+    <title>Task flow</title>
+  </head>
+
+  <body>
+    <style>
+      #root {
+        height: 100%;
+      }
+
+      .flexGrowCards {
+        flex: 1;
+      }
+    </style>
+    <div id="root"></div>
+    <noscript>Javascript is disabled in your browser, please enable it.</noscript>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker
+          .register('/taskFlow/service-worker.js')
+          .then(() => navigator.serviceWorker.ready.then((worker) => worker.sync.register('syncdata')))
+          .catch(console.log());
+      }
+      Notification.requestPermission();
+    </script>
+    <script type="text/javascript" src="/taskFlow/index.js"></script>
+  <script type="text/javascript" src="/index.js"></script><script type="text/javascript" src="/service-worker.js"></script></body>
+</html>
