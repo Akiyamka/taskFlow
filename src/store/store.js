@@ -1,12 +1,17 @@
 import createStore from 'unistore';
 import devtools from 'unistore/devtools';
 
+const startTime = localStorage.getItem('startTime') !== null ? localStorage.getItem('startTime').split(':') : [0, 0, 0, 0];
+const start = new Date().setHours(...startTime, 0, 0);
+const endTime = localStorage.getItem('endTime') !== null ? localStorage.getItem('endTime').split(':') : [23, 59, 0, 0];
+const end = new Date().setHours(...endTime, 0, 0);
+
 const initialState = {
   edit: [],
   tasks: [],
   timeLine: {
-    start: new Date().setHours(0, 0, 0, 0),
-    end: new Date().setHours(23, 59, 0, 0),
+    start,
+    end,
   },
   resize: {
     isResize: false,

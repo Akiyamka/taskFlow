@@ -74,8 +74,13 @@ const TimeLine = ({
     return heights;
   }
 
-  const { start } = timeLine;
-  const { end } = timeLine;
+  let { start, end } = timeLine;
+  const timeout = ONE_MINUTE - new Date().getSeconds() * ONE_SECOND;
+  const [currentTime, useCurrentTime] = useState(currentTimeGenerator(start));
+  
+  if( start > new Date().getTime() ) start = new Date().getTime();  
+  if( end < new Date().getTime() ) end = new Date().getTime();
+  
   const massHeight = heightsGenerator(start, end);
 
   const timeTape = [];
@@ -86,9 +91,6 @@ const TimeLine = ({
     )
   );
 
-  const timeout = ONE_MINUTE - new Date().getSeconds() * ONE_SECOND;
-
-  const [currentTime, useCurrentTime] = useState(currentTimeGenerator(start));
 
   useEffect(() => {
     saveCurrentTimeInterval(currentTime.height);

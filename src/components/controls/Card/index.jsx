@@ -55,6 +55,11 @@ const Card = ({
     const height = parseInt(getComputedStyle(ref).height);
     const hours = Math.floor(height / coeff / oneMinutes);
     const minutes = Math.floor(height / coeff - hours * oneMinutes);
+    const bottomLimit = ref.offsetTop + parseInt(getComputedStyle(ref).height);
+    
+    if (ref.offsetTop < currentTimeInterval && currentTimeInterval < bottomLimit) {
+      usePerformed('cardPerformed');
+    } else usePerformed('cardNoPerformed');
 
     if (hours) setTime(`${hours}h ${minutes}min`);
     else setTime(`${minutes}min`);
