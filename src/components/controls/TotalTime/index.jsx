@@ -24,6 +24,8 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
     const startTimeLaterThanCurrent = timeStart < DateNow;
 
     setStart(e.target.value);
+    localStorage.setItem('startTime', e.target.value);
+
     if (startTimeLaterThanCurrent) {
       changeTimeLine({ time: timeStart, type: 'start' });
       setStatusStart('access');
@@ -35,7 +37,10 @@ const TotalTime = ({ changeTimeLine, timeLine }) => {
 
     const finalTimeMoreThanStartTime = timeEnd > timeLine.start;
     const finalTimeMoreThanCurrentTime = timeEnd > DateNow;
+
     setEnd(e.target.value);
+    localStorage.setItem('endTime', e.target.value);
+    
     if (finalTimeMoreThanStartTime && finalTimeMoreThanCurrentTime) {
       changeTimeLine({ time: timeEnd, type: 'end' });
       setStatusEnd('access');
