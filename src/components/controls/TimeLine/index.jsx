@@ -91,7 +91,6 @@ const TimeLine = ({
     )
   );
 
-
   useEffect(() => {
     saveCurrentTimeInterval(currentTime.height);
   });

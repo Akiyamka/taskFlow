@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import Routing from './components/routing';
 import firebase from './dataBase/firebase';
 import store from './store/store';
+import db from './dataBase/indexDb';
 import './style.styl';
 
 const getDataFromFirebase = () => {
@@ -24,7 +25,7 @@ const getDataFromFirebase = () => {
     });
 };
 
-setInterval(getDataFromFirebase, 120000);
+setInterval(getDataFromFirebase, 60000);
 
 window.onClose = () => {
   clearInterval(getDataFromFirebase);
